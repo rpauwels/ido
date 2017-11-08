@@ -1,11 +1,11 @@
 #ifndef PARTY_HPP_
 #define PARTY_HPP_
 
-#include <Wt/WDate>
-using Wt::WDate;
-
 #include <string>
 using std::string;
+
+#include <Wt/WDate.h>
+using Wt::WDate;
 
 #include <Wt/Dbo/Dbo.h>
 using Wt::Dbo::ptr;
@@ -21,6 +21,7 @@ public:
 	string uuid;
 	string email;
 	WDate opened;
+	string remarks;
 	WDate confirmation;
 	collection< ptr<Guest> > guests;
 

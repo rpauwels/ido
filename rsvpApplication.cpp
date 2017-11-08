@@ -2,40 +2,40 @@
 #include "guest.hpp"
 #include "party.hpp"
 
-#include <Wt/WApplication>
+#include <Wt/WApplication.h>
 using Wt::WApplication;
 using Wt::WEnvironment;
 using Wt::WRun;
 
-#include <Wt/WContainerWidget>
+#include <Wt/WContainerWidget.h>
 using Wt::WContainerWidget;
 
-#include <Wt/WStackedWidget>
+#include <Wt/WStackedWidget.h>
 using Wt::WStackedWidget;
 
-#include <Wt/WComboBox>
+#include <Wt/WComboBox.h>
 using Wt::WComboBox;
 
-#include <Wt/WText>
-using Wt:WText;
+#include <Wt/WText.h>
+using Wt::WText;
 
-#include <Wt/WLineEdit>
+#include <Wt/WLineEdit.h>
 using Wt::WLineEdit;
 
-#include <Wt/WPushButton>
+#include <Wt/WPushButton.h>
 using Wt::WPushButton;
 
-#include <Wt/WTemplate>
+#include <Wt/WTemplate.h>
 using Wt::WTemplate;
 
-#include <Wt/Mail/Client>
+#include <Wt/Mail/Client.h>
 using Wt::Mail::Client;
 
-#include <Wt/Mail/Message>
+#include <Wt/Mail/Message.h>
 using Wt::Mail::Message;
 using Wt::Mail::RecipientType;
 
-#include <Wt/Mail/Mailbox>
+#include <Wt/Mail/Mailbox.h>
 using Wt::Mail::Mailbox;
 
 #include <Wt/Dbo/Dbo.h>

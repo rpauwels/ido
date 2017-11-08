@@ -1,13 +1,10 @@
-#include "UserAccount.h"
-#include "Entry.h"
+#include "party.hpp"
 
-#include <Wt/WRandom>
+#include <Wt/WRandom.h>
 using Wt::WRandom;
 
-#include <Wt/WApplication>
-#include <Wt/WLogger>
-
-#include <Wt/Dbo/WtSqlTraits>
+#include <Wt/WApplication.h>
+#include <Wt/WLogger.h>
 
 Party::Party()
 { }

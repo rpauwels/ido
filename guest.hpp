@@ -4,10 +4,10 @@
 #include <string>
 using std::string;
 
-#include <Wt/WDate>
+#include <Wt/WDate.h>
 using Wt::WDate;
 
-#include <Wt/Dbo/Dbo>
+#include <Wt/Dbo/Dbo.h>
 using Wt::Dbo::ptr;
 //using Wt::Dbo::collection;
 using Wt::Dbo::field;
