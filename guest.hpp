@@ -4,15 +4,10 @@
 #include <string>
 using std::string;
 
-#include <Wt/WDate.h>
-using Wt::WDate;
-
 #include <Wt/Dbo/Dbo.h>
 using Wt::Dbo::ptr;
-//using Wt::Dbo::collection;
 using Wt::Dbo::field;
 using Wt::Dbo::belongsTo;
-//using Wt::Dbo::ManyToOne;
 
 enum class Diet {
 	None = 0,

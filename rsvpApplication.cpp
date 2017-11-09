@@ -2,6 +2,9 @@
 #include "guest.hpp"
 #include "party.hpp"
 
+#include <Wt/WServer.h>
+using Wt::WServer;
+
 #include <Wt/WApplication.h>
 using Wt::WApplication;
 using Wt::WRun;
@@ -57,12 +60,14 @@ using std::move;
 RsvpApplication::RsvpApplication(const WEnvironment& env)
   : WApplication(env)
 {
+	messageResourceBundle().use("resources");
 	setTitle(WString::tr("title"));
 	useStyleSheet("style.css");
-	messageResourceBundle().use(appRoot() + "simplechat");
 	
-	auto t = make_unique<WTemplate>(WString::tr("template"));
-	auto rows = t->bindWidget("rows", make_unique<WContainerWidget>());
+	auto rsvpPtr = make_unique<WContainerWidget>();
+	auto rsvp = mainPtr.get();
+	setJavaScriptClass("rsvp");
+	bindWidget(move(rsvpPtr), "rsvp");
 	auto remarks = t->bindWidget("remarks", make_unique<WLineEdit>());
 	auto submit = t->bindWidget("submit", make_unique<WPushButton>());	
 	
@@ -92,8 +97,12 @@ void RsvpApplication::submit() {
 	client.send(message);
 }
 
+unique_ptr<WApplication> createWidgetSet(const WEnvironment& env) {
+  return cpp14::make_unique<RsvpApplication>(env);
+}
+
 int main(int argc, char **argv) {
-	unique_ptr<Sqlite3> sqlite3(new Sqlite3(":memory:"));
+	unique_ptr<Sqlite3> sqlite3(new Sqlite3("rsvp.db"));
 	sqlite3->setProperty("show-queries", "true");
   Session session;
   session.setConnection(move(sqlite3));
@@ -103,21 +112,19 @@ int main(int argc, char **argv) {
   string uuid;
   {
   	Transaction transaction(session);
-  	unique_ptr<Party> party{new Party()};
-  	party->email = "raf@localhost";
+  	ptr<Party> party = session.add(unique_ptr<Party>{new Party()});
+  	party.modify()->email = "raf@localhost";
   	uuid = party->uuid;
-  	ptr<Party> partyPtr = session.add(move(party));
   }
   ptr<Guest> guest;
   {
   	Transaction transaction(session);
-  	ptr<Party> party = session.find<Party>().where("uuid = ?").bind(uuid);
   	guest = session.add(unique_ptr<Guest>{new Guest()});
-  	guest.modify()->party = party;
+  	guest.modify()->party = session.find<Party>().where("uuid = ?").bind(uuid);
   }
   
-	return WRun(argc, argv, [](const WEnvironment& env) {
-		return make_unique<RsvpApplication>(env);
-	});
+  WServer server(argc, argv, WTHTTP_CONFIGURATION);
+  server.addEntryPoint(EntryPointType::WidgetSet, createWidgetSet, "/rsvp.js");
+  server.run();
 }
 

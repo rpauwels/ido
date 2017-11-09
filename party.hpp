@@ -14,6 +14,8 @@ using Wt::Dbo::field;
 using Wt::Dbo::hasMany;
 using Wt::Dbo::ManyToOne;
 
+#include <Wt/Dbo/WtSqlTraits.h>
+
 class Guest;
 class Party
 {
@@ -22,7 +24,7 @@ public:
 	string email;
 	WDate opened;
 	string remarks;
-	WDate confirmation;
+	//WDate confirmation;
 	collection< ptr<Guest> > guests;
 
 	Party();
@@ -34,8 +36,8 @@ public:
 		field(a, email, "email");
 		field(a, opened, "opened");
 		field(a, remarks, "remarks");
-		field(a, confirmation, "confirmation");
-		hasMany(a, guests, ManyToOne, "guests");
+		//field(a, confirmation, "confirmation");
+		hasMany(a, guests, ManyToOne, "party");
 	}
 };
 #endif // PARTY_HPP_
