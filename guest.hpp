@@ -26,6 +26,7 @@ class Guest
 public:
 	string firstName;
 	string lastName;
+	int order;
 	Diet diet;
 	ptr<Party> party;
 
@@ -36,6 +37,7 @@ public:
 	{
 		field(a, firstName, "first_name");
 		field(a, lastName, "last_name");
+		field(a, order, "order");
 		field(a, diet, "diet");
 		belongsTo(a, party, "party");
 	}

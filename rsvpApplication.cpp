@@ -4,8 +4,13 @@
 
 #include <Wt/WApplication.h>
 using Wt::WApplication;
-using Wt::WEnvironment;
 using Wt::WRun;
+
+#include <Wt/WEnvironment.h>
+using Wt::WEnvironment;
+
+#include <Wt/WString.h>
+using Wt::WString;
 
 #include <Wt/WContainerWidget.h>
 using Wt::WContainerWidget;
@@ -45,38 +50,40 @@ using Wt::Dbo::Transaction;
 #include <Wt/Dbo/backend/Sqlite3.h>
 using Wt::Dbo::backend::Sqlite3;
 
+using std::make_unique;
 using std::unique_ptr;
 using std::move;
 
 RsvpApplication::RsvpApplication(const WEnvironment& env)
   : WApplication(env)
 {
-	setTitle("raf + véronique");
-	WTemplate *result = new WTemplate("index.html", root());
-	WStackedWidget *rows = new WStackedWidget();
+	setTitle(WString::tr("title"));
+	useStyleSheet("style.css");
+	messageResourceBundle().use(appRoot() + "simplechat");
+	
+	auto t = make_unique<WTemplate>(WString::tr("template"));
+	auto rows = t->bindWidget("rows", make_unique<WContainerWidget>());
+	auto remarks = t->bindWidget("remarks", make_unique<WLineEdit>());
+	auto submit = t->bindWidget("submit", make_unique<WPushButton>());	
+	
+  const string *uuid = env.getParameter("party");
 	
 	// TODO loop
-	WContainerWidget *row = new WContainerWidget(&rows);
-	WText *name = new WText("Raf Pauwels", &row);
-	WText *participates = new WText(" zal er zijn en is ", &row);
-	WComboBox *diet = new WComboBox(&row);
+	rows->setList(true);
+	auto row = rows->addWidget(make_unique<WContainerWidget>());
+	row->addWidget(make_unique<WText>("Raf Pauwels"));
+	auto diet = row->addWidget(make_unique<WComboBox>());
 	diet->addItem("kan er niet bij zijn");
 	diet->addItem("is herbivoor");
 	diet->addItem("is carnivoor");
 	
-	WLineEdit *remarks = new WLineEdit(&rows);
-	WPushButton *submit = new WPushButton(&rows);
-	submit->clicked().connect(this, &FormExample::submit);
-	
-	result->bindWidget("rows", rows);
-	result->bindWidget("submitButton", submitButton);
-  Form *form = new Form(this);
+	submit->clicked().connect(this, &RsvpApplication::submit);
 }
 
-void FormExample::submit() {
+void RsvpApplication::submit() {
 	Message message;
-	message.setFrom(Mailbox("raf@localhost", "Raf Pauwels");
-	message.addRecipient(RecipientType::To, Mailbox("raf@localhost", "Raf Pauwels");
+	message.setFrom(Mailbox("raf@localhost", "Raf Pauwels"));
+	message.addRecipient(RecipientType::To, Mailbox("raf@localhost", "Raf Pauwels"));
 	message.setSubject("Bevestiging");
 	message.setBody("Bedankt om de registratie te bevestigen.");
 	message.addHtmlBody("<p>Bedankt om de registratie te bevestigen.</p>");

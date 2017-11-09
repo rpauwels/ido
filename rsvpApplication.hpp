@@ -27,6 +27,8 @@ private:
   vector<WLineEdit> *names_;
   WLineEdit *remarks_;
   WPushButton *submit_;
+  
+  void submit();
 };
 
 #endif // RSVPAPPLICATION_HPP_
