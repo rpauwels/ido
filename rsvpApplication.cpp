@@ -83,12 +83,12 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	
 	// TODO loop
 	names->setList(true);
-	auto nameRow = names->addWidget(make_unique<WContainerWidget>());
+	auto nameRow = names->addWidget(make_unique<WContaibnerWidget>());
 	nameRow->addWidget(make_unique<WText>("Raf Pauwels"));
 	auto diet = nameRow->addWidget(make_unique<WComboBox>());
-	diet->addItem("kan er niet bij zijn");
-	diet->addItem("is herbivoor");
-	diet->addItem("is carnivoor");
+	diet->addItem(WString::tr("absent"));
+	diet->addItem(WString::tr("herbivore"));
+	diet->addItem(WString::tr("carnivore"));
 	
 	submit->clicked().connect(this, &RsvpApplication::submit);
 }

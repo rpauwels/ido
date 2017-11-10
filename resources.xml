@@ -2,5 +2,7 @@
 <messages>
 	<message id="title">raf + veronique</message>
 	<message id="submit">bevestigen</message>
-	<message id="details"></message>
+	<message id="absent">kan er niet bij zijn</message>
+	<message id="herbivore">is herbivoor</message>
+	<message id="carnivore">is carnivoor</message>
 </messages>
