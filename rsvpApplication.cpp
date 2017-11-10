@@ -4,6 +4,7 @@
 
 #include <Wt/WServer.h>
 using Wt::WServer;
+using Wt::EntryPointType;
 
 #include <Wt/WApplication.h>
 using Wt::WApplication;
@@ -57,27 +58,34 @@ using std::make_unique;
 using std::unique_ptr;
 using std::move;
 
-RsvpApplication::RsvpApplication(const WEnvironment& env)
+RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
   : WApplication(env)
 {
 	messageResourceBundle().use("resources");
-	setTitle(WString::tr("title"));
-	useStyleSheet("style.css");
-	
-	auto rsvpPtr = make_unique<WContainerWidget>();
-	auto rsvp = mainPtr.get();
-	setJavaScriptClass("rsvp");
-	bindWidget(move(rsvpPtr), "rsvp");
-	auto remarks = t->bindWidget("remarks", make_unique<WLineEdit>());
-	auto submit = t->bindWidget("submit", make_unique<WPushButton>());	
-	
-  const string *uuid = env.getParameter("party");
+	WContainerWidget *top;
+	if (embedded) {
+		auto topPtr = make_unique<WContainerWidget>();
+		top = topPtr.get();
+		setJavaScriptClass("rsvp");
+		bindWidget(move(topPtr), "rsvp");
+	} else {
+		setTitle(WString::tr("title"));
+		useStyleSheet("style.css");
+		top = root();
+	}
+	//top->setInline(false);
+	auto names = top->addWidget(make_unique<WContainerWidget>());
+	auto remarks = top->addWidget(make_unique<WLineEdit>());
+	remarks->setInline(false);
+	auto submit = top->addWidget(make_unique<WPushButton>(WString::tr("submit")));
+	submit->setInline(false);
+  const string *uuid = env.getParameter("uuid");
 	
 	// TODO loop
-	rows->setList(true);
-	auto row = rows->addWidget(make_unique<WContainerWidget>());
-	row->addWidget(make_unique<WText>("Raf Pauwels"));
-	auto diet = row->addWidget(make_unique<WComboBox>());
+	names->setList(true);
+	auto nameRow = names->addWidget(make_unique<WContainerWidget>());
+	nameRow->addWidget(make_unique<WText>("Raf Pauwels"));
+	auto diet = nameRow->addWidget(make_unique<WComboBox>());
 	diet->addItem("kan er niet bij zijn");
 	diet->addItem("is herbivoor");
 	diet->addItem("is carnivoor");
@@ -97,8 +105,12 @@ void RsvpApplication::submit() {
 	client.send(message);
 }
 
+unique_ptr<WApplication> createApplication(const WEnvironment& env) {
+	return make_unique<RsvpApplication>(env, false);
+}
+
 unique_ptr<WApplication> createWidgetSet(const WEnvironment& env) {
-  return cpp14::make_unique<RsvpApplication>(env);
+	return make_unique<RsvpApplication>(env, true);
 }
 
 int main(int argc, char **argv) {
@@ -124,6 +136,7 @@ int main(int argc, char **argv) {
   }
   
   WServer server(argc, argv, WTHTTP_CONFIGURATION);
+  server.addEntryPoint(EntryPointType::Application, createApplication);
   server.addEntryPoint(EntryPointType::WidgetSet, createWidgetSet, "/rsvp.js");
   server.run();
 }

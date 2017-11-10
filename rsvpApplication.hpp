@@ -21,7 +21,7 @@ namespace Wt {
 class RsvpApplication : public WApplication
 {
 public:
-  RsvpApplication(const WEnvironment& env);
+  RsvpApplication(const WEnvironment& env, bool embedded);
 
 private:
   vector<WLineEdit> *names_;
