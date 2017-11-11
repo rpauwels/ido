@@ -1,6 +1,8 @@
 #ifndef RSVPAPPLICATION_HPP_
 #define RSVPAPPLICATION_HPP_
 
+#include "party.hpp"
+
 #include <Wt/WApplication.h>
 using Wt::WApplication;
 using Wt::WEnvironment;
@@ -8,27 +10,23 @@ using Wt::WEnvironment;
 #include <Wt/WLineEdit.h>
 using Wt::WLineEdit;
 
-#include <Wt/WPushButton.h>
-using Wt::WPushButton;
+#include <Wt/WComboBox.h>
+using Wt::WComboBox;
 
-#include <vector>
-using std::vector;
-
-namespace Wt {
-  class WText;
-}
+#include <Wt/Dbo/Dbo.h>
+using Wt::Dbo::Session;
 
 class RsvpApplication : public WApplication
 {
 public:
-  RsvpApplication(const WEnvironment& env, bool embedded);
+	RsvpApplication(const WEnvironment& env, bool embedded);
 
 private:
-  vector<WLineEdit> *names_;
-  WLineEdit *remarks_;
-  WPushButton *submit_;
-  
-  void submit();
+	Session session_;
+	ptr<Party> party_;
+	WComboBox *diet_;
+	WLineEdit *remarks_;
+	void submit();
 };
 
 #endif // RSVPAPPLICATION_HPP_

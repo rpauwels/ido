@@ -78,6 +78,7 @@
 		<script src="jquery/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="script.js"></script>
-		<script src="rsvp.js?div=hello&amp;Wt-history=Wt-history"></script>
+		<!--<script src="rsvp.js?div=hello&amp;Wt-history=Wt-history"></script>-->
+		<script>$.getScript("rsvp.js?Wt-history=Wt-history&" + window.location.search.substring(1))</script>
 	</body>
 </html>

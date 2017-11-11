@@ -5,4 +5,5 @@
 	<message id="absent">kan er niet bij zijn</message>
 	<message id="herbivore">is herbivoor</message>
 	<message id="carnivore">is carnivoor</message>
+	<message id="remarks">opmerkingen</message>
 </messages>

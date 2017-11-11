@@ -1,0 +1,5 @@
+<server>
+	<application-settings location="*">
+		<log-config>*</log-config>
+	</application-settings>
+</server>

@@ -24,7 +24,7 @@ public:
 	string email;
 	WDate opened;
 	string remarks;
-	//WDate confirmation;
+	WDate confirmed;
 	collection< ptr<Guest> > guests;
 
 	Party();
@@ -36,7 +36,7 @@ public:
 		field(a, email, "email");
 		field(a, opened, "opened");
 		field(a, remarks, "remarks");
-		//field(a, confirmation, "confirmation");
+		field(a, confirmed, "confirmed");
 		hasMany(a, guests, ManyToOne, "party");
 	}
 };
