@@ -16,12 +16,19 @@ using Wt::Dbo::ManyToOne;
 
 #include <Wt/Dbo/WtSqlTraits.h>
 
+enum class InviteLevel {
+	Dessert = 0,
+	Meal = 1,
+	Full = 2
+};
+
 class Guest;
 class Party
 {
 public:
 	string uuid;
 	string email;
+	InviteLevel inviteLevel;
 	WDate opened;
 	string remarks;
 	WDate confirmed;
@@ -34,6 +41,7 @@ public:
 	{
 		field(a, uuid, "uuid");
 		field(a, email, "email");
+		field(a, inviteLevel, "inviteLevel");
 		field(a, opened, "opened");
 		field(a, remarks, "remarks");
 		field(a, confirmed, "confirmed");

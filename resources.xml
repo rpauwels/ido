@@ -2,8 +2,30 @@
 <messages>
 	<message id="title">raf + veronique</message>
 	<message id="submit">bevestigen</message>
+	<message id="confirmed">bevestigd</message>
+	<message id="change">aanpassen</message>
+	<message id="alreadySubmitted">je hebt reeds bevestigd</message>
 	<message id="absent">kan er niet bij zijn</message>
 	<message id="herbivore">is herbivoor</message>
 	<message id="carnivore">is carnivoor</message>
 	<message id="remarks">opmerkingen</message>
+	<message id="invitation.subject">Uitnodiging</message>
+	<message id="invitation.body">
+Hallo {1},
+
+Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevestigen via http://raf-en-vero.pauwels-cordier.be/ ?
+
+Tot dan!
+
+Met vriendelijke groeten,
+
+Véronique Cordier 👰 en Raf Pauwels 🤵
+	</message>
+	<message id="invitation.html">
+		<p>Hallo {1},</p>
+		<p>Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevestigen via <a href="http://raf-en-vero.pauwels-cordier.be/">onze website</a>?</p>
+		<p>Tot dan!</p>
+		<p>Met vriendelijke groeten,</p>
+		<p>Véronique Cordier 👰 en Raf Pauwels🤵</p>
+	</message>
 </messages>
