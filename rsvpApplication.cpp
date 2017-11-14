@@ -1,4 +1,5 @@
 #include "rsvpApplication.hpp"
+#include "adminApplication.hpp"
 #include "guest.hpp"
 #include "party.hpp"
 
@@ -60,8 +61,7 @@ using std::unique_ptr;
 using std::move;
 
 RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
-  : WApplication(env)
-{
+  : WApplication(env) {
 	messageResourceBundle().use("resources");
 	client_.connect("localhost");
 	unique_ptr<Sqlite3> sqlite3(new Sqlite3("rsvp.db"));
@@ -72,48 +72,26 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	
 	const string *uuid = env.getParameter("uuid");
 	if (!uuid) {
-		log("error") << "No uuid parameter found";
-		return;
-	}
-	if (*uuid == "Swf9TMCxFwkdrdahZLcE") {
-		session_.createTables();
-		Transaction transaction(session_);
-		ptr<Party> party = session_.add(unique_ptr<Party>{new Party()});
-		party.modify()->uuid = "test";
-		party.modify()->email = "raf@localhost";
-		ptr<Guest> guest = session_.add(unique_ptr<Guest>{new Guest()});
-		guest.modify()->firstName = "Raf";
-		guest.modify()->lastName = "Pauwels";
-		guest.modify()->party = party;
-		log("info") << "Database created.";
-		return;
-	} else if (*uuid == "m6xkGySLuNEf8StUaTzP") {
-		collection< ptr<Party> > parties = session_.find<Party>();
-		for (const ptr<Party> &party: parties) {
-			ptr<Guest> guest = party->guests.front();
-			Message message;
-			message.setFrom(Mailbox("raf@localhost", WString::tr("fromName")));
-			message.addRecipient(RecipientType::To, Mailbox(party->email, guest->firstName + " " + guest->lastName));
-			message.setSubject(WString::tr("invitation.subject"));
-			message.setBody(WString::tr("invitation.body"));
-			message.addHtmlBody(WString::tr("invitation.html"));
-			client_.send(message);
-			log("info") << "Sent invitation to " + party->email;
-		}
-		log("info") << "All invitations were sent.";
+		log("error") << "Uuid parameter absent";
 		return;
 	}
 	Transaction transaction(session_);
 	party_ = session_.find<Party>().where("uuid = ?").bind(*uuid);
 	if (!party_) {
-		log("error") << "Party not found";
+		log("error") << "Uuid parameter " << *uuid << " not found";
 		return;
 	}
 
 	WContainerWidget *top;
 	if (embedded) {
-		setJavaScriptClass("rsvp");
+		//setJavaScriptClass("time");
 		auto topPtr = make_unique<WContainerWidget>();
+		top = topPtr.get();
+		bindWidget(move(topPtr), "time");
+		top->hide();
+	
+		setJavaScriptClass("rsvp");
+		topPtr = make_unique<WContainerWidget>();
 		top = topPtr.get();
 		bindWidget(move(topPtr), "rsvp");
 	} else {
@@ -158,7 +136,7 @@ void RsvpApplication::submit() {
 		guest.modify()->diet = static_cast<Diet>(diet_->currentIndex());
 	ptr<Guest> guest = party_->guests.front();
 	Message message;
-	message.setFrom(Mailbox("raf@localhost", WString::tr("fromName")));
+	message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
 	message.addRecipient(RecipientType::To, Mailbox(party_->email, guest->firstName + " " + guest->lastName));
 	message.setSubject(WString::tr("confirmation.subject"));
 	message.setBody(WString::tr("confirmation.body"));
@@ -176,9 +154,14 @@ unique_ptr<WApplication> createWidgetSet(const WEnvironment& env) {
 	return make_unique<RsvpApplication>(env, true);
 }
 
+unique_ptr<WApplication> createAdminApplication(const WEnvironment& env) {
+	return make_unique<AdminApplication>(env);
+}
+
 int main(int argc, char **argv) {
 	WServer server(argc, argv, WTHTTP_CONFIGURATION);
 	server.addEntryPoint(EntryPointType::Application, createApplication);
+	server.addEntryPoint(EntryPointType::Application, createAdminApplication, "/admin");
 	server.addEntryPoint(EntryPointType::WidgetSet, createWidgetSet, "/rsvp.js");
 	server.run();
 }

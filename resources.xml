@@ -9,6 +9,12 @@
 	<message id="herbivore">is herbivoor</message>
 	<message id="carnivore">is carnivoor</message>
 	<message id="remarks">opmerkingen</message>
+	<message id="password">batterij paard</message>
+	<message id="passwordPlaceholder">wachtwoord</message>
+	<message id="create">tabellen maken</message>
+	<message id="invite">uitnodigen</message>
+	<message id="fromAddress">raf@localhost</message>
+	<message id="fromName">Raf Pauwels</message>
 	<message id="invitation.subject">Uitnodiging</message>
 	<message id="invitation.body">
 Hallo {1},
@@ -17,15 +23,15 @@ Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevesti
 
 Tot dan!
 
-Met vriendelijke groeten,
+Met feestelijke groeten,
 
 Véronique Cordier 👰 en Raf Pauwels 🤵
 	</message>
 	<message id="invitation.html">
-		<p>Hallo {1},</p>
-		<p>Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevestigen via <a href="http://raf-en-vero.pauwels-cordier.be/">onze website</a>?</p>
-		<p>Tot dan!</p>
-		<p>Met vriendelijke groeten,</p>
-		<p>Véronique Cordier 👰 en Raf Pauwels🤵</p>
+<p>Hallo {1},</p>
+<p>Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevestigen via <a href="http://raf-en-vero.pauwels-cordier.be/">onze website</a>?</p>
+<p>Tot dan!</p>
+<p>Met feestelijke groeten,</p>
+<p>Véronique Cordier 👰 en Raf Pauwels 🤵</p>
 	</message>
 </messages>
