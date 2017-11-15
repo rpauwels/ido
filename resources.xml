@@ -4,7 +4,7 @@
 	<message id="submit">bevestigen</message>
 	<message id="confirmed">bevestigd</message>
 	<message id="change">aanpassen</message>
-	<message id="alreadySubmitted">je hebt reeds bevestigd</message>
+	<message id="alreadySubmitted">je bevestiging is verstuurd, bedankt!</message>
 	<message id="absent">kan er niet bij zijn</message>
 	<message id="herbivore">is herbivoor</message>
 	<message id="carnivore">is carnivoor</message>
@@ -25,13 +25,62 @@ Tot dan!
 
 Met feestelijke groeten,
 
-Véronique Cordier 👰 en Raf Pauwels 🤵
+Véronique 👰 en Raf 🤵
 	</message>
 	<message id="invitation.html">
 <p>Hallo {1},</p>
-<p>Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevestigen via <a href="http://raf-en-vero.pauwels-cordier.be/">onze website</a>?</p>
-<p>Tot dan!</p>
+<p>Je bent uitgenodigd op ons huwelijksfeest op <em>3 februari</em>! Kan je je komst bevestigen via <a href="http://raf-en-vero.pauwels-cordier.be/">onze website</a>?</p>
+<p>Hopelijk tot dan!</p>
 <p>Met feestelijke groeten,</p>
-<p>Véronique Cordier 👰 en Raf Pauwels 🤵</p>
+<p>Véronique 👰 en Raf 🤵</p>
+	</message>
+	<message id="plan.ceremony">
+		<h3>ja</h3>
+		<time>11:30</time>
+		<p>
+			<a href="geo:51.124517,4.214168">
+				gemeentehuis<br/>
+			</a>
+			markt 1<br/>
+			temse
+		</p>
+	</message>
+	<message id="plan.lunch">
+		<h3>hap</h3>
+		<time>12:30</time>
+		<p>
+			<a href="geo:51.056199,4.211381">
+				eventroom<br/>
+			</a>
+			buisstraat 19<br/>
+			sint-amands
+		</p>
+	</message>
+	<message id="plan.photo">
+		<h3>klik</h3>
+		<time>13:00</time>
+		<p>
+			park<br/>
+			sint-amands
+		</p>
+	</message>
+	<message id="plan.reception">
+		<h3>chin</h3>
+		<time>18:00</time>
+		<p>
+			<a href="geo:51.056199,4.211381">
+				eventroom<br/>
+			</a>
+			buisstraat 19<br/>
+			sint-amands
+		</p>
+	</message>
+	<message id="plan.dinner">
+		<h3>njam</h3>
+		<time>19:00</time>
+	</message>
+	<message id="plan.dessert">
+		<h3>njam</h3>
+		<time>22:00</time>
 	</message>
 </messages>

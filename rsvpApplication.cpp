@@ -29,6 +29,10 @@ using Wt::WStackedWidget;
 #include <Wt/WComboBox.h>
 using Wt::WComboBox;
 
+#include <Wt/WTemplate.h>
+using Wt::WTemplate;
+using Wt::TextFormat;
+
 #include <Wt/WText.h>
 using Wt::WText;
 
@@ -69,6 +73,24 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	session_.setConnection(move(sqlite3));
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
+
+	WContainerWidget *top;
+	WContainerWidget *plan;
+	if (embedded) {
+		auto planPtr = make_unique<WContainerWidget>();
+		plan = planPtr.get();
+		bindWidget(move(planPtr), "plan");
+	
+		setJavaScriptClass("rsvp");
+		auto topPtr = make_unique<WContainerWidget>();
+		top = topPtr.get();
+		bindWidget(move(topPtr), "rsvp");
+	} else {
+		setTitle(WString::tr("title"));
+		useStyleSheet("style.css");
+		top = root();
+		plan = root();
+	}
 	
 	const string *uuid = env.getParameter("uuid");
 	if (!uuid) {
@@ -78,27 +100,21 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	Transaction transaction(session_);
 	party_ = session_.find<Party>().where("uuid = ?").bind(*uuid);
 	if (!party_) {
-		log("error") << "Uuid parameter " << *uuid << " not found";
+		log("error") << "Uuid value " << *uuid << " not found";
 		return;
 	}
-
-	WContainerWidget *top;
-	if (embedded) {
-		//setJavaScriptClass("time");
-		auto topPtr = make_unique<WContainerWidget>();
-		top = topPtr.get();
-		bindWidget(move(topPtr), "time");
-		top->hide();
 	
-		setJavaScriptClass("rsvp");
-		topPtr = make_unique<WContainerWidget>();
-		top = topPtr.get();
-		bindWidget(move(topPtr), "rsvp");
-	} else {
-		setTitle(WString::tr("title"));
-		useStyleSheet("style.css");
-		top = root();
+	plan->addWidget(make_unique<WTemplate>(WString::tr("plan.ceremony")));
+	if (party_->inviteLevel == InviteLevel::Full) {
+		plan->addWidget(make_unique<WTemplate>(WString::tr("plan.lunch")));
+		plan->addWidget(make_unique<WTemplate>(WString::tr("plan.photo")));
 	}
+	plan->addWidget(make_unique<WTemplate>(WString::tr("plan.reception")));
+	if (party_->inviteLevel == InviteLevel::Dessert)
+		plan->addWidget(make_unique<WTemplate>(WString::tr("plan.dessert")));
+	else
+		plan->addWidget(make_unique<WTemplate>(WString::tr("plan.dinner")));
+
 	auto names = top->addWidget(make_unique<WContainerWidget>());
 	names->setList(true);
 	remarks_ = top->addWidget(make_unique<WLineEdit>());
@@ -106,10 +122,11 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	remarks_->setPlaceholderText(WString::tr("remarks"));
 	remarks_->setText(party_->remarks);
 	WString buttonText;
+	status_ = top->addWidget(make_unique<WText>());
 	if (party_->confirmed.isNull()) {
 		buttonText = WString::tr("submit");
 	} else {
-		top->addWidget(make_unique<WText>(WString::tr("alreadySubmitted")));
+		status_->setText(WString::tr("alreadySubmitted"));
 		buttonText = WString::tr("change");
 	}
 	submit_ = top->addWidget(make_unique<WPushButton>(buttonText));
@@ -125,6 +142,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 		diet_->addItem(WString::tr("carnivore"));
 		diet_->setCurrentIndex(static_cast<int>(guest->diet));
 	}
+	party_.modify()->opened = WDate::currentDate();
 }
 
 void RsvpApplication::submit() {
@@ -142,6 +160,7 @@ void RsvpApplication::submit() {
 	message.setBody(WString::tr("confirmation.body"));
 	message.addHtmlBody(WString::tr("confirmation.html"));
 	client_.send(message);
+	status_->setText(WString::tr("alreadySubmitted"));
 	submit_->setText(WString::tr("change"));
 	submit_->setEnabled(true);
 }
@@ -165,4 +184,3 @@ int main(int argc, char **argv) {
 	server.addEntryPoint(EntryPointType::WidgetSet, createWidgetSet, "/rsvp.js");
 	server.run();
 }
-

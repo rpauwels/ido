@@ -16,6 +16,9 @@ using Wt::WComboBox;
 #include <Wt/WPushButton.h>
 using Wt::WPushButton;
 
+#include <Wt/WText.h>
+using Wt::WText;
+
 #include <Wt/Mail/Client.h>
 using Wt::Mail::Client;
 
@@ -34,6 +37,7 @@ private:
 	ptr<Party> party_;
 	WComboBox *diet_;
 	WLineEdit *remarks_;
+	WText *status_;
 	WPushButton *submit_;
 	void submit();
 };
