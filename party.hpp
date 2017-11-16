@@ -27,6 +27,7 @@ class Party
 {
 public:
 	string uuid;
+	string name;
 	string email;
 	InviteLevel inviteLevel;
 	WDate invited;
@@ -41,6 +42,7 @@ public:
 	void persist(Action& a)
 	{
 		field(a, uuid, "uuid");
+		field(a, name, "name");
 		field(a, email, "email");
 		field(a, inviteLevel, "inviteLevel");
 		field(a, invited, "invited");

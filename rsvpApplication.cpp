@@ -11,6 +11,9 @@ using Wt::WRun;
 #include <Wt/WApplication.h>
 using Wt::WApplication;
 
+#include <Wt/WBootstrapTheme.h>
+using Wt::WBootstrapTheme;
+
 #include <Wt/WEnvironment.h>
 using Wt::WEnvironment;
 
@@ -87,9 +90,15 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 		bindWidget(move(topPtr), "rsvp");
 	} else {
 		setTitle(WString::tr("title"));
+		//useStyleSheet("bootstrap/css/bootstrap.css");
 		useStyleSheet("style.css");
+		auto bootstrapTheme = std::make_shared<WBootstrapTheme>();
+		bootstrapTheme->setVersion(BootstrapVersion::v3);
+		bootstrapTheme->setResponsive(true);
+		setTheme(bootstrapTheme);
 		top = root();
 		plan = root();
+		root()->addWidget(make_unique<WTemplate>(WString::tr("header")));
 	}
 	
 	const string *uuid = env.getParameter("uuid");
@@ -119,17 +128,17 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	names->setList(true);
 	remarks_ = top->addWidget(make_unique<WLineEdit>());
 	remarks_->setInline(false);
+	remarks_->setTextSize(20);
 	remarks_->setPlaceholderText(WString::tr("remarks"));
 	remarks_->setText(party_->remarks);
 	WString buttonText;
-	status_ = top->addWidget(make_unique<WText>());
 	if (party_->confirmed.isNull()) {
-		buttonText = WString::tr("submit");
+		submit_ = top->addWidget(make_unique<WPushButton>(WString::tr("submit")));
+		status_ = top->addWidget(make_unique<WText>());
 	} else {
-		status_->setText(WString::tr("alreadySubmitted"));
-		buttonText = WString::tr("change");
+		submit_ = top->addWidget(make_unique<WPushButton>(WString::tr("change")));
+		status_ = top->addWidget(make_unique<WText>(WString::tr("alreadySubmitted")));
 	}
-	submit_ = top->addWidget(make_unique<WPushButton>(buttonText));
 	submit_->setInline(false);
 	submit_->clicked().connect(this, &RsvpApplication::submit);
 
@@ -137,6 +146,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 		auto nameRow = names->addWidget(make_unique<WContainerWidget>());
 		nameRow->addWidget(make_unique<WText>(guest->firstName + " " + guest->lastName));
 		diet_ = nameRow->addWidget(make_unique<WComboBox>());
+		diet_->addStyleClass("diet");
 		diet_->addItem(WString::tr("absent"));
 		diet_->addItem(WString::tr("herbivore"));
 		diet_->addItem(WString::tr("carnivore"));
@@ -157,8 +167,8 @@ void RsvpApplication::submit() {
 	message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
 	message.addRecipient(RecipientType::To, Mailbox(party_->email, guest->firstName + " " + guest->lastName));
 	message.setSubject(WString::tr("confirmation.subject"));
-	message.setBody(WString::tr("confirmation.body"));
-	message.addHtmlBody(WString::tr("confirmation.html"));
+	message.setBody(WString::tr("confirmation.body").arg(party_->name));
+	message.addHtmlBody(WString::tr("confirmation.html").arg(party_->name));
 	client_.send(message);
 	status_->setText(WString::tr("alreadySubmitted"));
 	submit_->setText(WString::tr("change"));

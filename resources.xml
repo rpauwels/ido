@@ -34,53 +34,95 @@ Véronique 👰 en Raf 🤵
 <p>Met feestelijke groeten,</p>
 <p>Véronique 👰 en Raf 🤵</p>
 	</message>
+	<message id="confirmation.subject">Bevestiging uitnodiging</message>
+	<message id="confirmation.body">
+Hallo {1},
+
+Bedankt om de uitnodiging te bevestigen!
+
+Met feestelijke groeten,
+
+Véronique 👰 en Raf 🤵
+	</message>
+	<message id="confirmation.html">
+<p>Hallo {1},</p>
+<p>Bedankt om de uitnodiging te bevestigen!</p>
+<p>Met feestelijke groeten,</p>
+<p>Véronique 👰 en Raf 🤵</p>
+	</message>
+	<message id="header">
+		<header>
+			<img class="animated fadeIn" id="robbe" src="robbe.jpg" alt="Robbe met ringen"/>
+			<h1 id="name">
+				<span class="animated fadeInDown">véronique</span>
+				<span>+</span>
+				<span class="animated fadeInUp">raf</span>
+				<p><small><time datetime="2018-02-03">3 februari 2018</time></small></p>
+			</h1>
+		</header>
+	</message>
 	<message id="plan.ceremony">
-		<h3>ja</h3>
-		<time>11:30</time>
-		<p>
-			<a href="geo:51.124517,4.214168">
-				gemeentehuis<br/>
-			</a>
-			markt 1<br/>
-			temse
-		</p>
+		<div class="col-sm-2">
+			<h3>ja</h3>
+			<time>11:30</time>
+			<p>
+				<a href="geo:51.124517,4.214168">
+					gemeentehuis<br/>
+				</a>
+				markt 1<br/>
+				temse
+			</p>
+		</div>
 	</message>
 	<message id="plan.lunch">
-		<h3>hap</h3>
-		<time>12:30</time>
-		<p>
-			<a href="geo:51.056199,4.211381">
-				eventroom<br/>
-			</a>
-			buisstraat 19<br/>
-			sint-amands
-		</p>
+		<div class="col-sm-2">
+			<h3>hap</h3>
+			<time>12:30</time>
+			<p>
+				<a href="geo:51.056199,4.211381">
+					eventroom<br/>
+				</a>
+				buisstraat 19<br/>
+				sint-amands
+			</p>
+		</div>
 	</message>
 	<message id="plan.photo">
-		<h3>klik</h3>
-		<time>13:00</time>
-		<p>
-			park<br/>
-			sint-amands
-		</p>
+		<div class="col-sm-2">
+			<h3>klik</h3>
+			<time>13:00</time>
+			<p>
+				park<br/>
+				sint-amands
+			</p>
+		</div>
 	</message>
 	<message id="plan.reception">
-		<h3>chin</h3>
-		<time>18:00</time>
-		<p>
-			<a href="geo:51.056199,4.211381">
-				eventroom<br/>
-			</a>
-			buisstraat 19<br/>
-			sint-amands
-		</p>
+		<div class="col-sm-2">
+			<h3>chin</h3>
+			<time>18:00</time>
+			<p>
+				<a href="geo:51.056199,4.211381">
+					eventroom<br/>
+				</a>
+				buisstraat 19<br/>
+				sint-amands
+			</p>
+		</div>
 	</message>
 	<message id="plan.dinner">
-		<h3>njam</h3>
-		<time>19:00</time>
+		<div class="col-sm-2">
+			<h3>njam</h3>
+			<time>19:00</time>
+		</div>
 	</message>
 	<message id="plan.dessert">
-		<h3>njam</h3>
-		<time>22:00</time>
+		<div class="col-sm-2">
+			<h3>njam</h3>
+			<time>22:00</time>
+		</div>
+	</message>
+	<message id="credit">
+		<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 	</message>
 </messages>

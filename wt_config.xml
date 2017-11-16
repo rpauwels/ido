@@ -1,5 +1,10 @@
 <server>
 	<application-settings location="*">
 		<log-config>*</log-config>
+		<redirect-message>Webpagina zonder JavaScript</redirect-message>
+		<meta-headers>
+			<meta name="author" content="Raf Pauwels" />
+			<meta name="description" content="Huwelijksuitnodiging" />
+		</meta-headers>
 	</application-settings>
 </server>
