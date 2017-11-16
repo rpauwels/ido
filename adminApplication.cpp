@@ -86,7 +86,7 @@ void AdminApplication::invite() {
 		message.addHtmlBody(WString::tr("invitation.html").arg(party->name));
 		client_.send(message);
 		party.modify()->invited = WDate::currentDate();
-		log("info") << "Sent invitation to " + party->email;
+		log("info") << "Sent invitation to " << party->email;
 	}
 	log("info") << "All invitations were sent.";
 }

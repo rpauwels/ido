@@ -13,6 +13,7 @@ using Wt::WApplication;
 
 #include <Wt/WBootstrapTheme.h>
 using Wt::WBootstrapTheme;
+using Wt::BootstrapVersion;
 
 #include <Wt/WEnvironment.h>
 using Wt::WEnvironment;
@@ -64,8 +65,8 @@ using Wt::Dbo::ptr;
 using Wt::Dbo::backend::Sqlite3;
 
 using std::make_unique;
-using std::unique_ptr;
 using std::move;
+using std::unique_ptr;
 
 RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
   : WApplication(env) {
@@ -141,16 +142,16 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	}
 	submit_->setInline(false);
 	submit_->clicked().connect(this, &RsvpApplication::submit);
-
 	for (const ptr<Guest> &guest: party_->guests) {
 		auto nameRow = names->addWidget(make_unique<WContainerWidget>());
 		nameRow->addWidget(make_unique<WText>(guest->firstName + " " + guest->lastName));
-		diet_ = nameRow->addWidget(make_unique<WComboBox>());
-		diet_->addStyleClass("diet");
-		diet_->addItem(WString::tr("absent"));
-		diet_->addItem(WString::tr("herbivore"));
-		diet_->addItem(WString::tr("carnivore"));
-		diet_->setCurrentIndex(static_cast<int>(guest->diet));
+		auto diet = nameRow->addWidget(make_unique<WComboBox>());
+		diet->addStyleClass("diet");
+		diet->addItem(WString::tr("absent"));
+		diet->addItem(WString::tr("herbivore"));
+		diet->addItem(WString::tr("carnivore"));
+		diet->setCurrentIndex(static_cast<int>(guest->diet));
+		diets_.push_back(diet);
 	}
 	party_.modify()->opened = WDate::currentDate();
 }
@@ -160,8 +161,9 @@ void RsvpApplication::submit() {
 	Transaction transaction(session_);
 	party_.modify()->confirmed = WDate::currentDate();
 	party_.modify()->remarks = remarks_->text().toUTF8();
+	int i = 0;
 	for (const ptr<Guest> &guest: party_->guests)
-		guest.modify()->diet = static_cast<Diet>(diet_->currentIndex());
+		guest.modify()->diet = static_cast<Diet>(diets_[i++]->currentIndex());
 	ptr<Guest> guest = party_->guests.front();
 	Message message;
 	message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));

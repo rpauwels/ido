@@ -26,6 +26,8 @@ using Wt::Mail::Client;
 using Wt::Dbo::Session;
 using Wt::Dbo::ptr;
 
+using std::vector;
+
 class RsvpApplication : public WApplication
 {
 public:
@@ -35,7 +37,7 @@ private:
 	Session session_;
 	Client client_;
 	ptr<Party> party_;
-	WComboBox *diet_;
+	vector<WComboBox*> diets_;
 	WLineEdit *remarks_;
 	WText *status_;
 	WPushButton *submit_;
