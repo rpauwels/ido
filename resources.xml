@@ -2,9 +2,11 @@
 <messages>
 	<message id="title">raf + veronique</message>
 	<message id="submit">bevestigen</message>
-	<message id="confirmed">bevestigd</message>
 	<message id="change">aanpassen</message>
-	<message id="alreadySubmitted">je bevestiging is verstuurd, bedankt!</message>
+	<message id="status.notSubmitted">je hebt de uitnodiging nog niet bevestigd</message>
+	<message id="status.submitted">je bevestiging is verstuurd, bedankt!</message>
+	<message id="addToCalendar">toevoegen aan kalender</message>
+	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
 	<message id="absent">kan er niet bij zijn</message>
 	<message id="herbivore">is herbivoor</message>
 	<message id="carnivore">is carnivoor</message>
@@ -12,6 +14,9 @@
 	<message id="password">batterij paard</message>
 	<message id="passwordPlaceholder">wachtwoord</message>
 	<message id="create">tabellen maken</message>
+	<message id="dessert">dessert</message>
+	<message id="meal">maaltijd</message>
+	<message id="full">alles</message>
 	<message id="invite">uitnodigen</message>
 	<message id="fromAddress">raf@localhost</message>
 	<message id="fromName">Raf Pauwels</message>
@@ -61,7 +66,7 @@ Véronique 👰 en Raf 🤵
 			</h1>
 		</header>
 	</message>
-	<message id="plan.ceremony">
+	<message id="plan">
 		<div class="col-sm-2">
 			<h3>ja</h3>
 			<time>11:30</time>
@@ -73,8 +78,7 @@ Véronique 👰 en Raf 🤵
 				temse
 			</p>
 		</div>
-	</message>
-	<message id="plan.lunch">
+		${<if-full>}
 		<div class="col-sm-2">
 			<h3>hap</h3>
 			<time>12:30</time>
@@ -86,8 +90,6 @@ Véronique 👰 en Raf 🤵
 				sint-amands
 			</p>
 		</div>
-	</message>
-	<message id="plan.photo">
 		<div class="col-sm-2">
 			<h3>klik</h3>
 			<time>13:00</time>
@@ -96,8 +98,8 @@ Véronique 👰 en Raf 🤵
 				sint-amands
 			</p>
 		</div>
-	</message>
-	<message id="plan.reception">
+		${</if-full>}
+		${<if-dinner>}
 		<div class="col-sm-2">
 			<h3>chin</h3>
 			<time>18:00</time>
@@ -109,14 +111,11 @@ Véronique 👰 en Raf 🤵
 				sint-amands
 			</p>
 		</div>
-	</message>
-	<message id="plan.dinner">
 		<div class="col-sm-2">
 			<h3>njam</h3>
 			<time>19:00</time>
 		</div>
-	</message>
-	<message id="plan.dessert">
+		${</if-dinner>}
 		<div class="col-sm-2">
 			<h3>njam</h3>
 			<time>22:00</time>

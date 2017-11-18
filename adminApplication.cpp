@@ -9,8 +9,11 @@ using Wt::WEnvironment;
 #include <Wt/WComboBox.h>
 using Wt::WComboBox;
 
-#include <Wt/WLineEdit.h>
-using Wt::WLineEdit;
+#include <Wt/WGroupBox.h>
+using Wt::WGroupBox;
+
+#include <Wt/WLogger.h>
+using Wt::log;
 
 #include <Wt/WPushButton.h>
 using Wt::WPushButton;
@@ -49,33 +52,27 @@ AdminApplication::AdminApplication(const WEnvironment& env)
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
 	
-	pass_ = root()->addWidget(make_unique<WLineEdit>());
-	pass_->setInline(false);
-	pass_->setPlaceholderText(WString::tr("passwordPlaceholder"));
 	create_ = root()->addWidget(make_unique<WPushButton>(WString::tr("create")));
 	create_->setInline(false);
 	create_->clicked().connect(this, &AdminApplication::create);
-	invite_ = root()->addWidget(make_unique<WPushButton>(WString::tr("invite")));
+	auto inviteGroup = root()->addWidget(make_unique<WGroupBox>());
+	inviteLevel_ = inviteGroup->addWidget(make_unique<WComboBox>());
+	inviteLevel_->addItem(WString::tr("dessert"));
+	inviteLevel_->addItem(WString::tr("meal"));
+	inviteLevel_->addItem(WString::tr("full"));
+	invite_ = inviteGroup->addWidget(make_unique<WPushButton>(WString::tr("invite")));
 	invite_->setInline(false);
 	invite_->clicked().connect(this, &AdminApplication::invite);
 }
 
 void AdminApplication::create() {
-	if (pass_->text() != WString::tr("password")) {
-		status("Wrong password");
-		return;
-	}
 	session_.createTables();
 	log("info") << "Database created.";
 }
 
 void AdminApplication::invite() {
-	if (pass_->text() != WString::tr("password")) {
-		status("Wrong password");
-		return;
-	}
 	Transaction transaction(session_);
-	collection< ptr<Party> > parties = session_.find<Party>();
+	collection< ptr<Party> > parties = session_.find<Party>().where("inviteLevel = ?").bind(inviteLevel_->currentIndex());
 	for (const ptr<Party> &party: parties) {
 		ptr<Guest> guest = party->guests.front();
 		Message message;
@@ -84,6 +81,7 @@ void AdminApplication::invite() {
 		message.setSubject(WString::tr("invitation.subject"));
 		message.setBody(WString::tr("invitation.body").arg(party->name));
 		message.addHtmlBody(WString::tr("invitation.html").arg(party->name));
+		client_.connect();
 		client_.send(message);
 		party.modify()->invited = WDate::currentDate();
 		log("info") << "Sent invitation to " << party->email;
@@ -91,7 +89,3 @@ void AdminApplication::invite() {
 	log("info") << "All invitations were sent.";
 }
 
-void AdminApplication::status(const string& status) {
-	log("info") << status;
-	root()->addWidget(make_unique<WText>(status))->setInline(false);
-}

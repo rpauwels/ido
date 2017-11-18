@@ -1,5 +1,6 @@
 #include "rsvpApplication.hpp"
 #include "adminApplication.hpp"
+#include "calendarResource.hpp"
 #include "guest.hpp"
 #include "party.hpp"
 
@@ -11,9 +12,21 @@ using Wt::WRun;
 #include <Wt/WApplication.h>
 using Wt::WApplication;
 
+#include <Wt/WAnchor.h>
+using Wt::WAnchor;
+
 #include <Wt/WBootstrapTheme.h>
 using Wt::WBootstrapTheme;
 using Wt::BootstrapVersion;
+
+#include <Wt/WComboBox.h>
+using Wt::WComboBox;
+
+#include <Wt/WContainerWidget.h>
+using Wt::WContainerWidget;
+
+#include <Wt/WDate.h>
+using Wt::WDate;
 
 #include <Wt/WEnvironment.h>
 using Wt::WEnvironment;
@@ -21,17 +34,8 @@ using Wt::WEnvironment;
 #include <Wt/WString.h>
 using Wt::WString;
 
-#include <Wt/WDate.h>
-using Wt::WDate;
-
-#include <Wt/WContainerWidget.h>
-using Wt::WContainerWidget;
-
 #include <Wt/WStackedWidget.h>
 using Wt::WStackedWidget;
-
-#include <Wt/WComboBox.h>
-using Wt::WComboBox;
 
 #include <Wt/WTemplate.h>
 using Wt::WTemplate;
@@ -42,6 +46,9 @@ using Wt::WText;
 
 #include <Wt/WLineEdit.h>
 using Wt::WLineEdit;
+
+#include <Wt/WLink.h>
+using Wt::WLink;
 
 #include <Wt/WPushButton.h>
 using Wt::WPushButton;
@@ -65,13 +72,13 @@ using Wt::Dbo::ptr;
 using Wt::Dbo::backend::Sqlite3;
 
 using std::make_unique;
+using std::make_shared;
 using std::move;
 using std::unique_ptr;
 
 RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
   : WApplication(env) {
 	messageResourceBundle().use("resources");
-	client_.connect("localhost");
 	unique_ptr<Sqlite3> sqlite3(new Sqlite3("rsvp.db"));
 	sqlite3->setProperty("show-queries", "true");
 	session_.setConnection(move(sqlite3));
@@ -91,9 +98,9 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 		bindWidget(move(topPtr), "rsvp");
 	} else {
 		setTitle(WString::tr("title"));
-		//useStyleSheet("bootstrap/css/bootstrap.css");
+		useStyleSheet("bootstrap/css/bootstrap.css");
 		useStyleSheet("style.css");
-		auto bootstrapTheme = std::make_shared<WBootstrapTheme>();
+		auto bootstrapTheme = make_shared<WBootstrapTheme>();
 		bootstrapTheme->setVersion(BootstrapVersion::v3);
 		bootstrapTheme->setResponsive(true);
 		setTheme(bootstrapTheme);
@@ -114,16 +121,11 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 		return;
 	}
 	
-	plan->addWidget(make_unique<WTemplate>(WString::tr("plan.ceremony")));
-	if (party_->inviteLevel == InviteLevel::Full) {
-		plan->addWidget(make_unique<WTemplate>(WString::tr("plan.lunch")));
-		plan->addWidget(make_unique<WTemplate>(WString::tr("plan.photo")));
-	}
-	plan->addWidget(make_unique<WTemplate>(WString::tr("plan.reception")));
-	if (party_->inviteLevel == InviteLevel::Dessert)
-		plan->addWidget(make_unique<WTemplate>(WString::tr("plan.dessert")));
-	else
-		plan->addWidget(make_unique<WTemplate>(WString::tr("plan.dinner")));
+	auto t = plan->addWidget(make_unique<WTemplate>(WString::tr("plan")));
+	t->setCondition("if-meal", party_->inviteLevel >= InviteLevel::Meal);
+	t->setCondition("if-full", party_->inviteLevel == InviteLevel::Full);
+	auto ical = WLink(make_shared<CalendarResource>(party_->inviteLevel));
+	plan->addWidget(make_unique<WAnchor>(ical, WString::tr("addToCalendar")));
 
 	auto names = top->addWidget(make_unique<WContainerWidget>());
 	names->setList(true);
@@ -135,10 +137,10 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	WString buttonText;
 	if (party_->confirmed.isNull()) {
 		submit_ = top->addWidget(make_unique<WPushButton>(WString::tr("submit")));
-		status_ = top->addWidget(make_unique<WText>());
+		status_ = top->addWidget(make_unique<WText>(WString::tr("status.notSubmitted")));
 	} else {
 		submit_ = top->addWidget(make_unique<WPushButton>(WString::tr("change")));
-		status_ = top->addWidget(make_unique<WText>(WString::tr("alreadySubmitted")));
+		status_ = top->addWidget(make_unique<WText>(WString::tr("status.submitted")));
 	}
 	submit_->setInline(false);
 	submit_->clicked().connect(this, &RsvpApplication::submit);
@@ -171,8 +173,9 @@ void RsvpApplication::submit() {
 	message.setSubject(WString::tr("confirmation.subject"));
 	message.setBody(WString::tr("confirmation.body").arg(party_->name));
 	message.addHtmlBody(WString::tr("confirmation.html").arg(party_->name));
+	client_.connect();
 	client_.send(message);
-	status_->setText(WString::tr("alreadySubmitted"));
+	status_->setText(WString::tr("status.submitted"));
 	submit_->setText(WString::tr("change"));
 	submit_->setEnabled(true);
 }

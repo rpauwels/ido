@@ -1,10 +1,13 @@
 <server>
 	<application-settings location="*">
 		<log-config>*</log-config>
-		<redirect-message>Webpagina zonder JavaScript</redirect-message>
+		<redirect-message>Eenvoudige HTML-versie</redirect-message>
 		<meta-headers>
 			<meta name="author" content="Raf Pauwels" />
 			<meta name="description" content="Huwelijksuitnodiging" />
 		</meta-headers>
+		<properties>
+			<property name="smtp-self-host">localhost</property>
+		</properties>
 	</application-settings>
 </server>

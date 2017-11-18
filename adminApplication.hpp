@@ -5,9 +5,6 @@
 using Wt::WApplication;
 using Wt::WEnvironment;
 
-#include <Wt/WLineEdit.h>
-using Wt::WLineEdit;
-
 #include <Wt/WComboBox.h>
 using Wt::WComboBox;
 
@@ -22,15 +19,13 @@ using Wt::Dbo::Session;
 
 using std::string;
 
-class AdminApplication : public WApplication
-{
+class AdminApplication : public WApplication {
 public:
 	AdminApplication(const WEnvironment& env);
 
 private:
 	Session session_;
 	Client client_;
-	WLineEdit *pass_;
 	WPushButton *create_;
 	WComboBox *inviteLevel_;
 	WPushButton *invite_;
@@ -39,4 +34,4 @@ private:
 	void status(const string& status);
 };
 
-#endif // RSVPAPPLICATION_HPP_
+#endif // ADMINAPPLICATION_HPP_
