@@ -124,4 +124,31 @@ Véronique 👰 en Raf 🤵
 	<message id="credit">
 		<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 	</message>
+<message id="ical.ceremony">BEGIN:VEVENT
+UID:ceremony@raf-en-vero.pauwels-cordier.be
+ORGANIZER;CN=Veronique en Raf:MAILTO:saftaplan@gmail.com
+LOCATION:Gemeentehuis, Markt 1, Temse
+SUMMARY:Huwelijksceremonie
+DTSTART:20180203T103000Z
+DTEND:20180203T113000Z
+DTSTAMP:20171019T001900Z
+END:VEVENT</message>
+<message id="ical.lunch">BEGIN:VEVENT
+UID:lunch@raf-en-vero.pauwels-cordier.be
+ORGANIZER;CN=Veronique en Raf:MAILTO:saftaplan@gmail.com
+LOCATION:Eventroom, Buisstraat 19, Sint-Amands
+SUMMARY:Lunch
+DTSTART:20180203T113000Z
+DTEND:20180203T123000Z
+DTSTAMP:20171019T001900Z
+END:VEVENT</message>
+<message id="ical.photo">BEGIN:VEVENT
+UID:photo@raf-en-vero.pauwels-cordier.be
+ORGANIZER;CN=Veronique en Raf:MAILTO:saftaplan@gmail.com
+LOCATION:Park
+SUMMARY:Foto's
+DTSTART:20180203T140000Z
+DTEND:20180203T150000Z
+DTSTAMP:20171019T001900Z
+END:VEVENT</message>
 </messages>

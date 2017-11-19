@@ -1,4 +1,5 @@
 #include "calendarResource.hpp"
+#include "party.hpp"
 
 #include <Wt/WObject.h>
 using Wt::WObject;
@@ -28,7 +29,14 @@ CalendarResource::~CalendarResource() {
 	
 void CalendarResource::handleRequest(const Request& request, Response& response) {
 	response.setMimeType("text/calendar");
-	response.out() << "BEGIN:VCALENDAR" << endl;
-	response.out() << "VERSION:2.0" << endl;
-	response.out() << "END:VCALENDAR" << endl;
+	response.out() << "BEGIN:VCALENDAR\n" 
+		<< "VERSION:2.0\n"
+		<< "PRODID:https://raf-en-vero.pauwels-cordier.be/\n"
+		<< "METHOD:PUBLISH\n"
+		<< WString::tr("ical.ceremony");
+	if (level_ == InviteLevel::Full) {
+		response.out() << WString::tr("ical.lunch") << "\n" 
+			<< WString::tr("ical.photo");
+	}
+	response.out() << "\nEND:VCALENDAR" << endl;
 }
