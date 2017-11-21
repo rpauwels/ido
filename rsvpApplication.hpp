@@ -26,6 +26,7 @@ using Wt::Mail::Client;
 using Wt::Dbo::Session;
 using Wt::Dbo::ptr;
 
+#include <vector>
 using std::vector;
 
 class RsvpApplication : public WApplication

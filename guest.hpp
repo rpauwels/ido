@@ -25,7 +25,7 @@ public:
 	Diet diet;
 	ptr<Party> party;
 
-	Guest();
+	Guest() {};
 
 	template<class Action>
 	void persist(Action& a)

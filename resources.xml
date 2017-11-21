@@ -11,15 +11,39 @@
 	<message id="herbivore">is herbivoor</message>
 	<message id="carnivore">is carnivoor</message>
 	<message id="remarks">opmerkingen</message>
-	<message id="password">batterij paard</message>
-	<message id="passwordPlaceholder">wachtwoord</message>
 	<message id="create">tabellen maken</message>
-	<message id="dessert">dessert</message>
-	<message id="meal">maaltijd</message>
-	<message id="full">alles</message>
+	<message id="dessert">Dessert</message>
+	<message id="meal">Maaltijd</message>
+	<message id="full">Alles</message>
 	<message id="invite">uitnodigen</message>
 	<message id="fromAddress">raf@localhost</message>
-	<message id="fromName">Raf Pauwels</message>
+	<message id="fromName">Raf en Véronique</message>
+	<message id="event.ceremony">Huwelijksceremonie</message>
+	<message id="event.lunch">Lunch</message>
+	<message id="event.photo">Foto's</message>
+	<message id="event.reception">Receptie</message>
+	<message id="event.diner">Diner</message>
+	<message id="event.dessert">Dessertenbuffet</message>
+	<message id="start.ceremony">Sat Feb 3 11:00:00 2018</message>
+	<message id="end.ceremony">Sat Feb 3 12:00:00 2018</message>
+	<message id="start.lunch">Sat Feb 3 12:00:00 2018</message>
+	<message id="end.lunch">Sat Feb 3 13:00:00 2018</message>
+	<message id="start.photo">Sat Feb 3 13:00:00 2018</message>
+	<message id="end.photo">Sat Feb 3 14:00:00 2018</message>
+	<message id="start.reception">Sat Feb 3 18:00:00 2018</message>
+	<message id="end.reception">Sat Feb 3 19:30:00 2018</message>
+	<message id="start.dinner">Sat Feb 3 19:30:00 2018</message>
+	<message id="end.dinner">Sat Feb 3 19:30:00 2018</message>
+	<message id="start.dessert">Sat Feb 3 22:00:00 2018</message>
+	<message id="end.dessert">Sat Feb 3 23:00:00 2018</message>
+	<message id="event.lunch">Lunch</message>
+	<message id="event.photo">Foto's</message>
+	<message id="event.reception">Receptie</message>
+	<message id="event.diner">Diner</message>
+	<message id="event.dessert">Dessertenbuffet</message>
+	<message id="location.townHall">Gemeentehuis, Markt 1, Temse</message>
+	<message id="location.eventroom">Eventroom, Buisstraat 19, Sint-Amands</message>
+	<message id="location.photo">Een park</message>
 	<message id="invitation.subject">Uitnodiging</message>
 	<message id="invitation.body">
 Hallo {1},
@@ -65,6 +89,19 @@ Véronique 👰 en Raf 🤵
 				<p><small><time datetime="2018-02-03">3 februari 2018</time></small></p>
 			</h1>
 		</header>
+	</message>
+	<message id="event">
+		<div class="col-sm-2">
+			<h3>${header}</h3>
+			<time>${start}</time>
+			<p>
+				${<if-geo>}<a href="geo:51.124517,4.214168">${</if-geo>}
+					gemeentehuis<br/>
+				${<if-geo>}</a>${</if-geo>}
+				markt 1<br/>
+				temse
+			</p>
+		</div>
 	</message>
 	<message id="plan">
 		<div class="col-sm-2">
@@ -124,31 +161,4 @@ Véronique 👰 en Raf 🤵
 	<message id="credit">
 		<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 	</message>
-<message id="ical.ceremony">BEGIN:VEVENT
-UID:ceremony@raf-en-vero.pauwels-cordier.be
-ORGANIZER;CN=Veronique en Raf:MAILTO:saftaplan@gmail.com
-LOCATION:Gemeentehuis, Markt 1, Temse
-SUMMARY:Huwelijksceremonie
-DTSTART:20180203T103000Z
-DTEND:20180203T113000Z
-DTSTAMP:20171019T001900Z
-END:VEVENT</message>
-<message id="ical.lunch">BEGIN:VEVENT
-UID:lunch@raf-en-vero.pauwels-cordier.be
-ORGANIZER;CN=Veronique en Raf:MAILTO:saftaplan@gmail.com
-LOCATION:Eventroom, Buisstraat 19, Sint-Amands
-SUMMARY:Lunch
-DTSTART:20180203T113000Z
-DTEND:20180203T123000Z
-DTSTAMP:20171019T001900Z
-END:VEVENT</message>
-<message id="ical.photo">BEGIN:VEVENT
-UID:photo@raf-en-vero.pauwels-cordier.be
-ORGANIZER;CN=Veronique en Raf:MAILTO:saftaplan@gmail.com
-LOCATION:Park
-SUMMARY:Foto's
-DTSTART:20180203T140000Z
-DTEND:20180203T150000Z
-DTSTAMP:20171019T001900Z
-END:VEVENT</message>
 </messages>

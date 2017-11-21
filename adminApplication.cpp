@@ -9,6 +9,9 @@ using Wt::WEnvironment;
 #include <Wt/WComboBox.h>
 using Wt::WComboBox;
 
+#include <Wt/WDateTime.h>
+using Wt::WDateTime;
+
 #include <Wt/WGroupBox.h>
 using Wt::WGroupBox;
 
@@ -49,6 +52,7 @@ AdminApplication::AdminApplication(const WEnvironment& env)
 	unique_ptr<Sqlite3> sqlite3(new Sqlite3("rsvp.db"));
 	sqlite3->setProperty("show-queries", "true");
 	session_.setConnection(move(sqlite3));
+	session_.mapClass<Event>("event");
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
 	
@@ -83,7 +87,7 @@ void AdminApplication::invite() {
 		message.addHtmlBody(WString::tr("invitation.html").arg(party->name));
 		client_.connect();
 		client_.send(message);
-		party.modify()->invited = WDate::currentDate();
+		party.modify()->invited = WDateTime::currentDateTime();
 		log("info") << "Sent invitation to " << party->email;
 	}
 	log("info") << "All invitations were sent.";

@@ -1,11 +1,13 @@
 #ifndef PARTY_HPP_
 #define PARTY_HPP_
 
+#include "event.hpp"
+
 #include <string>
 using std::string;
 
-#include <Wt/WDate.h>
-using Wt::WDate;
+#include <Wt/WDateTime.h>
+using Wt::WDateTime;
 
 #include <Wt/Dbo/Dbo.h>
 using Wt::Dbo::ptr;
@@ -13,6 +15,7 @@ using Wt::Dbo::collection;
 using Wt::Dbo::field;
 using Wt::Dbo::hasMany;
 using Wt::Dbo::ManyToOne;
+using Wt::Dbo::ManyToMany;
 
 #include <Wt/Dbo/WtSqlTraits.h>
 
@@ -30,13 +33,14 @@ public:
 	string name;
 	string email;
 	InviteLevel inviteLevel;
-	WDate invited;
-	WDate opened;
+	WDateTime invited;
+	WDateTime opened;
 	string remarks;
-	WDate confirmed;
+	WDateTime confirmed;
 	collection< ptr<Guest> > guests;
-
-	Party();
+	collection< ptr<Event> > events;
+	
+	Party() {};
 
 	template<class Action>
 	void persist(Action& a)
@@ -50,6 +54,7 @@ public:
 		field(a, remarks, "remarks");
 		field(a, confirmed, "confirmed");
 		hasMany(a, guests, ManyToOne, "party");
+		hasMany(a, events, ManyToMany, "event_party");
 	}
 };
 #endif // PARTY_HPP_

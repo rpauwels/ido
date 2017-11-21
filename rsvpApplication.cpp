@@ -25,8 +25,8 @@ using Wt::WComboBox;
 #include <Wt/WContainerWidget.h>
 using Wt::WContainerWidget;
 
-#include <Wt/WDate.h>
-using Wt::WDate;
+#include <Wt/WDateTime.h>
+using Wt::WDateTime;
 
 #include <Wt/WEnvironment.h>
 using Wt::WEnvironment;
@@ -82,6 +82,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	unique_ptr<Sqlite3> sqlite3(new Sqlite3("rsvp.db"));
 	sqlite3->setProperty("show-queries", "true");
 	session_.setConnection(move(sqlite3));
+	session_.mapClass<Event>("event");
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
 
@@ -121,11 +122,58 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 		return;
 	}
 	
-	auto t = plan->addWidget(make_unique<WTemplate>(WString::tr("plan")));
+	auto ical = make_shared<CalendarResource>();
+	for (const ptr<Event> &event: party_->events) {
+		auto t = plan->addWidget(make_unique<WTemplate>(WString::tr("event")));
+		event->fill(*t);
+		ical->addEvent(*event);
+	}
+	
+	/*auto t = plan->addWidget(make_unique<WTemplate>(WString::tr("plan")));
 	t->setCondition("if-meal", party_->inviteLevel >= InviteLevel::Meal);
 	t->setCondition("if-full", party_->inviteLevel == InviteLevel::Full);
-	auto ical = WLink(make_shared<CalendarResource>(party_->inviteLevel));
-	plan->addWidget(make_unique<WAnchor>(ical, WString::tr("addToCalendar")));
+	auto ical = make_shared<CalendarResource>();
+	ical->addEvent({
+		"ceremony@raf-en-vero.pauwels-cordier.be", 
+		WString::tr("event.ceremony"), WString::tr("location.townHall"), 
+		WDateTime::fromString(WString::tr("start.ceremony")),
+		WDateTime::fromString(WString::tr("end.ceremony"))
+	});
+	if (party_->inviteLevel == InviteLevel::Full) {
+		ical->addEvent({
+			"lunch@raf-en-vero.pauwels-cordier.be", 
+			WString::tr("event.lunch"), WString::tr("location.eventroom"), 
+			WDateTime::fromString(WString::tr("start.lunch")),
+			WDateTime::fromString(WString::tr("end.lunch"))
+		});
+		ical->addEvent({
+			"photo@raf-en-vero.pauwels-cordier.be", 
+			WString::tr("event.photo"), WString::tr("location.park"), 
+			WDateTime::fromString(WString::tr("start.photo")),
+			WDateTime::fromString(WString::tr("end.photo"))
+		});
+	}
+	if (party_->inviteLevel >= InviteLevel::Meal) {
+		ical->addEvent({
+			"reception@raf-en-vero.pauwels-cordier.be", 
+			WString::tr("event.reception"), WString::tr("location.eventroom"), 
+			WDateTime::fromString(WString::tr("start.reception")),
+			WDateTime::fromString(WString::tr("end.reception"))
+		});
+		ical->addEvent({
+			"dinner@raf-en-vero.pauwels-cordier.be", 
+			WString::tr("event.dinner"), WString::tr("location.eventroom"), 
+			WDateTime::fromString(WString::tr("start.dinner")),
+			WDateTime::fromString(WString::tr("end.dinner"))
+		});
+	}
+	ical->addEvent({
+		"dessert@raf-en-vero.pauwels-cordier.be", 
+		WString::tr("dessert"), WString::tr("location.eventroom"), 
+		WDateTime::fromString(WString::tr("start.dessert")),
+		WDateTime::fromString(WString::tr("end.dessert"))
+	});
+	plan->addWidget(make_unique<WAnchor>(WLink(ical), WString::tr("addToCalendar")));*/
 
 	auto names = top->addWidget(make_unique<WContainerWidget>());
 	names->setList(true);
@@ -155,13 +203,13 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 		diet->setCurrentIndex(static_cast<int>(guest->diet));
 		diets_.push_back(diet);
 	}
-	party_.modify()->opened = WDate::currentDate();
+	party_.modify()->opened = WDateTime::currentDateTime();
 }
 
 void RsvpApplication::submit() {
 	submit_->setEnabled(false);
 	Transaction transaction(session_);
-	party_.modify()->confirmed = WDate::currentDate();
+	party_.modify()->confirmed = WDateTime::currentDateTime();
 	party_.modify()->remarks = remarks_->text().toUTF8();
 	int i = 0;
 	for (const ptr<Guest> &guest: party_->guests)
