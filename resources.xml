@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <messages>
+	<message id="domain">raf-en-vero.pauwels-cordier.be</message>
 	<message id="title">raf + veronique</message>
 	<message id="submit">bevestigen</message>
 	<message id="change">aanpassen</message>
@@ -18,32 +19,6 @@
 	<message id="invite">uitnodigen</message>
 	<message id="fromAddress">raf@localhost</message>
 	<message id="fromName">Raf en Véronique</message>
-	<message id="event.ceremony">Huwelijksceremonie</message>
-	<message id="event.lunch">Lunch</message>
-	<message id="event.photo">Foto's</message>
-	<message id="event.reception">Receptie</message>
-	<message id="event.diner">Diner</message>
-	<message id="event.dessert">Dessertenbuffet</message>
-	<message id="start.ceremony">Sat Feb 3 11:00:00 2018</message>
-	<message id="end.ceremony">Sat Feb 3 12:00:00 2018</message>
-	<message id="start.lunch">Sat Feb 3 12:00:00 2018</message>
-	<message id="end.lunch">Sat Feb 3 13:00:00 2018</message>
-	<message id="start.photo">Sat Feb 3 13:00:00 2018</message>
-	<message id="end.photo">Sat Feb 3 14:00:00 2018</message>
-	<message id="start.reception">Sat Feb 3 18:00:00 2018</message>
-	<message id="end.reception">Sat Feb 3 19:30:00 2018</message>
-	<message id="start.dinner">Sat Feb 3 19:30:00 2018</message>
-	<message id="end.dinner">Sat Feb 3 19:30:00 2018</message>
-	<message id="start.dessert">Sat Feb 3 22:00:00 2018</message>
-	<message id="end.dessert">Sat Feb 3 23:00:00 2018</message>
-	<message id="event.lunch">Lunch</message>
-	<message id="event.photo">Foto's</message>
-	<message id="event.reception">Receptie</message>
-	<message id="event.diner">Diner</message>
-	<message id="event.dessert">Dessertenbuffet</message>
-	<message id="location.townHall">Gemeentehuis, Markt 1, Temse</message>
-	<message id="location.eventroom">Eventroom, Buisstraat 19, Sint-Amands</message>
-	<message id="location.photo">Een park</message>
 	<message id="invitation.subject">Uitnodiging</message>
 	<message id="invitation.body">
 Hallo {1},
@@ -58,7 +33,7 @@ Véronique 👰 en Raf 🤵
 	</message>
 	<message id="invitation.html">
 <p>Hallo {1},</p>
-<p>Je bent uitgenodigd op ons huwelijksfeest op <em>3 februari</em>! Kan je je komst bevestigen via <a href="http://raf-en-vero.pauwels-cordier.be/">onze website</a>?</p>
+<p>Je bent uitgenodigd op ons huwelijksfeest op <em>3 februari</em>! Kan je je komst bevestigen via <a href="https://raf-en-vero.pauwels-cordier.be/">onze website</a>?</p>
 <p>Hopelijk tot dan!</p>
 <p>Met feestelijke groeten,</p>
 <p>Véronique 👰 en Raf 🤵</p>
@@ -94,68 +69,7 @@ Véronique 👰 en Raf 🤵
 		<div class="col-sm-2">
 			<h3>${header}</h3>
 			<time>${start}</time>
-			<p>
-				${<if-geo>}<a href="geo:51.124517,4.214168">${</if-geo>}
-					gemeentehuis<br/>
-				${<if-geo>}</a>${</if-geo>}
-				markt 1<br/>
-				temse
-			</p>
-		</div>
-	</message>
-	<message id="plan">
-		<div class="col-sm-2">
-			<h3>ja</h3>
-			<time>11:30</time>
-			<p>
-				<a href="geo:51.124517,4.214168">
-					gemeentehuis<br/>
-				</a>
-				markt 1<br/>
-				temse
-			</p>
-		</div>
-		${<if-full>}
-		<div class="col-sm-2">
-			<h3>hap</h3>
-			<time>12:30</time>
-			<p>
-				<a href="geo:51.056199,4.211381">
-					eventroom<br/>
-				</a>
-				buisstraat 19<br/>
-				sint-amands
-			</p>
-		</div>
-		<div class="col-sm-2">
-			<h3>klik</h3>
-			<time>13:00</time>
-			<p>
-				park<br/>
-				sint-amands
-			</p>
-		</div>
-		${</if-full>}
-		${<if-dinner>}
-		<div class="col-sm-2">
-			<h3>chin</h3>
-			<time>18:00</time>
-			<p>
-				<a href="geo:51.056199,4.211381">
-					eventroom<br/>
-				</a>
-				buisstraat 19<br/>
-				sint-amands
-			</p>
-		</div>
-		<div class="col-sm-2">
-			<h3>njam</h3>
-			<time>19:00</time>
-		</div>
-		${</if-dinner>}
-		<div class="col-sm-2">
-			<h3>njam</h3>
-			<time>22:00</time>
+			<p><a href="geo:${lat},${lon}">${location}</a></p>
 		</div>
 	</message>
 	<message id="credit">

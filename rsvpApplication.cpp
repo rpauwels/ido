@@ -107,7 +107,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 		setTheme(bootstrapTheme);
 		top = root();
 		plan = root();
-		root()->addWidget(make_unique<WTemplate>(WString::tr("header")));
+		root()->addNew<WTemplate>(WString::tr("header"));
 	}
 	
 	const string *uuid = env.getParameter("uuid");
@@ -124,78 +124,33 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	
 	auto ical = make_shared<CalendarResource>();
 	for (const ptr<Event> &event: party_->events) {
-		auto t = plan->addWidget(make_unique<WTemplate>(WString::tr("event")));
+		auto t = plan->addNew<WTemplate>(WString::tr("event"));
 		event->fill(*t);
 		ical->addEvent(*event);
 	}
-	
-	/*auto t = plan->addWidget(make_unique<WTemplate>(WString::tr("plan")));
-	t->setCondition("if-meal", party_->inviteLevel >= InviteLevel::Meal);
-	t->setCondition("if-full", party_->inviteLevel == InviteLevel::Full);
-	auto ical = make_shared<CalendarResource>();
-	ical->addEvent({
-		"ceremony@raf-en-vero.pauwels-cordier.be", 
-		WString::tr("event.ceremony"), WString::tr("location.townHall"), 
-		WDateTime::fromString(WString::tr("start.ceremony")),
-		WDateTime::fromString(WString::tr("end.ceremony"))
-	});
-	if (party_->inviteLevel == InviteLevel::Full) {
-		ical->addEvent({
-			"lunch@raf-en-vero.pauwels-cordier.be", 
-			WString::tr("event.lunch"), WString::tr("location.eventroom"), 
-			WDateTime::fromString(WString::tr("start.lunch")),
-			WDateTime::fromString(WString::tr("end.lunch"))
-		});
-		ical->addEvent({
-			"photo@raf-en-vero.pauwels-cordier.be", 
-			WString::tr("event.photo"), WString::tr("location.park"), 
-			WDateTime::fromString(WString::tr("start.photo")),
-			WDateTime::fromString(WString::tr("end.photo"))
-		});
-	}
-	if (party_->inviteLevel >= InviteLevel::Meal) {
-		ical->addEvent({
-			"reception@raf-en-vero.pauwels-cordier.be", 
-			WString::tr("event.reception"), WString::tr("location.eventroom"), 
-			WDateTime::fromString(WString::tr("start.reception")),
-			WDateTime::fromString(WString::tr("end.reception"))
-		});
-		ical->addEvent({
-			"dinner@raf-en-vero.pauwels-cordier.be", 
-			WString::tr("event.dinner"), WString::tr("location.eventroom"), 
-			WDateTime::fromString(WString::tr("start.dinner")),
-			WDateTime::fromString(WString::tr("end.dinner"))
-		});
-	}
-	ical->addEvent({
-		"dessert@raf-en-vero.pauwels-cordier.be", 
-		WString::tr("dessert"), WString::tr("location.eventroom"), 
-		WDateTime::fromString(WString::tr("start.dessert")),
-		WDateTime::fromString(WString::tr("end.dessert"))
-	});
-	plan->addWidget(make_unique<WAnchor>(WLink(ical), WString::tr("addToCalendar")));*/
+	plan->addNew<WAnchor>(WLink(ical), WString::tr("addToCalendar"));
 
-	auto names = top->addWidget(make_unique<WContainerWidget>());
+	auto names = top->addNew<WContainerWidget>();
 	names->setList(true);
-	remarks_ = top->addWidget(make_unique<WLineEdit>());
+	remarks_ = top->addNew<WLineEdit>();
 	remarks_->setInline(false);
 	remarks_->setTextSize(20);
 	remarks_->setPlaceholderText(WString::tr("remarks"));
 	remarks_->setText(party_->remarks);
 	WString buttonText;
 	if (party_->confirmed.isNull()) {
-		submit_ = top->addWidget(make_unique<WPushButton>(WString::tr("submit")));
-		status_ = top->addWidget(make_unique<WText>(WString::tr("status.notSubmitted")));
+		submit_ = top->addNew<WPushButton>(WString::tr("submit"));
+		status_ = top->addNew<WText>(WString::tr("status.notSubmitted"));
 	} else {
-		submit_ = top->addWidget(make_unique<WPushButton>(WString::tr("change")));
-		status_ = top->addWidget(make_unique<WText>(WString::tr("status.submitted")));
+		submit_ = top->addNew<WPushButton>(WString::tr("change"));
+		status_ = top->addNew<WText>(WString::tr("status.submitted"));
 	}
 	submit_->setInline(false);
 	submit_->clicked().connect(this, &RsvpApplication::submit);
 	for (const ptr<Guest> &guest: party_->guests) {
-		auto nameRow = names->addWidget(make_unique<WContainerWidget>());
-		nameRow->addWidget(make_unique<WText>(guest->firstName + " " + guest->lastName));
-		auto diet = nameRow->addWidget(make_unique<WComboBox>());
+		auto nameRow = names->addNew<WContainerWidget>();
+		nameRow->addNew<WText>(guest->firstName + " " + guest->lastName);
+		auto diet = nameRow->addNew<WComboBox>();
 		diet->addStyleClass("diet");
 		diet->addItem(WString::tr("absent"));
 		diet->addItem(WString::tr("herbivore"));

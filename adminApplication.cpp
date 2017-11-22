@@ -59,12 +59,12 @@ AdminApplication::AdminApplication(const WEnvironment& env)
 	create_ = root()->addWidget(make_unique<WPushButton>(WString::tr("create")));
 	create_->setInline(false);
 	create_->clicked().connect(this, &AdminApplication::create);
-	auto inviteGroup = root()->addWidget(make_unique<WGroupBox>());
-	inviteLevel_ = inviteGroup->addWidget(make_unique<WComboBox>());
+	auto inviteGroup = root()->addNew<WGroupBox>();
+	inviteLevel_ = inviteGroup->addNew<WComboBox>();
 	inviteLevel_->addItem(WString::tr("dessert"));
 	inviteLevel_->addItem(WString::tr("meal"));
 	inviteLevel_->addItem(WString::tr("full"));
-	invite_ = inviteGroup->addWidget(make_unique<WPushButton>(WString::tr("invite")));
+	invite_ = inviteGroup->addNew<WPushButton>(WString::tr("invite"));
 	invite_->setInline(false);
 	invite_->clicked().connect(this, &AdminApplication::invite);
 }
