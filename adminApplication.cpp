@@ -42,7 +42,6 @@ using Wt::Dbo::ptr;
 #include <Wt/Dbo/backend/Sqlite3.h>
 using Wt::Dbo::backend::Sqlite3;
 
-using std::make_unique;
 using std::unique_ptr;
 using std::string;
 
@@ -56,7 +55,7 @@ AdminApplication::AdminApplication(const WEnvironment& env)
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
 	
-	create_ = root()->addWidget(make_unique<WPushButton>(WString::tr("create")));
+	create_ = root()->addNew<WPushButton>(WString::tr("create"));
 	create_->setInline(false);
 	create_->clicked().connect(this, &AdminApplication::create);
 	auto inviteGroup = root()->addNew<WGroupBox>();

@@ -32,7 +32,7 @@ using std::vector;
 class RsvpApplication : public WApplication
 {
 public:
-	RsvpApplication(const WEnvironment& env, bool embedded);
+	RsvpApplication(const WEnvironment& env);
 
 private:
 	Session session_;

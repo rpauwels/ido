@@ -76,7 +76,7 @@ using std::make_shared;
 using std::move;
 using std::unique_ptr;
 
-RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
+RsvpApplication::RsvpApplication(const WEnvironment& env)
   : WApplication(env) {
 	messageResourceBundle().use("resources");
 	unique_ptr<Sqlite3> sqlite3(new Sqlite3("rsvp.db"));
@@ -86,29 +86,14 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
 
-	WContainerWidget *top;
-	WContainerWidget *plan;
-	if (embedded) {
-		auto planPtr = make_unique<WContainerWidget>();
-		plan = planPtr.get();
-		bindWidget(move(planPtr), "plan");
-	
-		setJavaScriptClass("rsvp");
-		auto topPtr = make_unique<WContainerWidget>();
-		top = topPtr.get();
-		bindWidget(move(topPtr), "rsvp");
-	} else {
-		setTitle(WString::tr("title"));
-		useStyleSheet("bootstrap/css/bootstrap.css");
-		useStyleSheet("style.css");
-		auto bootstrapTheme = make_shared<WBootstrapTheme>();
-		bootstrapTheme->setVersion(BootstrapVersion::v3);
-		bootstrapTheme->setResponsive(true);
-		setTheme(bootstrapTheme);
-		top = root();
-		plan = root();
-		root()->addNew<WTemplate>(WString::tr("header"));
-	}
+	setTitle(WString::tr("title"));
+	useStyleSheet("bootstrap/css/bootstrap.css");
+	useStyleSheet("style.css");
+	auto bootstrapTheme = make_shared<WBootstrapTheme>();
+	bootstrapTheme->setVersion(BootstrapVersion::v3);
+	bootstrapTheme->setResponsive(true);
+	setTheme(bootstrapTheme);
+	root()->addNew<WTemplate>(WString::tr("header"));
 	
 	const string *uuid = env.getParameter("uuid");
 	if (!uuid) {
@@ -124,26 +109,26 @@ RsvpApplication::RsvpApplication(const WEnvironment& env, bool embedded)
 	
 	auto ical = make_shared<CalendarResource>();
 	for (const ptr<Event> &event: party_->events) {
-		auto t = plan->addNew<WTemplate>(WString::tr("event"));
+		auto t = root()->addNew<WTemplate>(WString::tr("event"));
 		event->fill(*t);
 		ical->addEvent(*event);
 	}
-	plan->addNew<WAnchor>(WLink(ical), WString::tr("addToCalendar"));
+	root()->addNew<WAnchor>(WLink(ical), WString::tr("addToCalendar"));
 
-	auto names = top->addNew<WContainerWidget>();
+	auto names = root()->addNew<WContainerWidget>();
 	names->setList(true);
-	remarks_ = top->addNew<WLineEdit>();
+	remarks_ = root()->addNew<WLineEdit>();
 	remarks_->setInline(false);
 	remarks_->setTextSize(20);
 	remarks_->setPlaceholderText(WString::tr("remarks"));
 	remarks_->setText(party_->remarks);
 	WString buttonText;
 	if (party_->confirmed.isNull()) {
-		submit_ = top->addNew<WPushButton>(WString::tr("submit"));
-		status_ = top->addNew<WText>(WString::tr("status.notSubmitted"));
+		submit_ = root()->addNew<WPushButton>(WString::tr("submit"));
+		status_ = root()->addNew<WText>(WString::tr("status.notSubmitted"));
 	} else {
-		submit_ = top->addNew<WPushButton>(WString::tr("change"));
-		status_ = top->addNew<WText>(WString::tr("status.submitted"));
+		submit_ = root()->addNew<WPushButton>(WString::tr("change"));
+		status_ = root()->addNew<WText>(WString::tr("status.submitted"));
 	}
 	submit_->setInline(false);
 	submit_->clicked().connect(this, &RsvpApplication::submit);
@@ -184,11 +169,7 @@ void RsvpApplication::submit() {
 }
 
 unique_ptr<WApplication> createApplication(const WEnvironment& env) {
-	return make_unique<RsvpApplication>(env, false);
-}
-
-unique_ptr<WApplication> createWidgetSet(const WEnvironment& env) {
-	return make_unique<RsvpApplication>(env, true);
+	return make_unique<RsvpApplication>(env);
 }
 
 unique_ptr<WApplication> createAdminApplication(const WEnvironment& env) {
@@ -199,6 +180,5 @@ int main(int argc, char **argv) {
 	WServer server(argc, argv, WTHTTP_CONFIGURATION);
 	server.addEntryPoint(EntryPointType::Application, createApplication);
 	server.addEntryPoint(EntryPointType::Application, createAdminApplication, "/admin");
-	server.addEntryPoint(EntryPointType::WidgetSet, createWidgetSet, "/rsvp.js");
 	server.run();
 }
