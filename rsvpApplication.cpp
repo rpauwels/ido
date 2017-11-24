@@ -44,6 +44,9 @@ using Wt::TextFormat;
 #include <Wt/WText.h>
 using Wt::WText;
 
+#include <Wt/WLabel.h>
+using Wt::WLabel;
+
 #include <Wt/WLineEdit.h>
 using Wt::WLineEdit;
 
@@ -75,6 +78,7 @@ using std::make_unique;
 using std::make_shared;
 using std::move;
 using std::unique_ptr;
+using std::to_string;
 
 RsvpApplication::RsvpApplication(const WEnvironment& env)
   : WApplication(env) {
@@ -87,13 +91,15 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	session_.mapClass<Party>("party");
 
 	setTitle(WString::tr("title"));
-	useStyleSheet("bootstrap/css/bootstrap.css");
-	useStyleSheet("style.css");
 	auto bootstrapTheme = make_shared<WBootstrapTheme>();
 	bootstrapTheme->setVersion(BootstrapVersion::v3);
 	bootstrapTheme->setResponsive(true);
 	setTheme(bootstrapTheme);
-	root()->addNew<WTemplate>(WString::tr("header"));
+	useStyleSheet("bootstrap/css/bootstrap.css");
+	useStyleSheet("style.css");
+	
+	auto header = root()->addNew<WTemplate>(WString::tr("header"));
+	header->addStyleClass("header");
 	
 	const string *uuid = env.getParameter("uuid");
 	if (!uuid) {
@@ -107,39 +113,48 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 		return;
 	}
 	
+	auto events = root()->addNew<WContainerWidget>();
+	events->addStyleClass("container");
 	auto ical = make_shared<CalendarResource>();
 	for (const ptr<Event> &event: party_->events) {
-		auto t = root()->addNew<WTemplate>(WString::tr("event"));
+		auto t = events->addNew<WTemplate>(WString::tr("event"));
+		t->addStyleClass("col-sm-" + to_string(12 / party_->events.size()));
 		event->fill(*t);
 		ical->addEvent(*event);
 	}
 	root()->addNew<WAnchor>(WLink(ical), WString::tr("addToCalendar"));
 
-	auto names = root()->addNew<WContainerWidget>();
+	auto rsvp = root()->addNew<WContainerWidget>();
+	rsvp->addStyleClass("rsvp");
+	auto names = rsvp->addNew<WContainerWidget>();
 	names->setList(true);
-	remarks_ = root()->addNew<WLineEdit>();
-	remarks_->setInline(false);
+	remarks_ = rsvp->addNew<WLineEdit>();
 	remarks_->setTextSize(20);
 	remarks_->setPlaceholderText(WString::tr("remarks"));
 	remarks_->setText(party_->remarks);
 	WString buttonText;
 	if (party_->confirmed.isNull()) {
-		submit_ = root()->addNew<WPushButton>(WString::tr("submit"));
-		status_ = root()->addNew<WText>(WString::tr("status.notSubmitted"));
+		submit_ = rsvp->addNew<WPushButton>(WString::tr("submit"));
+		status_ = rsvp->addNew<WText>(WString::tr("status.notSubmitted"));
 	} else {
-		submit_ = root()->addNew<WPushButton>(WString::tr("change"));
-		status_ = root()->addNew<WText>(WString::tr("status.submitted"));
+		submit_ = rsvp->addNew<WPushButton>(WString::tr("change"));
+		status_ = rsvp->addNew<WText>(WString::tr("status.submitted"));
 	}
-	submit_->setInline(false);
+	status_->addStyleClass("status");
 	submit_->clicked().connect(this, &RsvpApplication::submit);
 	for (const ptr<Guest> &guest: party_->guests) {
 		auto nameRow = names->addNew<WContainerWidget>();
-		nameRow->addNew<WText>(guest->firstName + " " + guest->lastName);
+		auto label = nameRow->addNew<WLabel>(guest->firstName + " " + guest->lastName);
 		auto diet = nameRow->addNew<WComboBox>();
+		label->setBuddy(diet);
 		diet->addStyleClass("diet");
+		if (party_->inviteLevel == InviteLevel::Dessert) {
+			diet->addItem(WString::tr("present"));
+		} else {
+			diet->addItem(WString::tr("herbivore"));
+			diet->addItem(WString::tr("carnivore"));
+		}
 		diet->addItem(WString::tr("absent"));
-		diet->addItem(WString::tr("herbivore"));
-		diet->addItem(WString::tr("carnivore"));
 		diet->setCurrentIndex(static_cast<int>(guest->diet));
 		diets_.push_back(diet);
 	}

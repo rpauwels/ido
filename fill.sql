@@ -9,6 +9,8 @@ insert into event values (6, 0, 'njam', 'Dessertenbuffet', 'Eventroom, Buisstraa
 
 insert into party (id, version, uuid, name, email, inviteLevel, invited, opened, remarks, confirmed) 
 	values (0, 0, "test", "Hoogheid", "raf@localhost", 0, null, null, "", null);
+insert into party (id, version, uuid, name, email, inviteLevel, invited, opened, remarks, confirmed) 
+	values (1, 0, lower(hex(randomblob(16))), "echte uuid", "raf@localhost", 0, null, null, "", null);
 
 insert into guest (id, version, first_name, last_name, "order", diet, party_id)
 	values (0, 0, "Raf", "Pauwels", 0, 1, 0);

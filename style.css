@@ -13,10 +13,14 @@
 #robbe {
 	width: 600px;
 }
-header, span, #rsvp {
+.form-control {
+	width: auto;
 	display: inline-block;
 }
-header {
+.status {
+	display: block;
+}
+.header {
 	padding: 20px;
 	border: gray 1px solid;
 	background-color: #594c4c;
@@ -25,6 +29,7 @@ body {
 	text-align: center;
 	font-family: "Economica";
 	font-size: 15pt;
+	text-transform: lowercase;
 	background-color: #2d2d2d;
 	color: white;
 }
@@ -53,11 +58,11 @@ ul {
 a {
 	color: #aaa527;
 }
-aside {
-	position: fixed;
-}
 .diet {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 15px;
+}
+.rsvp {
+	width: 400px;
 }

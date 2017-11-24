@@ -9,6 +9,7 @@
 	<message id="addToCalendar">toevoegen aan kalender</message>
 	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
 	<message id="absent">kan er niet bij zijn</message>
+	<message id="present">zal er zijn</message>
 	<message id="herbivore">is herbivoor</message>
 	<message id="carnivore">is carnivoor</message>
 	<message id="remarks">opmerkingen</message>
@@ -23,7 +24,7 @@
 	<message id="invitation.body">
 Hallo {1},
 
-Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevestigen via http://raf-en-vero.pauwels-cordier.be/ ?
+Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevestigen via http://${tr:domain}/ ?
 
 Tot dan!
 
@@ -33,7 +34,7 @@ Véronique 👰 en Raf 🤵
 	</message>
 	<message id="invitation.html">
 <p>Hallo {1},</p>
-<p>Je bent uitgenodigd op ons huwelijksfeest op <em>3 februari</em>! Kan je je komst bevestigen via <a href="https://raf-en-vero.pauwels-cordier.be/">onze website</a>?</p>
+<p>Je bent uitgenodigd op ons huwelijksfeest op <em>3 februari</em>! Kan je je komst bevestigen via <a href="https://${tr:domain}/">onze website</a>?</p>
 <p>Hopelijk tot dan!</p>
 <p>Met feestelijke groeten,</p>
 <p>Véronique 👰 en Raf 🤵</p>
@@ -55,22 +56,18 @@ Véronique 👰 en Raf 🤵
 <p>Véronique 👰 en Raf 🤵</p>
 	</message>
 	<message id="header">
-		<header>
-			<img class="animated fadeIn" id="robbe" src="robbe.jpg" alt="Robbe met ringen"/>
-			<h1 id="name">
-				<span class="animated fadeInDown">véronique</span>
-				<span>+</span>
-				<span class="animated fadeInUp">raf</span>
-				<p><small><time datetime="2018-02-03">3 februari 2018</time></small></p>
-			</h1>
-		</header>
+		<img class="animated fadeIn" id="robbe" src="robbe.jpg" alt="Robbe met ringen"/>
+		<h1 id="name">
+			<span class="animated fadeInDown">véronique</span>
+			<span>+</span>
+			<span class="animated fadeInUp">raf</span>
+			<p><small><time datetime="2018-02-03">3 februari 2018</time></small></p>
+		</h1>
 	</message>
 	<message id="event">
-		<div class="col-sm-2">
-			<h3>${header}</h3>
-			<time>${start}</time>
-			<p><a href="geo:${lat},${lon}">${location}</a></p>
-		</div>
+		<h3>${header}</h3>
+		<time>${start}</time>
+		<p><a href="geo:${lat},${lon}">${location}</a></p>
 	</message>
 	<message id="credit">
 		<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
