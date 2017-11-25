@@ -96,10 +96,11 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	bootstrapTheme->setResponsive(true);
 	setTheme(bootstrapTheme);
 	useStyleSheet("bootstrap/css/bootstrap.css");
+	useStyleSheet("animate.css/animate.min.css");
 	useStyleSheet("style.css");
 	
 	auto header = root()->addNew<WTemplate>(WString::tr("header"));
-	header->addStyleClass("header");
+	header->addStyleClass("jumbotron");
 	
 	const string *uuid = env.getParameter("uuid");
 	if (!uuid) {
@@ -179,6 +180,7 @@ void RsvpApplication::submit() {
 	client_.connect();
 	client_.send(message);
 	status_->setText(WString::tr("status.submitted"));
+	status_->addStyleClass("alert alert-success");
 	submit_->setText(WString::tr("change"));
 	submit_->setEnabled(true);
 }

@@ -56,12 +56,11 @@ Véronique 👰 en Raf 🤵
 <p>Véronique 👰 en Raf 🤵</p>
 	</message>
 	<message id="header">
-		<img class="animated fadeIn" id="robbe" src="robbe.jpg" alt="Robbe met ringen"/>
 		<h1 id="name">
 			<span class="animated fadeInDown">véronique</span>
-			<span>+</span>
+			+
 			<span class="animated fadeInUp">raf</span>
-			<p><small><time datetime="2018-02-03">3 februari 2018</time></small></p>
+			<small><time datetime="2018-02-03">3 februari 2018</time></small>
 		</h1>
 	</message>
 	<message id="event">

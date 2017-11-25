@@ -10,20 +10,8 @@
     font-family:"Economica";
     src: url("fonts/Economica/Economica-Regular.ttf")
 }
-#robbe {
-	width: 600px;
-}
-.form-control {
-	width: auto;
-	display: inline-block;
-}
-.status {
-	display: block;
-}
-.header {
-	padding: 20px;
-	border: gray 1px solid;
-	background-color: #594c4c;
+body, html {
+	height: 100%;
 }
 body {
 	text-align: center;
@@ -33,22 +21,36 @@ body {
 	background-color: #2d2d2d;
 	color: white;
 }
-input, button {
-	margin: 10px auto;
+span {
+	display: inline-block;
+}
+.jumbotron {
+	min-height: 100%;
+	background-image: url("robbe.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 75% 75%;
 }
 input, select, button {
+	margin: 10px auto;
 	color: black;
 }
 h1 {
+	background-color: #0006;
 	font-size: 3em;
+	position: absolute;
+	left: 0;
+	bottom: 10%;
+	padding: 30px;
+}
+h1 small {
+	display: block;
+	color: #ddd;
 }
 h3 {
 	margin-top: 100px;
 	font-size: 2em;
-}
-section {
-	margin-top: 50px;
-	margin-bottom: 50px;
 }
 ul {
   list-style-type: none;
@@ -64,5 +66,12 @@ a {
 	margin-left: 15px;
 }
 .rsvp {
-	width: 400px;
+	min-height: 100%;
+}
+.form-control {
+	width: auto;
+	display: inline-block;
+}
+.status {
+	display: block;
 }
