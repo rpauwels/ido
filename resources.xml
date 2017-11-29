@@ -8,6 +8,7 @@
 	<message id="status.submitted">je bevestiging is verstuurd, bedankt!</message>
 	<message id="addToCalendar">toevoegen aan kalender</message>
 	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
+	<message id="rsvpHeader"><h2>Kom</h2></message>
 	<message id="absent">kan er niet bij zijn</message>
 	<message id="present">zal er zijn</message>
 	<message id="herbivore">is herbivoor</message>
@@ -67,6 +68,14 @@ Véronique 👰 en Raf 🤵
 		<h3>${header}</h3>
 		<time>${start}</time>
 		<p><a href="geo:${lat},${lon}">${location}</a></p>
+	</message>
+	<message id="rsvp">
+		<h2>Kom</h2>
+		${names}
+		<h3>Muzieksuggesties</h3>
+		${songs}
+		${remarks}
+		${confirm}
 	</message>
 	<message id="credit">
 		<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

@@ -2,6 +2,7 @@
 #define PARTY_HPP_
 
 #include "event.hpp"
+#include "song.hpp"
 
 #include <string>
 using std::string;
@@ -26,6 +27,7 @@ enum class InviteLevel {
 };
 
 class Guest;
+class Song;
 class Party
 {
 public:
@@ -39,6 +41,7 @@ public:
 	WDateTime confirmed;
 	collection< ptr<Guest> > guests;
 	collection< ptr<Event> > events;
+	collection< ptr<Song> > songs;
 	
 	Party() {};
 
@@ -55,6 +58,7 @@ public:
 		field(a, confirmed, "confirmed");
 		hasMany(a, guests, ManyToOne, "party");
 		hasMany(a, events, ManyToMany, "event_party");
+		hasMany(a, songs, ManyToOne, "party");
 	}
 };
 #endif // PARTY_HPP_

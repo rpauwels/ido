@@ -29,6 +29,9 @@ using Wt::Dbo::ptr;
 #include <vector>
 using std::vector;
 
+#include <utility>
+using std::pair;
+
 class RsvpApplication : public WApplication
 {
 public:
@@ -39,10 +42,13 @@ private:
 	Client client_;
 	ptr<Party> party_;
 	vector<WComboBox*> diets_;
+	vector<pair<WLineEdit*, WLineEdit*>> songs_;
 	WLineEdit *remarks_;
 	WText *status_;
 	WPushButton *submit_;
+
 	void submit();
+	void songChanged();
 };
 
 #endif // RSVPAPPLICATION_HPP_

@@ -3,6 +3,7 @@
 #include "calendarResource.hpp"
 #include "guest.hpp"
 #include "party.hpp"
+#include "song.hpp"
 
 #include <Wt/WServer.h>
 using Wt::WServer;
@@ -76,7 +77,9 @@ using Wt::Dbo::backend::Sqlite3;
 
 using std::make_unique;
 using std::make_shared;
+using std::make_pair;
 using std::move;
+using std::pair;
 using std::unique_ptr;
 using std::to_string;
 
@@ -125,24 +128,10 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	}
 	root()->addNew<WAnchor>(WLink(ical), WString::tr("addToCalendar"));
 
-	auto rsvp = root()->addNew<WContainerWidget>();
-	rsvp->addStyleClass("rsvp");
-	auto names = rsvp->addNew<WContainerWidget>();
+	auto rsvp = root()->addNew<WTemplate>(WString::tr("rsvp"));
+	auto names = rsvp->bindNew<WContainerWidget>("names");
+	names->addStyleClass("names row");
 	names->setList(true);
-	remarks_ = rsvp->addNew<WLineEdit>();
-	remarks_->setTextSize(20);
-	remarks_->setPlaceholderText(WString::tr("remarks"));
-	remarks_->setText(party_->remarks);
-	WString buttonText;
-	if (party_->confirmed.isNull()) {
-		submit_ = rsvp->addNew<WPushButton>(WString::tr("submit"));
-		status_ = rsvp->addNew<WText>(WString::tr("status.notSubmitted"));
-	} else {
-		submit_ = rsvp->addNew<WPushButton>(WString::tr("change"));
-		status_ = rsvp->addNew<WText>(WString::tr("status.submitted"));
-	}
-	status_->addStyleClass("status");
-	submit_->clicked().connect(this, &RsvpApplication::submit);
 	for (const ptr<Guest> &guest: party_->guests) {
 		auto nameRow = names->addNew<WContainerWidget>();
 		auto label = nameRow->addNew<WLabel>(guest->firstName + " " + guest->lastName);
@@ -159,7 +148,49 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 		diet->setCurrentIndex(static_cast<int>(guest->diet));
 		diets_.push_back(diet);
 	}
+	auto songs = rsvp->bindNew<WContainerWidget>("songs");
+	for (const ptr<Song> &song: party_->songs) {
+		auto songRow = songs->addNew<WContainerWidget>();
+		auto artist = songRow->addNew<WLineEdit>(song->artist);
+		artist->setTextSize(10);
+		artist->setPlaceholderText(WString::tr("artist"));
+		artist->changed().connect(this, &RsvpApplication::songChanged);
+		auto title = songRow->addNew<WLineEdit>(song->title);
+		title->setTextSize(10);
+		title->setPlaceholderText(WString::tr("title"));
+		title->changed().connect(this, &RsvpApplication::songChanged);
+		songs_.push_back(make_pair(artist, title));
+	}
+	//auto formFooter = rsvp->addNew<WContainerWidget>();
+	//formFooter->addStyleClass("formFooter row");
+	remarks_ = rsvp->bindNew<WLineEdit>("remarks");
+	remarks_->setTextSize(20);
+	remarks_->setPlaceholderText(WString::tr("remarks"));
+	remarks_->setText(party_->remarks);
+	WString submitText;
+	WString statusText;
+	if (party_->confirmed.isNull()) {
+		submitText = WString::tr("submit");
+		statusText = WString::tr("status.notSubmitted");
+	} else {
+		submitText = WString::tr("change");
+		statusText = WString::tr("status.submitted");
+	}
+	submit_ = rsvp->bindNew<WPushButton>("submit", submitText);
+	status_ = rsvp->bindNew<WText>("status", WString::tr("status.submitted"));
+	status_->addStyleClass("status");
+	submit_->clicked().connect(this, &RsvpApplication::submit);
+
 	party_.modify()->opened = WDateTime::currentDateTime();
+}
+
+void RsvpApplication::songChanged() {
+	if (songs_.size() < 2)
+	for (const pair<WLineEdit*, WLineEdit*> &pair: songs_) {
+		if (pair.first->text().empty() && pair.second->text().empty()) {
+			
+		}
+	}
 }
 
 void RsvpApplication::submit() {
