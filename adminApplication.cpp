@@ -1,6 +1,7 @@
 #include "adminApplication.hpp"
 #include "guest.hpp"
 #include "party.hpp"
+#include "song.hpp"
 
 #include <Wt/WApplication.h>
 using Wt::WApplication;
@@ -54,6 +55,7 @@ AdminApplication::AdminApplication(const WEnvironment& env)
 	session_.mapClass<Event>("event");
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
+	session_.mapClass<Song>("song");
 	
 	create_ = root()->addNew<WPushButton>(WString::tr("create"));
 	create_->setInline(false);

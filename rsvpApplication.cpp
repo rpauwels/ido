@@ -92,8 +92,9 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	session_.mapClass<Event>("event");
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
+	session_.mapClass<Song>("song");
 
-	setTitle(WString::tr("title"));
+	setTitle(WString::tr("pageTitle"));
 	auto bootstrapTheme = make_shared<WBootstrapTheme>();
 	bootstrapTheme->setVersion(BootstrapVersion::v3);
 	bootstrapTheme->setResponsive(true);
@@ -148,21 +149,10 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 		diet->setCurrentIndex(static_cast<int>(guest->diet));
 		diets_.push_back(diet);
 	}
-	auto songs = rsvp->bindNew<WContainerWidget>("songs");
-	for (const ptr<Song> &song: party_->songs) {
-		auto songRow = songs->addNew<WContainerWidget>();
-		auto artist = songRow->addNew<WLineEdit>(song->artist);
-		artist->setTextSize(10);
-		artist->setPlaceholderText(WString::tr("artist"));
-		artist->changed().connect(this, &RsvpApplication::songChanged);
-		auto title = songRow->addNew<WLineEdit>(song->title);
-		title->setTextSize(10);
-		title->setPlaceholderText(WString::tr("title"));
-		title->changed().connect(this, &RsvpApplication::songChanged);
-		songs_.push_back(make_pair(artist, title));
-	}
-	//auto formFooter = rsvp->addNew<WContainerWidget>();
-	//formFooter->addStyleClass("formFooter row");
+	songContainer_ = rsvp->bindNew<WContainerWidget>("songs");
+	for (const ptr<Song> &song: party_->songs)
+		addSong(song->artist, song->title);
+	addSong();
 	remarks_ = rsvp->bindNew<WLineEdit>("remarks");
 	remarks_->setTextSize(20);
 	remarks_->setPlaceholderText(WString::tr("remarks"));
@@ -184,13 +174,32 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	party_.modify()->opened = WDateTime::currentDateTime();
 }
 
+void RsvpApplication::addSong(const string& artist, const string& title) {
+	auto songRow = songContainer_->addNew<WContainerWidget>();
+	songRow->addStyleClass("animated fadeInDown");
+	auto artistEdit = songRow->addNew<WLineEdit>(artist);
+	artistEdit->setTextSize(10);
+	artistEdit->setPlaceholderText(WString::tr("artist"));
+	artistEdit->changed().connect(this, &RsvpApplication::songChanged);
+	auto titleEdit = songRow->addNew<WLineEdit>(title);
+	titleEdit->setTextSize(10);
+	titleEdit->setPlaceholderText(WString::tr("title"));
+	titleEdit->changed().connect(this, &RsvpApplication::songChanged);
+	songs_.push_back(make_pair(artistEdit, titleEdit));
+}
+
 void RsvpApplication::songChanged() {
-	if (songs_.size() < 2)
-	for (const pair<WLineEdit*, WLineEdit*> &pair: songs_) {
-		if (pair.first->text().empty() && pair.second->text().empty()) {
-			
+	auto it = songs_.begin();
+	for (int i = 0; it < songs_.end() - 1; ++i) {
+		if (it->first->text().empty() && it->second->text().empty()) {
+			songContainer_->removeWidget(songContainer_->widget(i));
+			songs_.erase(it);
+		} else {
+			++it;
 		}
 	}
+	if (!it->first->text().empty() || !it->second->text().empty())
+		addSong();
 }
 
 void RsvpApplication::submit() {
@@ -201,6 +210,18 @@ void RsvpApplication::submit() {
 	int i = 0;
 	for (const ptr<Guest> &guest: party_->guests)
 		guest.modify()->diet = static_cast<Diet>(diets_[i++]->currentIndex());
+	party_.modify()->songs.clear();
+	int j = 0;
+	for (const pair<WLineEdit*, WLineEdit*> &pair: songs_) {
+		if (!pair.first->text().empty() || !pair.second->text().empty()) {
+			unique_ptr<Song> song{new Song()};
+			song->artist = pair.first->text().toUTF8();
+			song->title = pair.second->text().toUTF8();
+			song->order = j++;
+			song->party = party_;
+			session_.add(move(song));
+		}
+	}
 	ptr<Guest> guest = party_->guests.front();
 	Message message;
 	message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));

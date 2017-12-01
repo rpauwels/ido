@@ -13,6 +13,9 @@ using Wt::WLineEdit;
 #include <Wt/WComboBox.h>
 using Wt::WComboBox;
 
+#include <Wt/WContainerWidget.h>
+using Wt::WContainerWidget;
+
 #include <Wt/WPushButton.h>
 using Wt::WPushButton;
 
@@ -32,6 +35,9 @@ using std::vector;
 #include <utility>
 using std::pair;
 
+#include <string>
+using std::string;
+
 class RsvpApplication : public WApplication
 {
 public:
@@ -42,13 +48,15 @@ private:
 	Client client_;
 	ptr<Party> party_;
 	vector<WComboBox*> diets_;
-	vector<pair<WLineEdit*, WLineEdit*>> songs_;
+	WContainerWidget *songContainer_;
+	vector< pair<WLineEdit*, WLineEdit*> > songs_;
 	WLineEdit *remarks_;
 	WText *status_;
 	WPushButton *submit_;
 
 	void submit();
 	void songChanged();
+	void addSong(const string& artist = "", const string& title = "");
 };
 
 #endif // RSVPAPPLICATION_HPP_
