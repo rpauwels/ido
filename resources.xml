@@ -6,7 +6,8 @@
 	<message id="change">aanpassen</message>
 	<message id="status.notSubmitted">je hebt de uitnodiging nog niet bevestigd</message>
 	<message id="status.submitted">je bevestiging is verstuurd, bedankt!</message>
-	<message id="addToCalendar">toevoegen aan kalender</message>
+	<message id="calendarImg">calendar.svg</message>
+	<message id="calendar">toevoegen aan kalender</message>
 	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
 	<message id="rsvpHeader"><h2>Kom</h2></message>
 	<message id="absent">kan er niet bij zijn</message>
@@ -67,19 +68,20 @@ Véronique 👰 en Raf 🤵
 		</h1>
 	</message>
 	<message id="event">
-		<img src="${header}.svg" alt="${name}" />
-		<h3>${header}</h3>
-		<time>${start}</time>
-		<p><a href="geo:${lat},${lon}">${location}</a></p>
+		<img class="event-img" src="${header}.svg" alt="${name}" />
+		<time class="event-time">${start}</time>
+		<p class="event-location"><a href="geo:${lat},${lon}">${location}</a></p>
 	</message>
 	<message id="rsvp">
-		<h2>Kom</h2>
-		${names}
-		<h3>Muziek</h3>
-		<p>Hieronder kan je muziek suggereren. We kunnen natuurlijk niks beloven :)</p>
-		${songs}
-		${remarks}
-		${submit}
+		<div class="rsvp">
+			<h2>Kom</h2>
+			${names}
+			<h3>Muziek</h3>
+			<p>Hieronder kan je muziek suggereren. We kunnen natuurlijk niks beloven :)</p>
+			${songs}
+			${remarks}
+			${submit}
+		</div>
 	</message>
 	<message id="credit">
 		<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

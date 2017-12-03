@@ -66,12 +66,18 @@ a {
 .rsvpWrapper {
 	min-height: 100%;
 	position: relative;
+	background-image: url("robbe.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 75% 75%;
 }
 .rsvp {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	background-color: #0006;
 }
 .names {
   list-style-type: none;
@@ -86,4 +92,70 @@ a {
 }
 .status {
 	display: block;
+}
+.timeline {
+  outline: 1px dashed rgba(255, 0, 0, 0);
+}
+.timeline:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.calendar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #52A39A;
+}
+.event {
+  outline: 1px dashed rgba(0, 128, 0, 0);
+}
+.event-img {
+  display: block;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #52A39A;
+}
+.event-time {
+  color: #52A39A;
+  font-weight: 400;
+  font-size: 1.4em;
+}
+.event-location {
+  overflow: hidden;
+}
+@media screen and (max-width: 500px) {
+  .timeline {
+    border-left: 2px solid #52A39A;
+    margin-left: 25px;
+  }
+  .event {
+    margin-left: -25px;
+  }
+  .event-img {
+    float: left;
+    margin-right: 20px;
+  }
+  .event-location {
+  	margin: 0;
+	}
+}
+@media screen and (min-width: 500px) {
+  .timeline {
+    border-top: 2px solid #52A39A;
+    padding-top: 20px;
+    margin-top: 40px;
+    margin-left: 16.65%;
+    margin-right: 16.65%;
+  }
+  .event {
+    float: left;
+    width: 33%;
+    margin-top: -50px;
+  }
+  .event-location {
+    text-align: center;
+  }
 }

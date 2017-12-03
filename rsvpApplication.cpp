@@ -32,6 +32,9 @@ using Wt::WDateTime;
 #include <Wt/WEnvironment.h>
 using Wt::WEnvironment;
 
+#include <Wt/WImage.h>
+using Wt::WImage;
+
 #include <Wt/WString.h>
 using Wt::WString;
 
@@ -119,17 +122,21 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	}
 	
 	auto events = root()->addNew<WContainerWidget>();
-	events->addStyleClass("container");
+	events->addStyleClass("timeline");
 	auto ical = make_shared<CalendarResource>();
 	for (const ptr<Event> &event: party_->events) {
 		auto t = events->addNew<WTemplate>(WString::tr("event"));
-		t->addStyleClass("col-sm-" + to_string(12 / party_->events.size()));
+		//t->addStyleClass("col-sm-" + to_string(12 / party_->events.size()));
+		t->addStyleClass("event");
 		event->fill(*t);
 		ical->addEvent(*event);
 	}
-	root()->addNew<WAnchor>(WLink(ical), WString::tr("addToCalendar"));
+	auto calendar = root()->addNew<WAnchor>(WLink(ical));
+	calendar->setImage(make_unique<WImage>(WString::tr("calendarImg").toUTF8(), WString::tr("calendar")));
+	calendar->image()->addStyleClass("calendar");
 
 	auto rsvp = root()->addNew<WTemplate>(WString::tr("rsvp"));
+	rsvp->addStyleClass("rsvpWrapper");
 	auto names = rsvp->bindNew<WContainerWidget>("names");
 	names->addStyleClass("names row");
 	names->setList(true);
