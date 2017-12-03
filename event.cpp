@@ -14,6 +14,7 @@ Event::Event() {}
 
 void Event::fill(WTemplate &t) const {
 	t.bindString("header", header);
+	t.bindString("summary", summary);
 	string location_br = location;
 	replace_all(location_br, ", ", "<br/>");
 	t.bindString("location", location_br);

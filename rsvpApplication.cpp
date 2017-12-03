@@ -48,6 +48,9 @@ using Wt::TextFormat;
 #include <Wt/WText.h>
 using Wt::WText;
 
+#include <Wt/WTextArea.h>
+using Wt::WTextArea;
+
 #include <Wt/WLabel.h>
 using Wt::WLabel;
 
@@ -126,7 +129,6 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	auto ical = make_shared<CalendarResource>();
 	for (const ptr<Event> &event: party_->events) {
 		auto t = events->addNew<WTemplate>(WString::tr("event"));
-		//t->addStyleClass("col-sm-" + to_string(12 / party_->events.size()));
 		t->addStyleClass("event");
 		event->fill(*t);
 		ical->addEvent(*event);
@@ -160,8 +162,8 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	for (const ptr<Song> &song: party_->songs)
 		addSong(song->artist, song->title);
 	addSong();
-	remarks_ = rsvp->bindNew<WLineEdit>("remarks");
-	remarks_->setTextSize(20);
+	remarks_ = rsvp->bindNew<WTextArea>("remarks");
+	remarks_->addStyleClass("remarks");
 	remarks_->setPlaceholderText(WString::tr("remarks"));
 	remarks_->setText(party_->remarks);
 	WString submitText;

@@ -7,20 +7,23 @@
 using Wt::WApplication;
 using Wt::WEnvironment;
 
-#include <Wt/WLineEdit.h>
-using Wt::WLineEdit;
-
 #include <Wt/WComboBox.h>
 using Wt::WComboBox;
 
 #include <Wt/WContainerWidget.h>
 using Wt::WContainerWidget;
 
+#include <Wt/WLineEdit.h>
+using Wt::WLineEdit;
+
 #include <Wt/WPushButton.h>
 using Wt::WPushButton;
 
 #include <Wt/WText.h>
 using Wt::WText;
+
+#include <Wt/WTextArea.h>
+using Wt::WTextArea;
 
 #include <Wt/Mail/Client.h>
 using Wt::Mail::Client;
@@ -50,7 +53,7 @@ private:
 	vector<WComboBox*> diets_;
 	WContainerWidget *songContainer_;
 	vector< pair<WLineEdit*, WLineEdit*> > songs_;
-	WLineEdit *remarks_;
+	WTextArea *remarks_;
 	WText *status_;
 	WPushButton *submit_;
 
