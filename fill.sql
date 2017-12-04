@@ -5,12 +5,12 @@ insert into event values (2, 0, 'klik', 'Foto''s', 'Park, Sint-Amands', 0, 0, '2
 insert into event values (3, 0, 'chin', 'Receptie', 'Eventroom, Buisstraat 19, Sint-Amands', 51.056199, 4.211381, '2018-02-03T18:00:00.000', '2018-02-03T19:30:00.000');
 insert into event values (4, 0, 'njam', 'Diner', 'Eventroom, Buisstraat 19, Sint-Amands', 51.056199, 4.211381, '2018-02-03T19:30:00.000', '2018-02-03T22:00:00.000');
 insert into event values (5, 0, 'chin', 'Receptie', 'Eventroom, Buisstraat 19, Sint-Amands', 51.056199, 4.211381, '2018-02-03T21:30:00.000', '2018-02-03T22:00:00.000');
-insert into event values (6, 0, 'njam', 'Dessertenbuffet', 'Eventroom, Buisstraat 19, Sint-Amands', 51.056199, 4.211381, '2018-02-03T22:00:00.000', '2018-02-03T23:00:00.000');
+insert into event values (6, 0, 'mmm', 'Dessertenbuffet', 'Eventroom, Buisstraat 19, Sint-Amands', 51.056199, 4.211381, '2018-02-03T22:00:00.000', '2018-02-03T23:00:00.000');
 
 insert into party (id, version, uuid, name, email, inviteLevel, invited, opened, remarks, confirmed) 
-	values (0, 0, "test", "Hoogheid", "raf@localhost", 0, null, null, "", null);
+	values (0, 0, "test", "Hoogheid", "raf@localhost", 2, null, null, "", null);
 insert into party (id, version, uuid, name, email, inviteLevel, invited, opened, remarks, confirmed) 
-	values (1, 0, lower(hex(randomblob(16))), "echte uuid", "raf@localhost", 0, null, null, "", null);
+	values (1, 0, lower(hex(randomblob(16))), "echte uuid", "raf@localhost", 1, null, null, "", null);
 
 insert into guest (id, version, first_name, last_name, "order", diet, party_id)
 	values (0, 0, "Raf", "Pauwels", 0, 1, 0);

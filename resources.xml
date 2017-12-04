@@ -12,8 +12,8 @@
 	<message id="rsvpHeader"><h2>Kom</h2></message>
 	<message id="absent">kan er niet bij zijn</message>
 	<message id="present">zal er zijn</message>
-	<message id="herbivore">is herbivoor</message>
-	<message id="carnivore">is carnivoor</message>
+	<message id="herbivore">eet vegetarisch</message>
+	<message id="carnivore">eet vlees</message>
 	<message id="artist">artiest</message>
 	<message id="title">titel</message>
 	<message id="remarks">opmerkingen</message>
@@ -68,21 +68,25 @@ Véronique 👰 en Raf 🤵
 		</h1>
 	</message>
 	<message id="event">
-		<img class="event-img" src="${header}.svg" alt="${summary}" />
+		<div class="event-circle">
+			<img class="event-img animated slideInLeft" src="${header}.svg" alt="${summary}" />
+		</div>
 		<time class="event-time">${start}</time>
 		<p class="event-location"><a href="geo:${lat},${lon}">${location}</a></p>
 	</message>
 	<message id="rsvp">
 		<div class="rsvp">
 			${names}
-			<p>Hieronder kan je muziek suggereren. We kunnen natuurlijk niks beloven :)</p>
+			<p>Hieronder kan je muziek suggereren.</p>
+			<p>We kunnen natuurlijk niks beloven :)</p>
 			${songs}
 			${remarks}
 			${submit}
 		</div>
 	</message>
-	<message id="credit">
+	<message id="footer">
 		<p>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
 		<p><a href="https://visualpharm.com/free-icons/wedding%20rings-595b40b85ba036ed117dbdc3">Wedding Rings icon</a></p>
+		<p>Gemaakt in C++ met <a href="https://webtoolkit.eu/">Wt</a></p>
 	</message>
 </messages>

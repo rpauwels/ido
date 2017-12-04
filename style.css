@@ -33,11 +33,13 @@ span {
 	background-position: 75% 75%;
 }
 .form-control, .btn {
-	margin: 10px auto;
+	margin: 10px;
 	color: black;
 }
 textarea.form-control {
 	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 h1 {
 	background-color: #0006;
@@ -116,14 +118,19 @@ a {
 .event {
   outline: 1px dashed rgba(0, 128, 0, 0);
 }
-.event-img {
-  display: block;
-  margin: auto;
+.event-circle {
+  display: flex;
+  align-items: center;
+  background-color: white;/*#52A39A;*/
+  border-radius: 50%;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  background-color: white;/*#52A39A;*/
-  padding: 10px;
+  margin: auto;
+}
+.event-img {
+  width: 30px;
+  height: 30px;
+  margin: auto;
 }
 .event-time {
   color: white;/*#52A39A;*/
@@ -133,7 +140,7 @@ a {
 .event-location {
   overflow: hidden;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .timeline {
     border-left: 2px solid white; /*#52A39A;*/
     margin-left: 25px;
@@ -151,19 +158,20 @@ a {
   	margin: 0;
 	}
 }
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 700px) {
   .timeline {
     border-top: 2px solid white;/*#52A39A;*/
     padding-top: 20px;
-    margin-left: 16.65%;
-    margin-right: 16.65%;
     margin-top: 80px;
     margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
   }
   .event {
     float: left;
-    width: 33%;
     margin-top: -50px;
+    margin-left: 20px;
+    margin-right: 20px; 
   }
   .event-location {
     text-align: center;

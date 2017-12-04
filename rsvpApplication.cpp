@@ -179,11 +179,14 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	status_ = rsvp->bindNew<WText>("status", WString::tr("status.submitted"));
 	status_->addStyleClass("status");
 	submit_->clicked().connect(this, &RsvpApplication::submit);
-
+	
+	auto footer = root()->addNew<WText>(WString::tr("footer"));
 	party_.modify()->opened = WDateTime::currentDateTime();
 }
 
 void RsvpApplication::addSong(const string& artist, const string& title) {
+	if (songContainer_->count() > 6)
+		return;
 	auto songRow = songContainer_->addNew<WContainerWidget>();
 	songRow->addStyleClass("animated fadeInDown");
 	auto artistEdit = songRow->addNew<WLineEdit>(artist);
