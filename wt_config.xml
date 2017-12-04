@@ -8,6 +8,7 @@
 		</meta-headers>
 		<properties>
 			<property name="smtp-self-host">localhost</property>
+			<property name="favicon">ja.svg</property>
 		</properties>
 	</application-settings>
 </server>

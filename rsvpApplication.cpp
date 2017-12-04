@@ -133,7 +133,8 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 		event->fill(*t);
 		ical->addEvent(*event);
 	}
-	auto calendar = root()->addNew<WAnchor>(WLink(ical));
+	auto calendar = events->addNew<WAnchor>(WLink(ical));
+	calendar->addStyleClass("calendar-circle");
 	calendar->setImage(make_unique<WImage>(WString::tr("calendarImg").toUTF8(), WString::tr("calendar")));
 	calendar->image()->addStyleClass("calendar");
 
