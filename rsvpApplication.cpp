@@ -149,13 +149,14 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 		auto diet = nameRow->addNew<WComboBox>();
 		label->setBuddy(diet);
 		diet->addStyleClass("diet");
+		diet->addItem(WString::tr("absent"));
 		if (party_->inviteLevel == InviteLevel::Dessert) {
 			diet->addItem(WString::tr("present"));
 		} else {
 			diet->addItem(WString::tr("herbivore"));
 			diet->addItem(WString::tr("carnivore"));
+			diet->addItem(WString::tr("pollotarian"));
 		}
-		diet->addItem(WString::tr("absent"));
 		diet->setCurrentIndex(static_cast<int>(guest->diet));
 		diets_.push_back(diet);
 	}
@@ -200,9 +201,9 @@ void RsvpApplication::setStatus() {
 		statusText = WString::tr("status.submitted").arg(party_->confirmed.toString("yyyy-MM-dd HH:mm:ss"));
 	}
 	submit_ = rsvp_->bindNew<WPushButton>("submit", submitText);
-	submit->addStyleClass("btn btn-default");
+	submit_->addStyleClass("btn btn-default");
 	auto status = rsvp_->bindNew<WText>("status", statusText);
-	status->addStyleClass("status");
+	status->addStyleClass("alert");
 	submit_->clicked().connect(this, &RsvpApplication::submit);
 }
 

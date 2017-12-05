@@ -13,7 +13,8 @@
 	<message id="absent">kan er niet bij zijn</message>
 	<message id="present">zal er zijn</message>
 	<message id="herbivore">eet vegetarisch</message>
-	<message id="carnivore">eet vlees</message>
+	<message id="carnivore">eet vis en vlees</message>
+	<message id="pollotarian">eet vlees (geen vis)</message>
 	<message id="artist">artiest</message>
 	<message id="title">titel</message>
 	<message id="remarks">opmerkingen</message>
@@ -86,6 +87,6 @@ Véronique 👰 en Raf 🤵
 		</div>
 	</message>
 	<message id="footer">
-		<p>Gemaakt in C++ met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a></p>
+		Gemaakt in C++ met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
 	</message>
 </messages>

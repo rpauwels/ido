@@ -5,6 +5,7 @@
 		<meta-headers>
 			<meta name="author" content="Raf Pauwels" />
 			<meta name="description" content="Huwelijksuitnodiging" />
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
 		</meta-headers>
 		<properties>
 			<property name="smtp-self-host">localhost</property>

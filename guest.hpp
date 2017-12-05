@@ -12,7 +12,8 @@ using Wt::Dbo::belongsTo;
 enum class Diet {
 	None = 0,
 	Carnivore = 1,
-	Herbivore = 2
+	Herbivore = 2,
+	Pollotarian = 3
 };
 
 class Party;
