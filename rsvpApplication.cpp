@@ -138,9 +138,9 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	calendar->setImage(make_unique<WImage>(WString::tr("calendarImg").toUTF8(), WString::tr("calendar")));
 	calendar->image()->addStyleClass("calendar");
 
-	auto rsvp = root()->addNew<WTemplate>(WString::tr("rsvp"));
-	rsvp->addStyleClass("rsvpWrapper");
-	auto names = rsvp->bindNew<WContainerWidget>("names");
+	rsvp_ = root()->addNew<WTemplate>(WString::tr("rsvp"));
+	rsvp_->addStyleClass("rsvpWrapper");
+	auto names = rsvp_->bindNew<WContainerWidget>("names");
 	names->addStyleClass("names row");
 	names->setList(true);
 	for (const ptr<Guest> &guest: party_->guests) {
@@ -159,27 +159,15 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 		diet->setCurrentIndex(static_cast<int>(guest->diet));
 		diets_.push_back(diet);
 	}
-	songContainer_ = rsvp->bindNew<WContainerWidget>("songs");
+	songContainer_ = rsvp_->bindNew<WContainerWidget>("songs");
 	for (const ptr<Song> &song: party_->songs)
 		addSong(song->artist, song->title);
 	addSong();
-	remarks_ = rsvp->bindNew<WTextArea>("remarks");
+	remarks_ = rsvp_->bindNew<WTextArea>("remarks");
 	remarks_->addStyleClass("remarks");
 	remarks_->setPlaceholderText(WString::tr("remarks"));
 	remarks_->setText(party_->remarks);
-	WString submitText;
-	WString statusText;
-	if (party_->confirmed.isNull()) {
-		submitText = WString::tr("submit");
-		statusText = WString::tr("status.notSubmitted");
-	} else {
-		submitText = WString::tr("change");
-		statusText = WString::tr("status.submitted");
-	}
-	submit_ = rsvp->bindNew<WPushButton>("submit", submitText);
-	status_ = rsvp->bindNew<WText>("status", WString::tr("status.submitted"));
-	status_->addStyleClass("status");
-	submit_->clicked().connect(this, &RsvpApplication::submit);
+	setStatus();
 	
 	auto footer = root()->addNew<WText>(WString::tr("footer"));
 	party_.modify()->opened = WDateTime::currentDateTime();
@@ -191,14 +179,31 @@ void RsvpApplication::addSong(const string& artist, const string& title) {
 	auto songRow = songContainer_->addNew<WContainerWidget>();
 	songRow->addStyleClass("animated fadeInDown");
 	auto artistEdit = songRow->addNew<WLineEdit>(artist);
-	artistEdit->setTextSize(10);
+	artistEdit->setTextSize(15);
 	artistEdit->setPlaceholderText(WString::tr("artist"));
 	artistEdit->changed().connect(this, &RsvpApplication::songChanged);
 	auto titleEdit = songRow->addNew<WLineEdit>(title);
-	titleEdit->setTextSize(10);
+	titleEdit->setTextSize(15);
 	titleEdit->setPlaceholderText(WString::tr("title"));
 	titleEdit->changed().connect(this, &RsvpApplication::songChanged);
 	songs_.push_back(make_pair(artistEdit, titleEdit));
+}
+
+void RsvpApplication::setStatus() {
+	WString submitText;
+	WString statusText;
+	if (party_->confirmed.isNull()) {
+		submitText = WString::tr("submit");
+		statusText = WString::tr("status.notSubmitted");
+	} else {
+		submitText = WString::tr("change");
+		statusText = WString::tr("status.submitted").arg(party_->confirmed.toString("yyyy-MM-dd HH:mm:ss"));
+	}
+	submit_ = rsvp_->bindNew<WPushButton>("submit", submitText);
+	submit->addStyleClass("btn btn-default");
+	auto status = rsvp_->bindNew<WText>("status", statusText);
+	status->addStyleClass("status");
+	submit_->clicked().connect(this, &RsvpApplication::submit);
 }
 
 void RsvpApplication::songChanged() {
@@ -244,10 +249,7 @@ void RsvpApplication::submit() {
 	message.addHtmlBody(WString::tr("confirmation.html").arg(party_->name));
 	client_.connect();
 	client_.send(message);
-	status_->setText(WString::tr("status.submitted"));
-	status_->addStyleClass("alert alert-success");
-	submit_->setText(WString::tr("change"));
-	submit_->setEnabled(true);
+	setStatus();
 }
 
 unique_ptr<WApplication> createApplication(const WEnvironment& env) {

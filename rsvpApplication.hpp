@@ -54,12 +54,13 @@ private:
 	WContainerWidget *songContainer_;
 	vector< pair<WLineEdit*, WLineEdit*> > songs_;
 	WTextArea *remarks_;
-	WText *status_;
+	WTemplate *rsvp_;
 	WPushButton *submit_;
 
 	void submit();
 	void songChanged();
 	void addSong(const string& artist = "", const string& title = "");
+	void setStatus();
 };
 
 #endif // RSVPAPPLICATION_HPP_

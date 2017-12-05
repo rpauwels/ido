@@ -4,8 +4,8 @@
 	<message id="pageTitle">raf + veronique</message>
 	<message id="submit">bevestigen</message>
 	<message id="change">aanpassen</message>
-	<message id="status.notSubmitted">je hebt de uitnodiging nog niet bevestigd</message>
-	<message id="status.submitted">je bevestiging is verstuurd, bedankt!</message>
+	<message id="status.notSubmitted">Je hebt de uitnodiging nog niet bevestigd.</message>
+	<message id="status.submitted">Je bevestigde op {1} en ontving hierover een e-mail.</message>
 	<message id="calendarImg">calendar.svg</message>
 	<message id="calendar">toevoegen aan kalender</message>
 	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
@@ -82,6 +82,7 @@ Véronique 👰 en Raf 🤵
 			${songs}
 			${remarks}
 			${submit}
+			${status}
 		</div>
 	</message>
 	<message id="footer">
