@@ -22,19 +22,18 @@ body {
 	font-family: "Economica";
 	font-size: 15pt;
 	text-transform: lowercase;
-	background-color: #2d2d2d;
 	color: white;
-}
-span {
-	display: inline-block;
-}
-.jumbotron {
-	min-height: 100%;
 	background-image: url("robbe.jpg");
 	background-size: cover;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: 75% 75%;
+}
+span {
+	display: inline-block;
+}
+.header {
+	min-height: 100%;
 }
 .form-control, .btn {
 	margin: 10px;
@@ -59,10 +58,8 @@ h1 small {
 }
 h2 {
 	font-size: 2.5em;
-	font-family: "Economica";
 }
 h3 {
-	font-family: "Economica";
 	font-size: 2em;
 }
 a {
@@ -76,17 +73,9 @@ a:hover {
 	margin-left: 15px;
 	margin-right: 15px;
 }
-.rsvpWrapper {
-	background-image: url("robbe.jpg");
-	background-size: cover;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-position: 75% 75%;
-}
 .rsvp {
 	background-color: #0006;
 	padding-top: 20px;
-	padding-bottom: 20px;
 }
 .names {
   list-style-type: none;
@@ -106,13 +95,18 @@ a:hover {
 	border-color: #fff856;
 	box-shadow: 0 0 8px #fff856;
 }
+label {
+	width: 150px;
+}
 .btn {
-  background-color: #d1cb37;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-.btn:hover {
+.btn-default {
+  background-color: #d1cb37;
+}
+.btn-default:hover,.calendar-circle:hover {
   background-color: #fff856;
 }
 .status {
@@ -120,13 +114,17 @@ a:hover {
 }
 .timeline {
   outline: 1px dashed rgba(255, 0, 0, 0);
-  margin-bottom: 40px;
   position: relative;
+  background-color: #2d2d2d;
 }
 .timeline:after {
   content: "";
   display: table;
   clear: both;
+}
+.timelineWrapper {
+	background-color: #2d2d2d;
+	margin-top: 25px;
 }
 .calendar-circle {
   width: 40px;
@@ -168,12 +166,16 @@ a:hover {
 .event-location {
   overflow: hidden;
 }
+.footer {
+  background-color: #2d2d2d;
+  display: block;
+}
 @media screen and (max-width: 700px) {
   .timeline {
     border-left: 2px solid white; /*#52A39A;*/
     margin-left: 25px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
   }
   .event {
     margin-left: -25px;
@@ -189,9 +191,7 @@ a:hover {
 @media screen and (min-width: 700px) {
   .timeline {
     border-top: 2px solid white;/*#52A39A;*/
-    padding-top: 20px;
-    margin-top: 80px;
-    margin-bottom: 40px;
+    padding-top: 25px;
     display: flex;
     justify-content: center;
   }

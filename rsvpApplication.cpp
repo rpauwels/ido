@@ -10,6 +10,11 @@ using Wt::WServer;
 using Wt::EntryPointType;
 using Wt::WRun;
 
+#include <Wt/WAnimation.h>
+using Wt::WAnimation;
+using Wt::AnimationEffect;
+using Wt::TimingFunction;
+
 #include <Wt/WApplication.h>
 using Wt::WApplication;
 
@@ -105,12 +110,11 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	bootstrapTheme->setVersion(BootstrapVersion::v3);
 	bootstrapTheme->setResponsive(true);
 	setTheme(bootstrapTheme);
-	useStyleSheet("bootstrap/css/bootstrap.css");
 	useStyleSheet("animate.css/animate.min.css");
 	useStyleSheet("style.css");
 	
 	auto header = root()->addNew<WTemplate>(WString::tr("header"));
-	header->addStyleClass("jumbotron");
+	header->addStyleClass("header");
 	
 	const string *uuid = env.getParameter("uuid");
 	if (!uuid) {
@@ -124,22 +128,24 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 		return;
 	}
 	
-	auto events = root()->addNew<WContainerWidget>();
-	events->addStyleClass("timeline");
+	auto timelineWrapper = root()->addNew<WContainerWidget>();
+	timelineWrapper->addStyleClass("timelineWrapper");
+	auto timeline = timelineWrapper->addNew<WContainerWidget>();
+	timeline->addStyleClass("timeline");
 	auto ical = make_shared<CalendarResource>();
 	for (const ptr<Event> &event: party_->events) {
-		auto t = events->addNew<WTemplate>(WString::tr("event"));
+		auto t = timeline->addNew<WTemplate>(WString::tr("event"));
 		t->addStyleClass("event");
 		event->fill(*t);
 		ical->addEvent(*event);
 	}
-	auto calendar = events->addNew<WAnchor>(WLink(ical));
+	auto calendar = timeline->addNew<WAnchor>(WLink(ical));
 	calendar->addStyleClass("calendar-circle");
 	calendar->setImage(make_unique<WImage>(WString::tr("calendarImg").toUTF8(), WString::tr("calendar")));
 	calendar->image()->addStyleClass("calendar");
 
 	rsvp_ = root()->addNew<WTemplate>(WString::tr("rsvp"));
-	rsvp_->addStyleClass("rsvpWrapper");
+	rsvp_->addStyleClass("rsvp");
 	auto names = rsvp_->bindNew<WContainerWidget>("names");
 	names->addStyleClass("names row");
 	names->setList(true);
@@ -171,6 +177,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	setStatus();
 	
 	auto footer = root()->addNew<WText>(WString::tr("footer"));
+	footer->addStyleClass("footer");
 	party_.modify()->opened = WDateTime::currentDateTime();
 }
 
@@ -178,7 +185,6 @@ void RsvpApplication::addSong(const string& artist, const string& title) {
 	if (songContainer_->count() > 6)
 		return;
 	auto songRow = songContainer_->addNew<WContainerWidget>();
-	songRow->addStyleClass("animated fadeInDown");
 	auto artistEdit = songRow->addNew<WLineEdit>(artist);
 	artistEdit->setTextSize(15);
 	artistEdit->setPlaceholderText(WString::tr("artist"));
@@ -187,6 +193,7 @@ void RsvpApplication::addSong(const string& artist, const string& title) {
 	titleEdit->setTextSize(15);
 	titleEdit->setPlaceholderText(WString::tr("title"));
 	titleEdit->changed().connect(this, &RsvpApplication::songChanged);
+	songRow->animateShow(WAnimation(AnimationEffect::SlideInFromTop | AnimationEffect::Fade, TimingFunction::EaseOut, 250));
 	songs_.push_back(make_pair(artistEdit, titleEdit));
 }
 
@@ -194,14 +201,14 @@ void RsvpApplication::setStatus() {
 	WString submitText;
 	WString statusText;
 	if (party_->confirmed.isNull()) {
-		submitText = WString::tr("submit");
+		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("submit"));
+		submit_->addStyleClass("btn btn-default");
 		statusText = WString::tr("status.notSubmitted");
 	} else {
-		submitText = WString::tr("change");
+		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("change"));
+		submit_->addStyleClass("btn");
 		statusText = WString::tr("status.submitted").arg(party_->confirmed.toString("yyyy-MM-dd HH:mm:ss"));
 	}
-	submit_ = rsvp_->bindNew<WPushButton>("submit", submitText);
-	submit_->addStyleClass("btn btn-default");
 	auto status = rsvp_->bindNew<WText>("status", statusText);
 	status->addStyleClass("alert");
 	submit_->clicked().connect(this, &RsvpApplication::submit);
