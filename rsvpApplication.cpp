@@ -86,12 +86,17 @@ using Wt::Dbo::ptr;
 #include <Wt/Dbo/backend/Sqlite3.h>
 using Wt::Dbo::backend::Sqlite3;
 
+#include <memory>
 using std::make_unique;
 using std::make_shared;
-using std::make_pair;
-using std::move;
-using std::pair;
 using std::unique_ptr;
+
+#include <utility>
+using std::move;
+using std::make_pair;
+using std::pair;
+
+#include <string>
 using std::to_string;
 
 RsvpApplication::RsvpApplication(const WEnvironment& env)
