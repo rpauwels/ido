@@ -43,3 +43,6 @@ insert into event_party
 	select 6, id 
 	from party 
 	where inviteLevel = 0;
+	
+update party
+	set uuid = lower(hex(randomblob(16)));

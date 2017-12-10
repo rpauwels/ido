@@ -82,14 +82,15 @@ void AdminApplication::invite() {
 		ptr<Guest> guest = party->guests.front();
 		Message message;
 		message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
-		message.addRecipient(RecipientType::To, Mailbox(party->email, guest->firstName + " " + guest->lastName));
+		for (const ptr<Guest> &guest: party->guests)
+			message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
 		message.setSubject(WString::tr("invitation.subject"));
 		message.setBody(WString::tr("invitation.body").arg(party->name));
 		message.addHtmlBody(WString::tr("invitation.html").arg(party->name));
 		client_.connect();
 		client_.send(message);
 		party.modify()->invited = WDateTime::currentDateTime();
-		log("info") << "Sent invitation to " << party->email;
+		log("info") << "Sent invitation to " << party->name;
 	}
 	log("info") << "All invitations were sent.";
 }

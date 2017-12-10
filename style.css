@@ -14,8 +14,16 @@
        url('fonts/lato-v14-latin-regular.woff2') format('woff2'), 
        url('fonts/lato-v14-latin-regular.woff') format('woff');
 }
-body, html {
+.wow { visibility: hidden; }
+body, html, .robbeWrapper {
 	height: 100%;
+}
+body, .robbe {
+	background-image: url("robbe.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 75% 75%;
 }
 body {
 	text-align: center;
@@ -23,11 +31,17 @@ body {
 	font-size: 15pt;
 	text-transform: lowercase;
 	color: white;
-	background-image: url("robbe.jpg");
-	background-size: cover;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-position: 75% 75%;
+}
+.robbeWrapper, .robbe {
+	height: 100%;
+	width: 100%;
+	z-index: -1;
+}
+.robbeWrapper {
+	filter: blur(5px);
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 span {
 	display: inline-block;
@@ -62,11 +76,17 @@ h2 {
 h3 {
 	font-size: 2em;
 }
-a {
+a:link {
 	color: #d1cb37;
+}
+a:visited {
+	color: #388976;
 }
 a:hover {
 	color: #fff856;
+}
+a:active {
+	color: #7ebcb1;
 }
 .diet {
 	margin-bottom: 10px;
@@ -76,6 +96,7 @@ a:hover {
 .rsvp {
 	background-color: #0006;
 	padding-top: 20px;
+	position: relative;
 }
 .names {
   list-style-type: none;
@@ -116,11 +137,7 @@ label {
   outline: 1px dashed rgba(255, 0, 0, 0);
   position: relative;
   background-color: #2d2d2d;
-}
-.timeline:after {
-  content: "";
-  display: table;
-  clear: both;
+  padding-bottom: 20px;
 }
 .timelineWrapper {
 	background-color: #2d2d2d;
@@ -148,7 +165,7 @@ label {
 .event-circle {
   display: flex;
   align-items: center;
-  background-color: white;/*#52A39A;*/
+  background-color: white;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -159,7 +176,7 @@ label {
   margin: auto;
 }
 .event-time {
-  color: white;/*#52A39A;*/
+  color: white;
   font-weight: 400;
   font-size: 1.4em;
 }
@@ -172,10 +189,9 @@ label {
 }
 @media screen and (max-width: 700px) {
   .timeline {
-    border-left: 2px solid white; /*#52A39A;*/
+    border-left: 2px solid white;
     margin-left: 25px;
     padding-top: 40px;
-    padding-bottom: 20px;
   }
   .event {
     margin-left: -25px;
@@ -190,7 +206,7 @@ label {
 }
 @media screen and (min-width: 700px) {
   .timeline {
-    border-top: 2px solid white;/*#52A39A;*/
+    border-top: 2px solid white;
     padding-top: 25px;
     display: flex;
     justify-content: center;

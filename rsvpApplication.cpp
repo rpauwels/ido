@@ -101,6 +101,7 @@ using std::to_string;
 
 RsvpApplication::RsvpApplication(const WEnvironment& env)
   : WApplication(env) {
+	useStyleSheet("animate.css/animate.min.css");
 	messageResourceBundle().use("resources");
 	unique_ptr<Sqlite3> sqlite3(new Sqlite3("rsvp.db"));
 	sqlite3->setProperty("show-queries", "true");
@@ -115,7 +116,6 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	bootstrapTheme->setVersion(BootstrapVersion::v3);
 	bootstrapTheme->setResponsive(true);
 	setTheme(bootstrapTheme);
-	useStyleSheet("animate.css/animate.min.css");
 	useStyleSheet("style.css");
 	
 	auto header = root()->addNew<WTemplate>(WString::tr("header"));
@@ -207,11 +207,11 @@ void RsvpApplication::setStatus() {
 	WString statusText;
 	if (party_->confirmed.isNull()) {
 		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("submit"));
-		submit_->addStyleClass("btn btn-default");
+		//submit_->setStyleClass("btn btn-default");
 		statusText = WString::tr("status.notSubmitted");
 	} else {
 		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("change"));
-		submit_->addStyleClass("btn");
+		//submit_->setStyleClass("btn");
 		statusText = WString::tr("status.submitted").arg(party_->confirmed.toString("yyyy-MM-dd HH:mm:ss"));
 	}
 	auto status = rsvp_->bindNew<WText>("status", statusText);
@@ -256,7 +256,8 @@ void RsvpApplication::submit() {
 	ptr<Guest> guest = party_->guests.front();
 	Message message;
 	message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
-	message.addRecipient(RecipientType::To, Mailbox(party_->email, guest->firstName + " " + guest->lastName));
+	for (const ptr<Guest> &guest: party_->guests)
+		message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
 	message.setSubject(WString::tr("confirmation.subject"));
 	message.setBody(WString::tr("confirmation.body").arg(party_->name));
 	message.addHtmlBody(WString::tr("confirmation.html").arg(party_->name));

@@ -72,13 +72,14 @@ Véronique 👰 en Raf 🤵
 		</h1>
 	</message>
 	<message id="event">
-		<div class="event-circle animated slideInLeft">
+		<div class="event-circle">
 			<img class="event-img" src="${header}.svg" alt="${summary}" />
 		</div>
 		<time class="event-time">${start}</time>
 		<p class="event-location"><a href="geo:${lat},${lon}">${location}</a></p>
 	</message>
 	<message id="rsvp">
+		<div class="robbeWrapper"><div class="robbe"></div></div>
 		${names}
 		<p>muziek die niet mag ontbreken?<br/>(optioneel, we kunnen natuurlijk niks beloven 😇)</p>
 		${songs}
@@ -87,6 +88,6 @@ Véronique 👰 en Raf 🤵
 		${status}
 	</message>
 	<message id="footer">
-		Gemaakt in C++ met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
+		Gemaakt met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
 	</message>
 </messages>
