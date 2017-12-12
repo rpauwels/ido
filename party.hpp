@@ -33,7 +33,6 @@ class Party
 public:
 	string uuid;
 	string name;
-	string email;
 	InviteLevel inviteLevel;
 	WDateTime invited;
 	WDateTime opened;
@@ -50,7 +49,6 @@ public:
 	{
 		field(a, uuid, "uuid");
 		field(a, name, "name");
-		field(a, email, "email");
 		field(a, inviteLevel, "inviteLevel");
 		field(a, invited, "invited");
 		field(a, opened, "opened");
