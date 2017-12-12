@@ -368,4 +368,10 @@ INSERT INTO `event` VALUES (6,0,'mmm','Dessertenbuffet','Eventroom, Buisstraat 1
 update guest
 	set email=''
 	where email is not null and email != '';
+update guest
+	set email='saftaplan@gmail.com'
+	where id in (1,12,93);
+update guest
+	set email='me_mulder@hotmail.com'
+	where id in (2,43,70);
 COMMIT;
