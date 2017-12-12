@@ -46,3 +46,7 @@ insert into event_party
 	
 update party
 	set uuid = lower(hex(randomblob(16)));
+	
+update guest
+	set email='raf@localhost'
+	where email is not null and email != '';
