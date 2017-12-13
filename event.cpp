@@ -3,6 +3,8 @@
 #include <boost/algorithm/string.hpp>
 using boost::replace_all;
 
+#include <Wt/WLocalDateTime.h>
+
 #include <Wt/WTemplate.h>
 using Wt::WTemplate;
 
@@ -15,7 +17,7 @@ Event::Event() {}
 void Event::fill(WTemplate &t) const {
 	t.bindString("header", header);
 	t.bindString("summary", summary);
-	t.bindString("start", start.toString("HH:mm"));
+	t.bindString("start", start.toLocalTime().toString("HH:mm"));
 	if (location.empty()) {
 		t.setCondition("if-tbd", true);
 	} else {

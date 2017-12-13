@@ -31,6 +31,7 @@ using Wt::WComboBox;
 #include <Wt/WContainerWidget.h>
 using Wt::WContainerWidget;
 
+#include <Wt/WLocalDateTime.h>
 #include <Wt/WDateTime.h>
 using Wt::WDateTime;
 
@@ -110,6 +111,8 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	session_.mapClass<Guest>("guest");
 	session_.mapClass<Party>("party");
 	session_.mapClass<Song>("song");
+	
+	locale().setTimeZone("EST-5EDT,M4.1.0,M10.5.0");
 
 	setTitle(WString::tr("pageTitle"));
 	auto bootstrapTheme = make_shared<WBootstrapTheme>();
@@ -152,7 +155,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	rsvp_ = root()->addNew<WTemplate>(WString::tr("rsvp"));
 	rsvp_->addStyleClass("rsvp");
 	auto names = rsvp_->bindNew<WContainerWidget>("names");
-	names->addStyleClass("names row");
+	names->addStyleClass("names");
 	names->setList(true);
 	for (const ptr<Guest> &guest: party_->guests) {
 		auto nameRow = names->addNew<WContainerWidget>();
@@ -211,7 +214,7 @@ void RsvpApplication::setStatus() {
 		statusText = WString::tr("status.notSubmitted");
 	} else {
 		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("change"));
-		statusText = WString::tr("status.submitted").arg(party_->confirmed.toString("yyyy-MM-dd HH:mm:ss"));
+		statusText = WString::tr("status.submitted").arg(party_->confirmed.toLocalTime().toString("yyyy-MM-dd HH:mm:ss"));
 	}
 	auto status = rsvp_->bindNew<WText>("status", statusText);
 	status->addStyleClass("alert");

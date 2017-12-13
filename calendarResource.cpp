@@ -26,15 +26,15 @@ using std::endl;
 ostream& operator<<(ostream &stream, const Event &event) {
 	WString dateTime = WDateTime::currentDateTime().toString("yyyyMMddTHHmmss");
 	stream << "BEGIN:VEVENT"
-		<< "\nUID:" << dateTime << "-" << event.summary << "@" << WString::tr("domain")
-		<< "\nSUMMARY:" << event.summary
-		<< "\nDTSTART:" << event.start.toString("yyyyMMddTHHmmss")
-		<< "\nDTEND:" << event.end.toString("yyyyMMddTHHmmss")
-		<< "\nDTSTAMP:" << dateTime;
+		<< "\r\nUID:" << dateTime << "-" << event.summary << "@" << WString::tr("domain")
+		<< "\r\nSUMMARY:" << event.summary
+		<< "\r\nDTSTART:" << event.start.toString("yyyyMMddTHHmmss") << "Z"
+		<< "\r\nDTEND:" << event.end.toString("yyyyMMddTHHmmss") << "Z"
+		<< "\r\nDTSTAMP:" << dateTime << "Z";
 	if (!event.location.empty())
-		stream << "\nLOCATION:" << event.location
-			<< "\nGEO:" << event.lat << "," << event.lon;
-	stream << "\nEND:VEVENT";
+		stream << "\r\nLOCATION:" << event.location
+			<< "\r\nGEO:" << event.lat << ";" << event.lon;
+	stream << "\r\nEND:VEVENT";
 }
 
 CalendarResource::CalendarResource() 
@@ -53,10 +53,9 @@ void CalendarResource::addEvent(const Event &event) {
 void CalendarResource::handleRequest(const Request& request, Response& response) {
 	response.setMimeType("text/calendar");
 	response.out() << "BEGIN:VCALENDAR" 
-		<< "\nVERSION:2.0"
-		<< "\nPRODID:https://" << WString::tr("domain") << "/"
-		<< "\nMETHOD:PUBLISH";
+		<< "\r\nVERSION:2.0"
+		<< "\r\nPRODID:https://" << WString::tr("domain") << "/";
 	for (const Event &event: events_)
-		response.out() << "\n" << event;
-	response.out() << "\nEND:VCALENDAR" << endl;
+		response.out() << "\r\n" << event;
+	response.out() << "\r\nEND:VCALENDAR\r" << endl;
 }
