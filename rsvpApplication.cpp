@@ -255,8 +255,10 @@ void RsvpApplication::submit() {
 	ptr<Guest> guest = party_->guests.front();
 	Message message;
 	message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
-	for (const ptr<Guest> &guest: party_->guests)
-		message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
+	for (const ptr<Guest> &guest: party_->guests) {
+		if (!guest->email.empty())
+			message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
+	}
 	message.setSubject(WString::tr("confirmation.subject"));
 	message.setBody(WString::tr("confirmation.body").arg(party_->name));
 	message.addHtmlBody(WString::tr("confirmation.html").arg(party_->name));

@@ -31,17 +31,6 @@ body {
 	text-transform: lowercase;
 	color: white;
 }
-.robbeWrapper, .robbe {
-	height: 100%;
-	width: 100%;
-	z-index: -1;
-}
-.robbeWrapper {
-	filter: blur(5px);
-	position: absolute;
-	left: 0;
-	top: 0;
-}
 span {
 	display: inline-block;
 }
@@ -97,7 +86,11 @@ a:active {
 	margin-right: 15px;
 }
 .rsvp {
-	background-color: rgba(0,0,0,0.4);
+	background-image: url("robbe-blur.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 75% 75%;
 	padding-top: 20px;
 	position: relative;
 }

@@ -83,7 +83,6 @@ Véronique 👰 en Raf 🤵
 		</p>
 	</message>
 	<message id="rsvp">
-		<div class="robbeWrapper"><div class="robbe"></div></div>
 		${names}
 		<p>Muziek die niet mag ontbreken?<br/>(optioneel, we kunnen natuurlijk niks beloven 😇)</p>
 		${songs}

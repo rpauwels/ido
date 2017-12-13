@@ -156,7 +156,7 @@ INSERT INTO `guest` VALUES (95,0,'Korneel','Dumon','',0,0,53);
 INSERT INTO `guest` VALUES (96,0,'Roel','Standaert','',0,0,54);
 INSERT INTO `guest` VALUES (97,0,'Lise','Buelens','',0,0,55);
 INSERT INTO `guest` VALUES (98,0,'Dirk','Callaerts','',0,0,56);
-INSERT INTO `guest` VALUES (99,0,'Koen','','',0,0,57);
+INSERT INTO `guest` VALUES (99,0,'Koen','Deforche','',0,0,57);
 INSERT INTO `guest` VALUES (100,0,'Wim','Dumon','',0,0,58);
 INSERT INTO `guest` VALUES (101,0,'Yoika','Ghysens','',0,0,59);
 INSERT INTO `guest` VALUES (102,0,'Michael','Vilsker','',0,0,60);
