@@ -1,5 +1,5 @@
 BEGIN TRANSACTION;
-INSERT INTO `party` VALUES (0,18,'8a62073a10cf2c8c1f1935303c70653e','wijzelf',2,NULL,'2017-12-13T16:48:21.429','',NULL);
+INSERT INTO `party` VALUES (0,0,'8a62073a10cf2c8c1f1935303c70653e','wijzelf',2,NULL,NULL,'',NULL);
 INSERT INTO `party` VALUES (1,0,'1929728a197538f553dddcb0c3967bf9','mama, papa, bompa en oma',2,'',NULL,'',NULL);
 INSERT INTO `party` VALUES (2,0,'c89ddf048bcd3ba53d4c01c385028b75','Wim en Ellen',2,'',NULL,'',NULL);
 INSERT INTO `party` VALUES (3,0,'9014f287fc0d30eb9bc3eb08f3ed4a9b','Koen en Daniëlle',2,NULL,NULL,'',NULL);
