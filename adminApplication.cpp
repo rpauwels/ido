@@ -90,8 +90,8 @@ void AdminApplication::invite() {
 			log("info") << "Party " << party->name << " has no e-mail addresses, skipping";
 		} else {
 			message.setSubject(WString::tr("invitation.subject"));
-			message.setBody(WString::tr("invitation.body").arg(party->name));
-			message.addHtmlBody(WString::tr("invitation.html").arg(party->name));
+			message.setBody(WString::tr("invitation.body").arg(party->name).arg(party->uuid));
+			message.addHtmlBody(WString::tr("invitation.html").arg(party->name).arg(party->uuid));
 			client_.connect();
 			client_.send(message);
 			party.modify()->invited = WDateTime::currentDateTime();
