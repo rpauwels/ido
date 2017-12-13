@@ -82,9 +82,10 @@ void AdminApplication::invite() {
 		ptr<Guest> guest = party->guests.front();
 		Message message;
 		message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
-		for (const ptr<Guest> &guest: party->guests)
+		for (const ptr<Guest> &guest: party->guests) {
 			if (!guest->email.empty())
 				message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
+		}
 		if (message.recipients().empty()) {
 			log("info") << "Party " << party->name << " has no e-mail addresses, skipping";
 		} else {

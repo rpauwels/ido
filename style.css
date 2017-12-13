@@ -126,6 +126,7 @@ label {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  font-size: 1em;
 }
 .btn-default {
   background-color: #d1cb37;
