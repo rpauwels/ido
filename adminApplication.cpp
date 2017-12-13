@@ -83,14 +83,19 @@ void AdminApplication::invite() {
 		Message message;
 		message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
 		for (const ptr<Guest> &guest: party->guests)
-			message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
-		message.setSubject(WString::tr("invitation.subject"));
-		message.setBody(WString::tr("invitation.body").arg(party->name));
-		message.addHtmlBody(WString::tr("invitation.html").arg(party->name));
-		client_.connect();
-		client_.send(message);
-		party.modify()->invited = WDateTime::currentDateTime();
-		log("info") << "Sent invitation to " << party->name;
+			if (!guest->email.empty())
+				message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
+		if (message.recipients().empty()) {
+			log("info") << "Party " << party->name << " has no e-mail addresses, skipping";
+		} else {
+			message.setSubject(WString::tr("invitation.subject"));
+			message.setBody(WString::tr("invitation.body").arg(party->name));
+			message.addHtmlBody(WString::tr("invitation.html").arg(party->name));
+			client_.connect();
+			client_.send(message);
+			party.modify()->invited = WDateTime::currentDateTime();
+			log("info") << "Sent invitation to " << party->name;
+		}
 	}
 	log("info") << "All invitations were sent.";
 }

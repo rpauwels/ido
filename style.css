@@ -14,7 +14,6 @@
        url('fonts/lato-v14-latin-regular.woff2') format('woff2'), 
        url('fonts/lato-v14-latin-regular.woff') format('woff');
 }
-.wow { visibility: hidden; }
 body, html, .robbeWrapper {
 	height: 100%;
 }
@@ -46,6 +45,10 @@ body {
 span {
 	display: inline-block;
 }
+.animated {
+	animation-delay: 1s;
+	animation-duration: 3s;
+}
 .header {
 	min-height: 100%;
 }
@@ -59,7 +62,7 @@ textarea.form-control {
 	margin-right: auto;
 }
 h1 {
-	background-color: #0006;
+	background-color: rgba(0,0,0,0.4);
 	font-size: 3em;
 	position: absolute;
 	left: 0;
@@ -94,7 +97,7 @@ a:active {
 	margin-right: 15px;
 }
 .rsvp {
-	background-color: #0006;
+	background-color: rgba(0,0,0,0.4);
 	padding-top: 20px;
 	position: relative;
 }

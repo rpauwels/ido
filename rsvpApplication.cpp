@@ -177,6 +177,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	addSong();
 	remarks_ = rsvp_->bindNew<WTextArea>("remarks");
 	remarks_->addStyleClass("remarks");
+	remarks_->setColumns(35);
 	remarks_->setPlaceholderText(WString::tr("remarks"));
 	remarks_->setText(party_->remarks);
 	setStatus();
@@ -207,11 +208,9 @@ void RsvpApplication::setStatus() {
 	WString statusText;
 	if (party_->confirmed.isNull()) {
 		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("submit"));
-		//submit_->setStyleClass("btn btn-default");
 		statusText = WString::tr("status.notSubmitted");
 	} else {
 		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("change"));
-		//submit_->setStyleClass("btn");
 		statusText = WString::tr("status.submitted").arg(party_->confirmed.toString("yyyy-MM-dd HH:mm:ss"));
 	}
 	auto status = rsvp_->bindNew<WText>("status", statusText);

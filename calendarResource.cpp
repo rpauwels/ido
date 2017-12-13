@@ -27,13 +27,14 @@ ostream& operator<<(ostream &stream, const Event &event) {
 	WString dateTime = WDateTime::currentDateTime().toString("yyyyMMddTHHmmss");
 	stream << "BEGIN:VEVENT"
 		<< "\nUID:" << dateTime << "-" << event.summary << "@" << WString::tr("domain")
-		<< "\nLOCATION:" << event.location
-		<< "\nGEO:" << event.lat << "," << event.lon
 		<< "\nSUMMARY:" << event.summary
 		<< "\nDTSTART:" << event.start.toString("yyyyMMddTHHmmss")
 		<< "\nDTEND:" << event.end.toString("yyyyMMddTHHmmss")
-		<< "\nDTSTAMP:" << dateTime
-		<< "\nEND:VEVENT";
+		<< "\nDTSTAMP:" << dateTime;
+	if (!event.location.empty())
+		stream << "\nLOCATION:" << event.location
+			<< "\nGEO:" << event.lat << "," << event.lon;
+	stream << "\nEND:VEVENT";
 }
 
 CalendarResource::CalendarResource() 

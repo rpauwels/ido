@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <messages>
 	<message id="domain">raf-en-vero.pauwels-cordier.be</message>
-	<message id="pageTitle">raf + veronique</message>
+	<message id="pageTitle">veronique + raf</message>
 	<message id="submit">bevestigen</message>
 	<message id="change">aanpassen</message>
 	<message id="status.notSubmitted">Je hebt de uitnodiging nog niet bevestigd.</message>
 	<message id="status.submitted">Je bevestigde op {1} en ontving hierover een e-mail.</message>
 	<message id="calendarImg">calendar.svg</message>
-	<message id="calendar">toevoegen aan agenda</message>
+	<message id="calendar">Toevoegen aan agenda</message>
 	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
-	<message id="rsvpHeader"><h2>Kom</h2></message>
 	<message id="absent">kan er niet bij zijn</message>
 	<message id="present">zal er zijn</message>
 	<message id="herbivore">eet vegetarisch</message>
@@ -18,12 +17,12 @@
 	<message id="artist">artiest</message>
 	<message id="title">titel</message>
 	<message id="remarks">opmerkingen</message>
-	<message id="create">tabellen maken</message>
+	<message id="create">Tabellen maken</message>
 	<message id="dessert">Dessert</message>
 	<message id="meal">Maaltijd</message>
 	<message id="full">Alles</message>
-	<message id="invite">uitnodigen</message>
-	<message id="fromAddress">raf@localhost</message>
+	<message id="invite">Uitnodigen</message>
+	<message id="fromAddress">raf.m.pauwels@gmail.com</message>
 	<message id="fromName">Raf en Véronique</message>
 	<message id="invitation.subject">Uitnodiging</message>
 	<message id="invitation.body">
@@ -64,7 +63,7 @@ Véronique 👰 en Raf 🤵
 <p>Véronique 👰 en Raf 🤵</p>
 	</message>
 	<message id="header">
-		<h1 id="name">
+		<h1 class="animated fadeIn" id="name">
 			<span class="animated fadeInDown">véronique</span>
 			+
 			<span class="animated fadeInUp">raf</span>
@@ -76,12 +75,15 @@ Véronique 👰 en Raf 🤵
 			<img class="event-img" src="${header}.svg" alt="${summary}" />
 		</div>
 		<time class="event-time">${start}</time>
-		<p class="event-location"><a href="geo:${lat},${lon}">${location}</a></p>
+		<p class="event-location">
+			${<if-geo>}<a href="geo:${lat},${lon}">${location}</a>${</if-geo>}
+			${<if-tbd>}(Te bepalen)${</if-tbd>}
+		</p>
 	</message>
 	<message id="rsvp">
 		<div class="robbeWrapper"><div class="robbe"></div></div>
 		${names}
-		<p>muziek die niet mag ontbreken?<br/>(optioneel, we kunnen natuurlijk niks beloven 😇)</p>
+		<p>Muziek die niet mag ontbreken?<br/>(optioneel, we kunnen natuurlijk niks beloven 😇)</p>
 		${songs}
 		${remarks}
 		${submit}
