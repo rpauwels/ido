@@ -274,8 +274,8 @@ void RsvpApplication::submit() {
 			message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
 	}
 	message.setSubject(WString::tr("confirmation.subject"));
-	message.setBody(WString::tr("confirmation.body").arg(party_->name));
-	message.addHtmlBody(WString::tr("confirmation.html").arg(party_->name));
+	message.setBody(WString::tr("confirmation.body").arg(party_->name).arg(party_->uuid));
+	message.addHtmlBody(WString::tr("confirmation.html").arg(party_->name).arg(party_->uuid));
 	Client client;
 	if (!client.connect())
 		log("error") << "Could not connect to SMTP server";
