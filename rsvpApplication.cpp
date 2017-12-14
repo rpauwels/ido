@@ -165,7 +165,6 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 
 	rsvp_ = root()->addNew<WTemplate>(WString::tr("rsvp"));
 	rsvp_->addStyleClass("rsvp");
-	rsvp_->setDisabled(!party_->confirmed.isNull());
 	auto names = rsvp_->bindNew<WContainerWidget>("names");
 	names->addStyleClass("names");
 	names->setList(true);
@@ -229,6 +228,7 @@ void RsvpApplication::setStatus() {
 	auto status = rsvp_->bindNew<WText>("status", statusText);
 	status->addStyleClass("alert");
 	submit_->clicked().connect(this, &RsvpApplication::submit);
+	rsvp_->setDisabled(!party_->confirmed.isNull());
 }
 
 void RsvpApplication::songChanged() {
