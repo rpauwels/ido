@@ -165,6 +165,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 
 	rsvp_ = root()->addNew<WTemplate>(WString::tr("rsvp"));
 	rsvp_->addStyleClass("rsvp");
+	rsvp_->setDisabled(!party_->confirmed.isNull());
 	auto names = rsvp_->bindNew<WContainerWidget>("names");
 	names->addStyleClass("names");
 	names->setList(true);
@@ -220,13 +221,11 @@ void RsvpApplication::addSong(const string& artist, const string& title) {
 void RsvpApplication::setStatus() {
 	WString submitText;
 	WString statusText;
-	if (party_->confirmed.isNull()) {
-		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("submit"));
+	submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("submit"));
+	if (party_->confirmed.isNull())
 		statusText = WString::tr("status.notSubmitted");
-	} else {
-		submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("change"));
+	else
 		statusText = WString::tr("status.submitted").arg(party_->confirmed.toLocalTime().toString("yyyy-MM-dd HH:mm:ss"));
-	}
 	auto status = rsvp_->bindNew<WText>("status", statusText);
 	status->addStyleClass("alert");
 	submit_->clicked().connect(this, &RsvpApplication::submit);

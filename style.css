@@ -112,6 +112,9 @@ a:active {
 	border-color: #fff856;
 	box-shadow: 0 0 8px #fff856;
 }
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+	background-color: rgba(45, 45, 45, 0.6);
+}
 label {
 	width: 150px;
 }
