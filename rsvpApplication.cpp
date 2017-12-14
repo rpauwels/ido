@@ -75,6 +75,9 @@ using Wt::WPushButton;
 #include <Wt/WTemplate.h>
 using Wt::WTemplate;
 
+#include <Wt/Mail/Client.h>
+using Wt::Mail::Client;
+
 #include <Wt/Mail/Message.h>
 using Wt::Mail::Message;
 using Wt::Mail::RecipientType;
@@ -273,8 +276,12 @@ void RsvpApplication::submit() {
 	message.setSubject(WString::tr("confirmation.subject"));
 	message.setBody(WString::tr("confirmation.body").arg(party_->name));
 	message.addHtmlBody(WString::tr("confirmation.html").arg(party_->name));
-	client_.connect();
-	client_.send(message);
+	Client client;
+	if (!client.connect())
+		log("error") << "Could not connect to SMTP server";
+	if (!client.send(message))
+		log("error") << "Could not send confirmation to " << party_->name;
+	client.disconnect();
 	setStatus();
 }
 

@@ -1,3 +1,4 @@
 docroot=/var/www/raf-en-vero.pauwels-cordier.be
 resources-dir=/usr/local/share/Wt/resources
 http-listen=0.0.0.0:8080
+no-compression=true

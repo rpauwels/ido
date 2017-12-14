@@ -11,9 +11,6 @@ using Wt::WComboBox;
 #include <Wt/WPushButton.h>
 using Wt::WPushButton;
 
-#include <Wt/Mail/Client.h>
-using Wt::Mail::Client;
-
 #include <Wt/Dbo/Dbo.h>
 using Wt::Dbo::Session;
 
@@ -25,7 +22,6 @@ public:
 
 private:
 	Session session_;
-	Client client_;
 	WPushButton *create_;
 	WComboBox *inviteLevel_;
 	WPushButton *invite_;

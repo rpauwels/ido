@@ -25,9 +25,6 @@ using Wt::WText;
 #include <Wt/WTextArea.h>
 using Wt::WTextArea;
 
-#include <Wt/Mail/Client.h>
-using Wt::Mail::Client;
-
 #include <Wt/Dbo/Dbo.h>
 using Wt::Dbo::Session;
 using Wt::Dbo::ptr;
@@ -48,7 +45,6 @@ public:
 
 private:
 	Session session_;
-	Client client_;
 	ptr<Party> party_;
 	vector<WComboBox*> diets_;
 	WContainerWidget *songContainer_;

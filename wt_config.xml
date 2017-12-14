@@ -2,11 +2,11 @@
 	<application-settings location="*">
 		<log-config>*</log-config>
 		<redirect-message>Eenvoudige HTML-versie</redirect-message>
-		<meta-headers>
+		<head-matter>
 			<meta name="author" content="Raf Pauwels" />
 			<meta name="description" content="Huwelijksuitnodiging" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
-		</meta-headers>
+		</head-matter>
 		<progressive-bootstrap>false</progressive-bootstrap>
 		<properties>
 			<property name="smtp-self-host">localhost</property>

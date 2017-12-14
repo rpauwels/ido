@@ -28,6 +28,9 @@ using Wt::WString;
 #include <Wt/WText.h>
 using Wt::WText;
 
+#include <Wt/Mail/Client.h>
+using Wt::Mail::Client;
+
 #include <Wt/Mail/Message.h>
 using Wt::Mail::Message;
 using Wt::Mail::RecipientType;
@@ -78,6 +81,9 @@ void AdminApplication::create() {
 void AdminApplication::invite() {
 	Transaction transaction(session_);
 	collection< ptr<Party> > parties = session_.find<Party>().where("inviteLevel = ?").bind(inviteLevel_->currentIndex());
+	Client client;
+	if (!client.connect())
+		log("error") << "Could not connect to SMTP server";
 	for (const ptr<Party> &party: parties) {
 		ptr<Guest> guest = party->guests.front();
 		Message message;
@@ -92,12 +98,14 @@ void AdminApplication::invite() {
 			message.setSubject(WString::tr("invitation.subject"));
 			message.setBody(WString::tr("invitation.body").arg(party->name).arg(party->uuid));
 			message.addHtmlBody(WString::tr("invitation.html").arg(party->name).arg(party->uuid));
-			client_.connect();
-			client_.send(message);
+			if (!client.send(message))
+				log("error") << "Could not send e-mail to " << party->name;
+			
 			party.modify()->invited = WDateTime::currentDateTime();
 			log("info") << "Sent invitation to " << party->name;
 		}
 	}
 	log("info") << "All invitations were sent.";
+	client.disconnect();
 }
 
