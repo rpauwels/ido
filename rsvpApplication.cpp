@@ -66,6 +66,9 @@ using Wt::WLineEdit;
 #include <Wt/WLink.h>
 using Wt::WLink;
 
+#include <Wt/WLocale.h>
+using Wt::WLocale;
+
 #include <Wt/WPushButton.h>
 using Wt::WPushButton;
 
@@ -86,6 +89,9 @@ using Wt::Dbo::ptr;
 
 #include <Wt/Dbo/backend/Sqlite3.h>
 using Wt::Dbo::backend::Sqlite3;
+
+#include <Wt/Date/tz.h>
+using date::current_zone;
 
 #include <memory>
 using std::make_unique;
@@ -112,7 +118,9 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	session_.mapClass<Party>("party");
 	session_.mapClass<Song>("song");
 	
-	locale().setTimeZone("EST-5EDT,M4.1.0,M10.5.0");
+	WLocale l = locale();
+	l.setTimeZone(current_zone());
+	setLocale(l);
 
 	setTitle(WString::tr("pageTitle"));
 	auto bootstrapTheme = make_shared<WBootstrapTheme>();
