@@ -32,8 +32,9 @@ ostream& operator<<(ostream &stream, const Event &event) {
 		<< "\r\nDTEND:" << event.end.toString("yyyyMMddTHHmmss") << "Z"
 		<< "\r\nDTSTAMP:" << dateTime << "Z";
 	if (!event.location.empty())
-		stream << "\r\nLOCATION:" << event.location
-			<< "\r\nGEO:" << event.lat << ";" << event.lon;
+		stream << "\r\nLOCATION:" << event.location;
+	if (event.lat != 0.0 || event.lon != 0.0)
+		stream << "\r\nGEO:" << event.lat << ";" << event.lon;
 	stream << "\r\nEND:VEVENT";
 }
 

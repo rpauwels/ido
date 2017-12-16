@@ -18,14 +18,14 @@ void Event::fill(WTemplate &t) const {
 	t.bindString("header", header);
 	t.bindString("summary", summary);
 	t.bindString("start", start.toLocalTime().toString("HH:mm"));
-	if (location.empty()) {
-		t.setCondition("if-tbd", true);
+	if (lat == 0.0 && lon == 0.0) {
+		t.setCondition("if-no-geo", true);
 	} else {
 		t.setCondition("if-geo", true);
-		string location_br = location;
-		replace_all(location_br, ", ", "<br/>");
-		t.bindString("location", location_br);
 		t.bindString("lat", to_string(lat));
 		t.bindString("lon", to_string(lon));
 	}
+	string location_br = location;
+	replace_all(location_br, ", ", "<br/>");
+	t.bindString("location", location_br);
 }
