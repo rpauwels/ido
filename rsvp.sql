@@ -164,7 +164,7 @@ INSERT INTO `guest` VALUES (102,0,'Michael','Vilsker','michael@emweb.be',0,0,60)
 INSERT INTO `guest` VALUES (103,0,'Irmanda','Verstraeten','',1,0,24);
 INSERT INTO `event` VALUES (0,0,'ja','Huwelijksceremonie','Gemeentehuis, Markt 1, Temse',51.124517,4.214168,'2018-02-03T10:00:00.000','2018-02-03T11:00:00.000');
 INSERT INTO `event` VALUES (1,0,'hap','Lunch','Eventroom, Buisstraat 19, Sint-Amands',51.056199,4.211381,'2018-02-03T11:30:00.000','2018-02-03T13:30:00.000');
-INSERT INTO `event` VALUES (2,0,'klik','Foto''s','(te bepalen)','','','2018-02-03T14:00:00.000','2018-02-03T15:00:00.000');
+INSERT INTO `event` VALUES (2,0,'klik','Foto''s','Dam, Sint-Amands','51.052267','4.197144','2018-02-03T14:00:00.000','2018-02-03T15:00:00.000');
 INSERT INTO `event` VALUES (3,0,'chin','Receptie','Eventroom, Buisstraat 19, Sint-Amands',51.056199,4.211381,'2018-02-03T17:00:00.000','2018-02-03T18:00:00.000');
 INSERT INTO `event` VALUES (4,0,'njam','Diner','Eventroom, Buisstraat 19, Sint-Amands',51.056199,4.211381,'2018-02-03T18:30:00.000','2018-02-03T20:00:00.000');
 INSERT INTO `event` VALUES (5,0,'chin','Receptie','Eventroom, Buisstraat 19, Sint-Amands',51.056199,4.211381,'2018-02-03T19:45:00.000','2018-02-03T20:15:00.000');
