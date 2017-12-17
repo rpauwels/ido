@@ -78,7 +78,7 @@ Véronique 👰 en Raf 🤵
 		</div>
 		<time class="event-time">${start}</time>
 		<p class="event-location">
-			${<if-geo>}<a href="geo:${lat},${lon}">${location}</a>${</if-geo>}
+			${<if-geo>}<a href="https://www.openstreetmap.org/?mlat=${lat}&amp;mlon=${lon}#map=17/${lat}/${lon}">${location}</a>${</if-geo>}
 			${<if-no-geo>}${location}${</if-no-geo>}
 		</p>
 	</message>
