@@ -151,12 +151,12 @@ INSERT INTO `guest` VALUES (89,0,'Lynn','Van Aken','lynnvanaken@hotmail.com',0,0
 INSERT INTO `guest` VALUES (90,0,'Ann','De Smedt','anndesmedt@sanctamariawillebroek.be',0,0,48);
 INSERT INTO `guest` VALUES (91,0,'Cindy','Van Heirstraeten','cindy.van.heirstraten@telenet.be',0,0,49);
 INSERT INTO `guest` VALUES (92,0,'Dennis','Christiaens','dennis99_98@hotmail.com',0,0,50);
-INSERT INTO `guest` VALUES (93,0,'Thomas','Dendaele','thomas@blooloc.be',0,0,51);
-INSERT INTO `guest` VALUES (94,0,'Ivo','Vandeweerdt','ivo@blooloc.be',0,0,52);
+INSERT INTO `guest` VALUES (93,0,'Thomas','Dendale','thomas.dendale@blooloc.com',0,0,51);
+INSERT INTO `guest` VALUES (94,0,'Ivo','Vandeweerd','ivo.vandeweerd@blooloc.com',0,0,52);
 INSERT INTO `guest` VALUES (95,0,'Korneel','Dumon','korneel@emweb.be',0,0,53);
 INSERT INTO `guest` VALUES (96,0,'Roel','Standaert','roel@emweb.be',0,0,54);
 INSERT INTO `guest` VALUES (97,0,'Lise','Buelens','lise@emweb.be',0,0,55);
-INSERT INTO `guest` VALUES (98,0,'Dirk','Callaerts','dirk@blooloc.be',0,0,56);
+INSERT INTO `guest` VALUES (98,0,'Dirk','Callaerts','dirk.callaerts@blooloc.com',0,0,56);
 INSERT INTO `guest` VALUES (99,0,'Koen','Deforche','koen@emweb.be',0,0,57);
 INSERT INTO `guest` VALUES (100,0,'Wim','Dumon','wim@emweb.be',0,0,58);
 INSERT INTO `guest` VALUES (101,0,'Yoika','Ghysens','yoika@emweb.be',0,0,59);
