@@ -187,7 +187,7 @@ label {
   background-color: #2d2d2d;
   display: block;
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .timeline {
     border-left: 2px solid white;
     margin-left: 25px;
@@ -204,7 +204,7 @@ label {
   	margin: 0;
 	}
 }
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 750px) {
   .timeline {
     border-top: 2px solid white;
     padding-top: 25px;

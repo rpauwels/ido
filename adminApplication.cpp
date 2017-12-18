@@ -80,27 +80,27 @@ void AdminApplication::create() {
 
 void AdminApplication::invite() {
 	Transaction transaction(session_);
-	collection< ptr<Party> > parties = session_.find<Party>().where("inviteLevel = ?").bind(inviteLevel_->currentIndex());
+	collection< ptr<Party> > parties = session_.find<Party>().where("inviteLevel = ?").bind(inviteLevel_->currentIndex()).where("invited is null");
 	Client client;
-	if (!client.connect())
+	if (!client.connect()) {
 		log("error") << "Could not connect to SMTP server";
+		return;
+	}
 	for (const ptr<Party> &party: parties) {
-		ptr<Guest> guest = party->guests.front();
 		Message message;
 		message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
 		for (const ptr<Guest> &guest: party->guests) {
 			if (!guest->email.empty())
 				message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
 		}
+		message.setSubject(WString::tr("invitation.subject"));
+		message.setBody(WString::tr("invitation.body").arg(party->name).arg(party->uuid));
+		message.addHtmlBody(WString::tr("invitation.html").arg(party->name).arg(party->uuid));
 		if (message.recipients().empty()) {
-			log("info") << "Party " << party->name << " has no e-mail addresses, skipping";
+			log("error") << "Party " << party->name << " has no e-mail addresses, skipping";
+		} else if (!client.send(message)) {
+			log("error") << "Could not send e-mail to " << party->name;
 		} else {
-			message.setSubject(WString::tr("invitation.subject"));
-			message.setBody(WString::tr("invitation.body").arg(party->name).arg(party->uuid));
-			message.addHtmlBody(WString::tr("invitation.html").arg(party->name).arg(party->uuid));
-			if (!client.send(message))
-				log("error") << "Could not send e-mail to " << party->name;
-			
 			party.modify()->invited = WDateTime::currentDateTime();
 			log("info") << "Sent invitation to " << party->name;
 		}

@@ -28,10 +28,10 @@
 	<message id="invitation.body">
 Hallo {1},
 
-Je bent uitgenodigd op ons huwelijksfeest op 3 februari! Kan je je komst bevestigen op
-https://raf-en-vero.pauwels-cordier.be/?uuid={2} ?
+Je bent uitgenodigd op ons huwelijksfeest op 3 februari 2018! Kan je je komst bevestigen op
+https://raf-en-vero.pauwels-cordier.be/?uuid={2} vóór 13 januari?
 
-Tot dan!
+Hopelijk tot dan!
 
 Met feestelijke groeten,
 
@@ -39,7 +39,7 @@ Véronique 👰 en Raf 🤵
 	</message>
 	<message id="invitation.html">
 <p>Hallo {1},</p>
-<p>Je bent uitgenodigd op ons huwelijksfeest op <em>3 februari</em>! Kan je je komst bevestigen op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">onze website</a>?</p>
+<p>Je bent uitgenodigd op ons huwelijksfeest op <strong>3 februari 2018</strong>! Kan je je komst bevestigen op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">onze website</a> vóór <strong>13 januari</strong>?</p>
 <p>Hopelijk tot dan!</p>
 <p>Met feestelijke groeten,</p>
 <p>Véronique 👰 en Raf 🤵</p>
@@ -49,7 +49,7 @@ Véronique 👰 en Raf 🤵
 Hallo {1},
 
 Je hebt de uitnodiging bevestigd. Je kan deze nakijken op
-https://raf-en-vero.pauwels-cordier.be/?uuid={2}.
+https://raf-en-vero.pauwels-cordier.be/?uuid={2} .
 
 Bedankt!
 
@@ -78,7 +78,7 @@ Véronique 👰 en Raf 🤵
 		</div>
 		<time class="event-time">${start}</time>
 		<p class="event-location">
-			${<if-geo>}<a href="geo:${lat},${lon}">${location}</a>${</if-geo>}
+			${<if-geo>}<a href="https://osm.org/?mlat=${lat}&amp;mlon=${lon}#map=18/${lat}/${lon}">${location}</a>${</if-geo>}
 			${<if-tbd>}(Te bepalen)${</if-tbd>}
 		</p>
 	</message>
