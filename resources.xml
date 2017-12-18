@@ -78,8 +78,8 @@ Véronique 👰 en Raf 🤵
 		</div>
 		<time class="event-time">${start}</time>
 		<p class="event-location">
-			${<if-geo>}<a href="https://osm.org/?mlat=${lat}&amp;mlon=${lon}#map=18/${lat}/${lon}">${location}</a>${</if-geo>}
-			${<if-tbd>}(Te bepalen)${</if-tbd>}
+			${<if-geo>}<a href="https://www.openstreetmap.org/?mlat=${lat}&amp;mlon=${lon}#map=17/${lat}/${lon}">${location}</a>${</if-geo>}
+			${<if-no-geo>}${location}${</if-no-geo>}
 		</p>
 	</message>
 	<message id="rsvp">
