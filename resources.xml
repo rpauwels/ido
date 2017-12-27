@@ -84,11 +84,15 @@ Véronique 👰 en Raf 🤵
 	</message>
 	<message id="rsvp">
 		${names}
-		<p>Muziek die niet mag ontbreken?<br/>(optioneel, we kunnen natuurlijk niks beloven 😇)</p>
+		<p>
+			Muziek die niet mag ontbreken?<br/>
+			<small>optioneel, we kunnen natuurlijk niks beloven 😇</small>
+		</p>
 		${songs}
 		${remarks}
 		${submit}
 		${status}
+		<p class="gift">Cadeautip ✉ BE76 9730 9611 3795</p>
 	</message>
 	<message id="footer">
 		Gemaakt met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>

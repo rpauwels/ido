@@ -183,6 +183,10 @@ label {
 .event-location {
   overflow: hidden;
 }
+.gift {
+	margin-bottom: 0;
+	padding-bottom: 20px;
+}
 .footer {
   background-color: #2d2d2d;
   display: block;
