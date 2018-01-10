@@ -199,6 +199,7 @@ RsvpApplication::RsvpApplication(const WEnvironment& env)
 	auto footer = root()->addNew<WText>(WString::tr("footer"));
 	footer->addStyleClass("footer");
 	party_.modify()->opened = WDateTime::currentDateTime();
+	log("info") << "Party " << party_.id() << " (" << party_->name << ") loaded the page";
 }
 
 void RsvpApplication::addSong(const string& artist, const string& title) {
@@ -248,6 +249,7 @@ void RsvpApplication::songChanged() {
 void RsvpApplication::submit() {
 	submit_->setEnabled(false);
 	Transaction transaction(session_);
+	party_.reread();
 	party_.modify()->confirmed = WDateTime::currentDateTime();
 	party_.modify()->remarks = remarks_->text().toUTF8();
 	int i = 0;
@@ -265,7 +267,6 @@ void RsvpApplication::submit() {
 			session_.add(move(song));
 		}
 	}
-	ptr<Guest> guest = party_->guests.front();
 	Message message;
 	message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
 	for (const ptr<Guest> &guest: party_->guests) {
