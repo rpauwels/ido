@@ -25,6 +25,9 @@ using Wt::WPushButton;
 #include <Wt/WString.h>
 using Wt::WString;
 
+#include <Wt/WTemplate.h>
+using Wt::WTemplate;
+
 #include <Wt/WText.h>
 using Wt::WText;
 
@@ -47,7 +50,13 @@ using Wt::Dbo::ptr;
 using Wt::Dbo::backend::Sqlite3;
 
 using std::unique_ptr;
+
+#include <string>
 using std::string;
+
+#include <tuple>
+using std::tuple;
+using std::get;
 
 AdminApplication::AdminApplication(const WEnvironment& env)
   : WApplication(env) {
@@ -63,6 +72,7 @@ AdminApplication::AdminApplication(const WEnvironment& env)
 	create_ = root()->addNew<WPushButton>(WString::tr("create"));
 	create_->setInline(false);
 	create_->clicked().connect(this, &AdminApplication::create);
+	
 	auto inviteGroup = root()->addNew<WGroupBox>();
 	inviteLevel_ = inviteGroup->addNew<WComboBox>();
 	inviteLevel_->addItem(WString::tr("dessert"));
@@ -71,6 +81,10 @@ AdminApplication::AdminApplication(const WEnvironment& env)
 	invite_ = inviteGroup->addNew<WPushButton>(WString::tr("invite"));
 	invite_->setInline(false);
 	invite_->clicked().connect(this, &AdminApplication::invite);
+	
+	auto sendUpdates = root()->addNew<WPushButton>(WString::tr("sendUpdates"));
+	sendUpdates->setInline(false);
+	sendUpdates->clicked().connect(this, &AdminApplication::sendUpdates);
 }
 
 void AdminApplication::create() {
@@ -109,3 +123,33 @@ void AdminApplication::invite() {
 	client.disconnect();
 }
 
+void AdminApplication::sendUpdates() {
+	Transaction transaction(session_);
+	collection< tuple< ptr<Party>, string > > results = session_.query< tuple< ptr<Party>, string > >("select Party, group_concat(place, ' en ') from (select distinct party_id, place from guest where diet != 0 and place != '') join party Party on (party_id = party.id) where confirmed is not null group by party_id");
+	Client client;
+	if (!client.connect()) {
+		log("error") << "Could not connect to SMTP server";
+		return;
+	}
+	for (const tuple<ptr<Party>, string> &result: results) {
+		Message message;
+		message.setFrom(Mailbox(WString::tr("fromAddress").toUTF8(), WString::tr("fromName")));
+		auto party = get<0>(result);
+		for (const ptr<Guest> &guest: party->guests) {
+			if (!guest->email.empty())
+				message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
+		}
+		message.setSubject(WString::tr("update.subject"));
+		message.setBody(WString::tr("update.body").arg(party->name).arg(get<1>(result)));
+		message.addHtmlBody(WString::tr("update.html").arg(party->name).arg(get<1>(result)));
+		if (message.recipients().empty()) {
+			log("error") << "Party " << party->name << " has no e-mail addresses, skipping";
+		} else if (!client.send(message)) {
+			log("error") << "Could not send e-mail to " << party->name;
+		} else {
+			log("info") << "Sent update to " << party->name << " (" << get<1>(result) << ")";
+		}
+	}
+	log("info") << "All updates were sent.";
+	client.disconnect();
+}

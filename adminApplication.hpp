@@ -28,6 +28,7 @@ private:
 	void create();
 	void invite();
 	void status(const string& status);
+	void sendUpdates();
 };
 
 #endif // ADMINAPPLICATION_HPP_

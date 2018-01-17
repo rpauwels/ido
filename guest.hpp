@@ -26,6 +26,7 @@ public:
 	int order;
 	Diet diet;
 	ptr<Party> party;
+	string place;
 
 	Guest() {};
 
@@ -38,6 +39,7 @@ public:
 		field(a, order, "order");
 		field(a, diet, "diet");
 		belongsTo(a, party, "party");
+		field(a, place, "place");
 	}
 };
 #endif // GUEST_HPP_

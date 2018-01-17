@@ -202,9 +202,13 @@ insert into event_party
 	select 7, id 
 	from party;
 
+alter table guest 
+	add column place text not null default '';
+
 update guest
 	set email = '';
 update guest
 	set email = 'saftaplan@gmail.com'
 	where id = 1;
+
 COMMIT;

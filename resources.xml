@@ -6,6 +6,7 @@
 	<message id="change">aanpassen</message>
 	<message id="status.notSubmitted">Je hebt de uitnodiging nog niet bevestigd.</message>
 	<message id="status.submitted">Je bevestigde op {1} en ontving hierover een e-mail.</message>
+	<message id="status.places">Je hebt bevestigd en kan plaatsnemen aan <strong>{1}</strong>.</message>
 	<message id="calendarImg">calendar.svg</message>
 	<message id="calendar">Toevoegen aan agenda</message>
 	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
@@ -24,14 +25,14 @@
 	<message id="invite">Uitnodigen</message>
 	<message id="fromAddress">raf.m.pauwels@gmail.com</message>
 	<message id="fromName">Raf en Véronique</message>
-	<message id="invitation.subject">Uitnodiging</message>
+	<message id="invitation.subject">Herinnering: uitnodiging</message>
 	<message id="invitation.body">
 Hallo {1},
 
-Je bent uitgenodigd op ons huwelijksfeest op 3 februari 2018! Kan je je komst bevestigen op
+Het lijkt er op dat je onze uitnodiging nog niet hebt beantwoord. Zou je dit kunnen doen op
 https://raf-en-vero.pauwels-cordier.be/?uuid={2} vóór 13 januari?
 
-Hopelijk tot dan!
+Bedankt en hopelijk tot dan!
 
 Met feestelijke groeten,
 
@@ -39,8 +40,8 @@ Véronique 👰 en Raf 🤵
 	</message>
 	<message id="invitation.html">
 <p>Hallo {1},</p>
-<p>Je bent uitgenodigd op ons huwelijksfeest op <strong>3 februari 2018</strong>! Kan je je komst bevestigen op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">onze website</a> vóór <strong>13 januari</strong>?</p>
-<p>Hopelijk tot dan!</p>
+<p>Het lijkt erop dat je onze uitnodiging nog niet hebt beantwoord. Zou je dit kunnen doen op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">onze website</a> vóór <strong>13 januari</strong>?</p>
+<p>Bedankt en hopelijk tot dan!</p>
 <p>Met feestelijke groeten,</p>
 <p>Véronique 👰 en Raf 🤵</p>
 	</message>
@@ -93,6 +94,42 @@ Véronique 👰 en Raf 🤵
 		${submit}
 		${status}
 		<p class="gift">Cadeautip ✉ BE76 9730 9611 3795</p>
+	</message>
+	<message id="sendUpdates">Update sturen</message>
+	<message id="update.subject">TEST Laatste infomatie voor huwelijksfeest</message>
+	<message id="update.body">
+Hallo {1},
+
+We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we jullie nog enkele praktische zaken meegeven.
+
+Wens je de ceremonie 's ochtends bij te wonen aan het gemeentehuis van Temse, dan kan je parkeren op het marktplein. Voor het avondfeest in Eventroom te Sint-Amands is er parking vlakbij of in de Buisstraat.
+
+Na de receptie werd er voor jou plaats voorzien aan {2}.
+
+Je vindt deze informatie en het tijdschema nog steeds terug op https://raf-en-vero.pauwels-cordier.be/?uuid={3}
+
+Bedankt om op onze uitnodiging in te gaan, en tot heel binnenkort!
+
+Met feestelijke groeten,
+
+Véronique en Raf
+	</message>
+	<message id="update.html">
+<p>Hallo {1},</p>
+
+<p>We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we jullie nog wat praktische dingen meegeven.</p>
+
+<p>Wens je de ceremonie 's ochtends bij te wonen aan het gemeentehuis van Temse, dan kan je parkeren op het marktplein. Voor het avondfeest in Eventroom te Sint-Amands is er parking vlakbij of in de Buisstraat.</p>
+
+<p>Na de receptie werd er voor jou plaats voorzien aan <strong>{2}</strong>.</p>
+
+<p>Je vindt deze informatie en het tijdschema nog steeds terug op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={3}">onze website</a>.</p>
+
+<p>Bedankt om op onze uitnodiging in te gaan, en tot heel binnenkort!</p>
+
+<p>Met feestelijke groeten,</p>
+
+<p>Véronique en Raf</p>
 	</message>
 	<message id="footer">
 		Gemaakt met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>

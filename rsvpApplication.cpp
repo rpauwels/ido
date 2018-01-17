@@ -222,10 +222,15 @@ void RsvpApplication::setStatus() {
 	WString submitText;
 	WString statusText;
 	submit_ = rsvp_->bindNew<WPushButton>("submit", WString::tr("submit"));
-	if (party_->confirmed.isNull())
+	if (party_->confirmed.isNull()) {
 		statusText = WString::tr("status.notSubmitted");
-	else
-		statusText = WString::tr("status.submitted").arg(party_->confirmed.toLocalTime().toString("yyyy-MM-dd HH:mm:ss"));
+	} else {
+		string places = session_.query<string>("select group_concat(place, ' en ') from (select distinct place from guest where party_id = ? and diet != 0 and place != '')").bind(party_.id());
+		if (places.empty())
+			statusText = WString::tr("status.submitted").arg(party_->confirmed.toLocalTime().toString("yyyy-MM-dd HH:mm:ss"));
+		else
+			statusText = WString::tr("status.places").arg(places);
+	}
 	auto status = rsvp_->bindNew<WText>("status", statusText);
 	status->addStyleClass("alert");
 	submit_->clicked().connect(this, &RsvpApplication::submit);
