@@ -204,6 +204,28 @@ insert into event_party
 
 alter table guest 
 	add column place text not null default '';
+update guest
+	set place = 'tafel 1'
+	where party_id in (1,4,7,10,11);
+update guest
+	set place = 'tafel 2'
+	where party_id in (8,9,12,13)
+	or id in (28,29,30);
+update guest
+	set place = 'tafel 3'
+	where party_id in (0,25,26,27,62);
+update guest
+	set place = 'tafel 5'
+	where party_id in (14,18,20,23,24);
+update guest
+	set place = 'tafel 6'
+	where party_id in (2,3,5,6);
+update guest
+	set place = 'tafel 7'
+	where party_id in (15,16,17,19,21,22);
+update guest
+	set place = 'tafel 4 (kinderen)'
+	where id in (20,21,41,42,45);
 
 update guest
 	set email = '';
