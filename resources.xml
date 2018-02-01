@@ -24,7 +24,7 @@
 	<message id="full">Alles</message>
 	<message id="invite">Uitnodigen</message>
 	<message id="fromAddress">raf.m.pauwels@gmail.com</message>
-	<message id="fromName">Raf en Véronique</message>
+	<message id="fromName">Raf Pauwels en Véronique Cordier</message>
 	<message id="invitation.subject">Herinnering: uitnodiging</message>
 	<message id="invitation.body">
 Hallo {1},
@@ -96,7 +96,7 @@ Véronique 👰 en Raf 🤵
 		<p class="gift">Cadeautip ✉ BE76 9730 9611 3795</p>
 	</message>
 	<message id="sendUpdates">Update sturen</message>
-	<message id="update.subject">TEST Laatste infomatie voor huwelijksfeest</message>
+	<message id="update.subject">Laatste infomatie voor huwelijksfeest</message>
 	<message id="update.body">
 Hallo {1},
 

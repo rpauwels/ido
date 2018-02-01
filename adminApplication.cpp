@@ -140,8 +140,8 @@ void AdminApplication::sendUpdates() {
 				message.addRecipient(RecipientType::To, Mailbox(guest->email, guest->firstName + " " + guest->lastName));
 		}
 		message.setSubject(WString::tr("update.subject"));
-		message.setBody(WString::tr("update.body").arg(party->name).arg(get<1>(result)));
-		message.addHtmlBody(WString::tr("update.html").arg(party->name).arg(get<1>(result)));
+		message.setBody(WString::tr("update.body").arg(party->name).arg(get<1>(result)).arg(party->uuid));
+		message.addHtmlBody(WString::tr("update.html").arg(party->name).arg(get<1>(result)).arg(party->uuid));
 		if (message.recipients().empty()) {
 			log("error") << "Party " << party->name << " has no e-mail addresses, skipping";
 		} else if (!client.send(message)) {
