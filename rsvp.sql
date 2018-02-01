@@ -226,11 +226,20 @@ update guest
 update guest
 	set place = 'tafel 4 (kinderen)'
 	where id in (20,21,41,42,45);
+update guest
+	set place = 'tafel 8'
+	where id in (80,81,86,90,84,71,73,75);
+update guest
+	set place = 'tafel 9'
+	where id in (72,74,77,78,83,85,87,88,89,104);
+update guest
+	set place = 'tafel 10'
+	where id in (93,96,97,98,99,100,102,109);
 
 update guest
 	set email = '';
 update guest
-	set email = 'saftaplan@gmail.com'
+	set email = 'raf@localhost'
 	where id = 1;
 
 COMMIT;

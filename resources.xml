@@ -100,11 +100,11 @@ Véronique 👰 en Raf 🤵
 	<message id="update.body">
 Hallo {1},
 
-We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we jullie nog enkele praktische zaken meegeven.
+We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we nog wat praktische dingen meegeven.
 
 Wens je de ceremonie 's ochtends bij te wonen aan het gemeentehuis van Temse, dan kan je parkeren op het marktplein. Voor het avondfeest in Eventroom te Sint-Amands is er parking vlakbij of in de Buisstraat.
 
-Na de receptie werd er voor jou plaats voorzien aan {2}.
+Na de receptie kan je plaatsnemen aan {2}.
 
 Je vindt deze informatie en het tijdschema nog steeds terug op https://raf-en-vero.pauwels-cordier.be/?uuid={3}
 
@@ -117,11 +117,11 @@ Véronique en Raf
 	<message id="update.html">
 <p>Hallo {1},</p>
 
-<p>We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we jullie nog wat praktische dingen meegeven.</p>
+<p>We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we nog wat praktische dingen meegeven.</p>
 
 <p>Wens je de ceremonie 's ochtends bij te wonen aan het gemeentehuis van Temse, dan kan je parkeren op het marktplein. Voor het avondfeest in Eventroom te Sint-Amands is er parking vlakbij of in de Buisstraat.</p>
 
-<p>Na de receptie werd er voor jou plaats voorzien aan <strong>{2}</strong>.</p>
+<p>Na de receptie kan je plaatsnemen aan <strong>{2}</strong>.</p>
 
 <p>Je vindt deze informatie en het tijdschema nog steeds terug op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={3}">onze website</a>.</p>
 
