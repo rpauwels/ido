@@ -1,20 +1,14 @@
 #include "event.hpp"
 
-#include <boost/algorithm/string.hpp>
-using boost::replace_all;
-
 #include <Wt/WLocalDateTime.h>
-
 #include <Wt/WTemplate.h>
-using Wt::WTemplate;
 
+#include <boost/algorithm/string.hpp>
 #include <string>
-using std::string;
-using std::to_string;
 
 Event::Event() {}
 
-void Event::fill(WTemplate &t) const {
+void Event::fill(Wt::WTemplate &t) const {
 	t.bindString("header", header);
 	t.bindString("summary", summary);
 	t.bindString("start", start.toLocalTime().toString("HH:mm"));
@@ -22,10 +16,10 @@ void Event::fill(WTemplate &t) const {
 		t.setCondition("if-no-geo", true);
 	} else {
 		t.setCondition("if-geo", true);
-		t.bindString("lat", to_string(lat));
-		t.bindString("lon", to_string(lon));
+		t.bindString("lat", std::to_string(lat));
+		t.bindString("lon", std::to_string(lon));
 	}
-	string location_br = location;
-	replace_all(location_br, ", ", "<br/>");
+	std::string location_br = location;
+	boost::replace_all(location_br, ", ", "<br/>");
 	t.bindString("location", location_br);
 }

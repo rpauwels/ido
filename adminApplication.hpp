@@ -2,32 +2,24 @@
 #define ADMINAPPLICATION_HPP_
 
 #include <Wt/WApplication.h>
-using Wt::WApplication;
-using Wt::WEnvironment;
-
 #include <Wt/WComboBox.h>
-using Wt::WComboBox;
-
 #include <Wt/WPushButton.h>
-using Wt::WPushButton;
-
 #include <Wt/Dbo/Dbo.h>
-using Wt::Dbo::Session;
 
 using std::string;
 
-class AdminApplication : public WApplication {
+class AdminApplication : public Wt::WApplication {
 public:
-	AdminApplication(const WEnvironment& env);
+	AdminApplication(const Wt::WEnvironment& env);
 
 private:
-	Session session_;
-	WPushButton *create_;
-	WComboBox *inviteLevel_;
-	WPushButton *invite_;
+	Wt::Dbo::Session session_;
+	Wt::WPushButton *create_;
+	Wt::WComboBox *inviteLevel_;
+	Wt::WPushButton *invite_;
 	void create();
 	void invite();
-	void status(const string& status);
+	void status(const std::string& status);
 	void sendUpdates();
 };
 

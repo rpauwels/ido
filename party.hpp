@@ -5,19 +5,9 @@
 #include "song.hpp"
 
 #include <string>
-using std::string;
 
 #include <Wt/WDateTime.h>
-using Wt::WDateTime;
-
 #include <Wt/Dbo/Dbo.h>
-using Wt::Dbo::ptr;
-using Wt::Dbo::collection;
-using Wt::Dbo::field;
-using Wt::Dbo::hasMany;
-using Wt::Dbo::ManyToOne;
-using Wt::Dbo::ManyToMany;
-
 #include <Wt/Dbo/WtSqlTraits.h>
 
 enum class InviteLevel {
@@ -31,32 +21,32 @@ class Song;
 class Party
 {
 public:
-	string uuid;
-	string name;
+	std::string uuid;
+	std::string name;
 	InviteLevel inviteLevel;
-	WDateTime invited;
-	WDateTime opened;
-	string remarks;
-	WDateTime confirmed;
-	collection< ptr<Guest> > guests;
-	collection< ptr<Event> > events;
-	collection< ptr<Song> > songs;
+	Wt::WDateTime invited;
+	Wt::WDateTime opened;
+	std::string remarks;
+	Wt::WDateTime confirmed;
+	Wt::Dbo::collection< Wt::Dbo::ptr<Guest> > guests;
+	Wt::Dbo::collection< Wt::Dbo::ptr<Event> > events;
+	Wt::Dbo::collection< Wt::Dbo::ptr<Song> > songs;
 	
 	Party() {};
 
 	template<class Action>
 	void persist(Action& a)
 	{
-		field(a, uuid, "uuid");
-		field(a, name, "name");
-		field(a, inviteLevel, "inviteLevel");
-		field(a, invited, "invited");
-		field(a, opened, "opened");
-		field(a, remarks, "remarks");
-		field(a, confirmed, "confirmed");
-		hasMany(a, guests, ManyToOne, "party");
-		hasMany(a, events, ManyToMany, "event_party");
-		hasMany(a, songs, ManyToOne, "party");
+		Wt::Dbo::field(a, uuid, "uuid");
+		Wt::Dbo::field(a, name, "name");
+		Wt::Dbo::field(a, inviteLevel, "inviteLevel");
+		Wt::Dbo::field(a, invited, "invited");
+		Wt::Dbo::field(a, opened, "opened");
+		Wt::Dbo::field(a, remarks, "remarks");
+		Wt::Dbo::field(a, confirmed, "confirmed");
+		Wt::Dbo::hasMany(a, guests, Wt::Dbo::ManyToOne, "party");
+		Wt::Dbo::hasMany(a, events, Wt::Dbo::ManyToMany, "event_party");
+		Wt::Dbo::hasMany(a, songs, Wt::Dbo::ManyToOne, "party");
 	}
 };
 #endif // PARTY_HPP_

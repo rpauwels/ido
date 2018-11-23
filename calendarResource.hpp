@@ -3,33 +3,21 @@
 
 #include "event.hpp"
 
-#include <Wt/WDateTime.h>
-using Wt::WDateTime;
-
-#include <Wt/WString.h>
-using Wt::WString;
-
-#include <Wt/WResource.h>
-using Wt::WResource;
-
 #include <Wt/Http/Request.h>
-using Wt::Http::Request;
-
 #include <Wt/Http/Response.h>
-using Wt::Http::Response;
+#include <Wt/WResource.h>
 
 #include <vector>
-using std::vector;
 
-class CalendarResource : public WResource {
+class CalendarResource : public Wt::WResource {
 public:
 	CalendarResource();
 	~CalendarResource();
-	void handleRequest(const Request& request, Response& response);
+	void handleRequest(const Wt::Http::Request& request, Wt::Http::Response& response);
 	void addEvent(const Event &event);
 	
 private:
-	vector<Event> events_;
+	std::vector<Event> events_;
 };
 
 #endif // CALENDARRESOURCE_HPP_
