@@ -79,7 +79,7 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 	auto timeline = timelineWrapper->addNew<Wt::WContainerWidget>();
 	timeline->addStyleClass("timeline");
 	auto ical = std::make_shared<CalendarResource>();
-	for (const Wt::Dbo::ptr<Event> &event: party_->events) {
+	for (auto event: party_->events) {
 		auto t = timeline->addNew<Wt::WTemplate>(Wt::WString::tr("event"));
 		t->addStyleClass("event");
 		event->fill(*t);
@@ -96,7 +96,7 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 	auto names = rsvp_->bindNew<Wt::WContainerWidget>("names");
 	names->addStyleClass("names");
 	names->setList(true);
-	for (const Wt::Dbo::ptr<Guest> &guest: party_->guests) {
+	for (auto guest: party_->guests) {
 		auto nameRow = names->addNew<Wt::WContainerWidget>();
 		auto label = nameRow->addNew<Wt::WLabel>(guest->firstName + " " + guest->lastName);
 		auto diet = nameRow->addNew<Wt::WComboBox>();
@@ -114,7 +114,7 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 		diets_.push_back(diet);
 	}
 	songContainer_ = rsvp_->bindNew<Wt::WContainerWidget>("songs");
-	for (const Wt::Dbo::ptr<Song> &song: party_->songs)
+	for (auto song: party_->songs)
 		addSong(song->artist, song->title);
 	addSong();
 	remarks_ = rsvp_->bindNew<Wt::WTextArea>("remarks");
@@ -189,11 +189,11 @@ void RsvpApplication::submit() {
 	party_.modify()->confirmed = Wt::WDateTime::currentDateTime();
 	party_.modify()->remarks = remarks_->text().toUTF8();
 	int i = 0;
-	for (const Wt::Dbo::ptr<Guest> &guest: party_->guests)
+	for (auto guest: party_->guests)
 		guest.modify()->diet = static_cast<Diet>(diets_[i++]->currentIndex());
 	party_.modify()->songs.clear();
 	int j = 0;
-	for (const std::pair<Wt::WLineEdit*, Wt::WLineEdit*> &pair: songs_) {
+	for (auto pair: songs_) {
 		if (!pair.first->text().empty() || !pair.second->text().empty()) {
 			std::unique_ptr<Song> song{new Song()};
 			song->artist = pair.first->text().toUTF8();
@@ -205,7 +205,7 @@ void RsvpApplication::submit() {
 	}
 	Wt::Mail::Message message;
 	message.setFrom(Wt::Mail::Mailbox(Wt::WString::tr("fromAddress").toUTF8(), Wt::WString::tr("fromName")));
-	for (const Wt::Dbo::ptr<Guest> &guest: party_->guests) {
+	for (auto guest: party_->guests) {
 		if (!guest->email.empty())
 			message.addRecipient(Wt::Mail::RecipientType::To, 
 			                     Wt::Mail::Mailbox(guest->email, guest->firstName + " " + guest->lastName));

@@ -43,7 +43,7 @@ void CalendarResource::handleRequest(const Wt::Http::Request& request, Wt::Http:
 	response.out() << "BEGIN:VCALENDAR" 
 		<< "\r\nVERSION:2.0"
 		<< "\r\nPRODID:https://" << Wt::WString::tr("domain") << "/";
-	for (const Event &event: events_)
+	for (auto event: events_)
 		response.out() << "\r\n" << event;
 	response.out() << "\r\nEND:VCALENDAR\r" << std::endl;
 }

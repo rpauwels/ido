@@ -4,11 +4,11 @@
 #include "event.hpp"
 #include "song.hpp"
 
-#include <string>
-
 #include <Wt/WDateTime.h>
 #include <Wt/Dbo/Dbo.h>
 #include <Wt/Dbo/WtSqlTraits.h>
+
+#include <string>
 
 enum class InviteLevel {
 	Dessert = 0,
