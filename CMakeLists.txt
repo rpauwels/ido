@@ -11,5 +11,9 @@ add_executable(${PROJECT_NAME}.wt
 	approot/resources.xml
 	approot/wt_config.xml
 )
-target_link_libraries(${PROJECT_NAME} wt wtdbo wtdbosqlite3 wthttp)
-install(TARGETS rsvpApplication DESTINATION /usr/local/bin)
+target_link_libraries(${PROJECT_NAME}.wt Wt::DboSqlite3 Wt::HTTP Wt::Wt)
+install(TARGETS ${PROJECT_NAME}.wt DESTINATION usr/bin)
+install(DIRECTORY approot DESTINATION etc/${PROJECT_NAME})
+install(DIRECTORY docroot DESTINATION var/www/${PROJECT_NAME})
+configure_file(${PROJECT_NAME}.wt.service.in etc/systemd/system/${PROJECT_NAME}.wt.service)
+

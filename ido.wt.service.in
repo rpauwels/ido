@@ -1,0 +1,12 @@
+[Unit]
+Description=${PROJECT_NAME} Web Server
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/${PROJECT_NAME}
+ExecStart=/usr/bin/${PROJECT_NAME}
+Restart=on-failure
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

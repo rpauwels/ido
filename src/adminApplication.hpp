@@ -6,10 +6,14 @@
 #include <Wt/WPushButton.h>
 #include <Wt/Dbo/Dbo.h>
 
-using std::string;
-
+/*! \brief Administration interface for sending e-mails.
+ *
+ * A very bare administration interface, allowing to send e-mails 
+ * to selected groups.
+ */
 class AdminApplication : public Wt::WApplication {
 public:
+	//! Connects and maps database and creates the UI.
 	AdminApplication(const Wt::WEnvironment& env);
 
 private:

@@ -9,6 +9,8 @@
 #include <string>
 
 class Party;
+
+//! A single event, with a place and start and end time.
 class Event
 {
 public:

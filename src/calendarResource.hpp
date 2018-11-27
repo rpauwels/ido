@@ -9,13 +9,17 @@
 
 #include <vector>
 
+//! iCalendar generator based on the visible events
 class CalendarResource : public Wt::WResource {
 public:
 	CalendarResource();
 	~CalendarResource();
-	void handleRequest(const Wt::Http::Request& request, Wt::Http::Response& response);
-	void addEvent(const Event &event);
 	
+	//! Generate a new iCalendar file upon download request
+	void handleRequest(const Wt::Http::Request& request, Wt::Http::Response& response);
+	
+	//! Add a new event to the list of generated events
+	void addEvent(const Event &event);
 private:
 	std::vector<Event> events_;
 };
