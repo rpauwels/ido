@@ -6,6 +6,8 @@
 #include <Wt/Dbo/Dbo.h>
 
 class Party;
+
+//! A single song suggestion by a Party.
 class Song
 {
 public:

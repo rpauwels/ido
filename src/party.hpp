@@ -2,7 +2,6 @@
 #define PARTY_HPP_
 
 #include "event.hpp"
-#include "song.hpp"
 
 #include <Wt/WDateTime.h>
 #include <Wt/Dbo/Dbo.h>
@@ -10,6 +9,7 @@
 
 #include <string>
 
+//! Whether a party is invited for only dessert, the full meal or all events.
 enum class InviteLevel {
 	Dessert = 0,
 	Meal = 1,
@@ -18,6 +18,14 @@ enum class InviteLevel {
 
 class Guest;
 class Song;
+
+//! Aggregation of guests, having an invite level
+/*!
+ * A Party is an aggregation of guests, because usually guests want to respond
+ * as a family instead of individually. Parties aggregate the e-mail 
+ * addresses of their members, but have the same UUID. The list of events is 
+ * actually filled by the InviteLevel, so this information is not normalized.
+ */
 class Party
 {
 public:

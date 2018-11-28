@@ -8,7 +8,7 @@
 
 /*! \brief Administration interface for sending e-mails.
  *
- * A very bare administration interface, allowing to send e-mails 
+ * A bare administration interface, allowing to send e-mails 
  * to selected groups.
  */
 class AdminApplication : public Wt::WApplication {

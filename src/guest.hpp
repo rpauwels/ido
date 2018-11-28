@@ -9,6 +9,7 @@ using Wt::Dbo::ptr;
 using Wt::Dbo::field;
 using Wt::Dbo::belongsTo;
 
+//! Diet of the guest, or None if (s)he cannot make it
 enum class Diet {
 	None = 0,
 	Carnivore = 1,
@@ -17,6 +18,14 @@ enum class Diet {
 };
 
 class Party;
+
+//! One member of a party
+/*! 
+ * A party member that has a name and e-mail address, party-specific order,
+ * a diet (including whether (s)he can make it) and a place (table).
+ * E-mail and place are only for internal organisation and are aggregated
+ * at the party level.
+ */
 class Guest
 {
 public:

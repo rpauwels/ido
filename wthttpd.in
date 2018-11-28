@@ -1,0 +1,2 @@
+docroot=${CMAKE_INSTALL_PREFIX}/var/www/${PROJECT_NAME}
+http-listen=0.0.0.0:8080

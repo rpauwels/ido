@@ -16,6 +16,7 @@
 #include <vector>
 #include <utility>
 
+//! Main application that takes a UUID and builds an interface.
 class RsvpApplication : public Wt::WApplication
 {
 public:

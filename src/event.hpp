@@ -24,6 +24,8 @@ public:
 	Wt::Dbo::collection< Wt::Dbo::ptr<Party> > parties;
 
 	Event();
+	
+	//! Fill a WTemplate based on the event information
 	void fill(Wt::WTemplate &t) const;
 
 	template<class Action>
