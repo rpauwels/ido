@@ -14,13 +14,28 @@ class Party;
 class Event
 {
 public:
+	//! Short name of the event, also used for the image name
 	std::string header;
+	
+	//! Single-word description
 	std::string summary;
+	
+	//! Full address
 	std::string location;
+	
+	//! Location latitude
 	float lat;
+	
+	//! Location longitude
 	float lon;
+	
+	//! Start time
 	Wt::WDateTime start;
+	
+	//! End time (only visible in iCalendar format)
 	Wt::WDateTime end;
+	
+	//! Invited parties to this event
 	Wt::Dbo::collection< Wt::Dbo::ptr<Party> > parties;
 
 	Event();
@@ -28,6 +43,7 @@ public:
 	//! Fill a WTemplate based on the event information
 	void fill(Wt::WTemplate &t) const;
 
+	//! Only for Wt::Dbo. Describes persisted fields and relations.
 	template<class Action>
 	void persist(Action& a)
 	{

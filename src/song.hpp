@@ -7,17 +7,25 @@
 
 class Party;
 
-//! A single song suggestion by a Party.
+//! A single song suggestion by a Party. They need not be unique.
 class Song
 {
 public:
+	//! Artist of the song
 	std::string artist;
+	
+	//! Song title
 	std::string title;
+	
+	//! Order of the song that was entered. Not of particular importance.
 	int order;
+	
+	//! Party that entered the song
 	Wt::Dbo::ptr<Party> party;
 
 	Song() {};
 
+	//! Only for Wt::Dbo. Describes persisted fields and relations.
 	template<class Action>
 	void persist(Action& a)
 	{

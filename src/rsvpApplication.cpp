@@ -62,7 +62,7 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 	auto header = root()->addNew<Wt::WTemplate>(Wt::WString::tr("header"));
 	header->addStyleClass("header");
 	
-	const string *uuid = env.getParameter("uuid");
+	const std::string *uuid = env.getParameter("uuid");
 	if (!uuid) {
 		log("error") << "Uuid parameter absent";
 		return;
@@ -130,7 +130,7 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 	log("info") << "Party " << party_.id() << " (" << party_->name << ") loaded the page";
 }
 
-void RsvpApplication::addSong(const string& artist, const string& title) {
+void RsvpApplication::addSong(const std::string& artist, const std::string& title) {
 	if (songContainer_->count() > 6)
 		return;
 	auto songRow = songContainer_->addNew<Wt::WContainerWidget>();
@@ -154,7 +154,7 @@ void RsvpApplication::setStatus() {
 	if (party_->confirmed.isNull()) {
 		statusText = Wt::WString::tr("status.notSubmitted");
 	} else {
-		string places = session_.query<string>("select group_concat(place, ' en ') \
+		std::string places = session_.query<std::string>("select group_concat(place, ' en ') \
 			from (select distinct place from guest where party_id = ? and diet != 0 and place != '')").bind(party_.id());
 		if (places.empty())
 			statusText = Wt::WString::tr("status.submitted").arg(party_->confirmed.toLocalTime()

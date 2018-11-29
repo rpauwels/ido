@@ -29,19 +29,39 @@ class Song;
 class Party
 {
 public:
+	//! Generated UUID used as parameter as main identification.
 	std::string uuid;
+	
+	//! Used as greeting in e-mails.
 	std::string name;
+	
+	//! At what level a party is invited.
 	InviteLevel inviteLevel;
+	
+	//! Date and time of invitation by e-mail.
 	Wt::WDateTime invited;
+	
+	//! Date and time that the UUID was last used to open the website.
 	Wt::WDateTime opened;
+	
+	//! Remarks that the party can enter when sending the form.
 	std::string remarks;
+	
+	//! Date and time that the guest confirmed.
 	Wt::WDateTime confirmed;
+	
+	//! Party members.
 	Wt::Dbo::collection< Wt::Dbo::ptr<Guest> > guests;
+	
+	//! Events to which the party is invited.
 	Wt::Dbo::collection< Wt::Dbo::ptr<Event> > events;
+	
+	//! Song suggestions that the party sent in.
 	Wt::Dbo::collection< Wt::Dbo::ptr<Song> > songs;
 	
 	Party() {};
 
+	//! Only for Wt::Dbo. Describes persisted fields and relations.
 	template<class Action>
 	void persist(Action& a)
 	{

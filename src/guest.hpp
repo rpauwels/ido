@@ -1,13 +1,9 @@
 #ifndef GUEST_HPP_
 #define GUEST_HPP_
 
-#include <string>
-using std::string;
-
 #include <Wt/Dbo/Dbo.h>
-using Wt::Dbo::ptr;
-using Wt::Dbo::field;
-using Wt::Dbo::belongsTo;
+
+#include <string>
 
 //! Diet of the guest, or None if (s)he cannot make it
 enum class Diet {
@@ -29,26 +25,40 @@ class Party;
 class Guest
 {
 public:
-	string firstName;
-	string lastName;
-	string email;
+	//! Given name, used in RSVP form
+	std::string firstName;
+	
+	//! Last name, used in RSVP form
+	std::string lastName;
+	
+	//! E-mail address. One e-mail is sent for the whole party, with all guest addresses.
+	std::string email;
+	
+	//! Defines ordering in the party
 	int order;
+	
+	//! Most important field for RSVP: whether (s)he can make it, and the diet.
 	Diet diet;
-	ptr<Party> party;
-	string place;
+	
+	//! Associated party. A single guest is also associated with a party.
+	Wt::Dbo::ptr<Party> party;
+	
+	//! Table name. Distinct values are aggregated at the party level.
+	std::string place;
 
 	Guest() {};
 
+	//! Only for Wt::Dbo. Describes persisted fields and relations.
 	template<class Action>
 	void persist(Action& a)
 	{
-		field(a, firstName, "first_name");
-		field(a, lastName, "last_name");
-		field(a, email, "email");
-		field(a, order, "order");
-		field(a, diet, "diet");
-		belongsTo(a, party, "party");
-		field(a, place, "place");
+		Wt::Dbo::field(a, firstName, "first_name");
+		Wt::Dbo::field(a, lastName, "last_name");
+		Wt::Dbo::field(a, email, "email");
+		Wt::Dbo::field(a, order, "order");
+		Wt::Dbo::field(a, diet, "diet");
+		Wt::Dbo::belongsTo(a, party, "party");
+		Wt::Dbo::field(a, place, "place");
 	}
 };
 #endif // GUEST_HPP_

@@ -20,6 +20,7 @@
 class RsvpApplication : public Wt::WApplication
 {
 public:
+	//! Sets up the database mapping and builds the interface.
 	RsvpApplication(const Wt::WEnvironment& env);
 
 private:

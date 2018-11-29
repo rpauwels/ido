@@ -23,10 +23,9 @@ if(DOXYGEN_FOUND)
 endif(DOXYGEN_FOUND)
 
 # This is AGPL software: we distribute the source code
-add_custom_target(src ALL
-	COMMAND ${CMAKE_COMMAND} -E tar "cfvz" "approot/${PROJECT_NAME}-source.tar.gz" "src")
+add_custom_target(src ALL COMMAND ${CMAKE_COMMAND} -E tar "cfvz" "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-src.tar.gz" "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
-add_dependencies(src ${PROJECT_NAME})
+add_dependencies(src ${PROJECT_NAME}.wt)
 
 configure_file(${PROJECT_NAME}.wt.service.in ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.wt.service)
 configure_file(wthttpd.in ${PROJECT_BINARY_DIR}/wthttpd)
