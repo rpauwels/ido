@@ -2,67 +2,67 @@
 <messages>
 	<message id="domain">raf-en-vero.pauwels-cordier.be</message>
 	<message id="pageTitle">veronique + raf</message>
-	<message id="submit">bevestigen</message>
-	<message id="change">aanpassen</message>
-	<message id="status.notSubmitted">Je hebt de uitnodiging nog niet bevestigd.</message>
-	<message id="status.submitted">Je bevestigde op {1} en ontving hierover een e-mail.</message>
-	<message id="status.places">Je hebt bevestigd en kan plaatsnemen aan <strong>{1}</strong>.</message>
+	<message id="submit">confirm</message>
+	<message id="change">change</message>
+	<message id="status.notSubmitted">You have not yet confirmed.</message>
+	<message id="status.submitted">You confirmed at {1} and received an e-mail about this.</message>
+	<message id="status.places">You confirmed and can join <strong>{1}</strong>.</message>
 	<message id="calendarImg">calendar.svg</message>
-	<message id="calendar">Toevoegen aan agenda</message>
-	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
-	<message id="absent">kan er niet bij zijn</message>
-	<message id="present">zal er zijn</message>
-	<message id="herbivore">eet vegetarisch</message>
-	<message id="carnivore">eet vis en vlees</message>
-	<message id="pollotarian">eet vlees (geen vis)</message>
-	<message id="artist">artiest</message>
-	<message id="title">titel</message>
-	<message id="remarks">opmerkingen</message>
-	<message id="create">Tabellen maken</message>
+	<message id="calendar">Add to calendar</message>
+	<message id="icsFilename">ido_wedding.ics</message>
+	<message id="absent">cannot make it</message>
+	<message id="present">will be present</message>
+	<message id="herbivore">is a vegetarian</message>
+	<message id="carnivore">eats fish and meat</message>
+	<message id="pollotarian">eats only meat (no fish)</message>
+	<message id="artist">artist</message>
+	<message id="title">title</message>
+	<message id="remarks">remarks</message>
+	<message id="create">Create tables</message>
 	<message id="dessert">Dessert</message>
-	<message id="meal">Maaltijd</message>
-	<message id="full">Alles</message>
-	<message id="invite">Uitnodigen</message>
-	<message id="fromAddress">raf.m.pauwels@gmail.com</message>
+	<message id="meal">Meal</message>
+	<message id="full">Full</message>
+	<message id="invite">Invite</message>
+	<message id="fromAddress">raf@localhost</message>
 	<message id="fromName">Raf Pauwels en Véronique Cordier</message>
-	<message id="invitation.subject">Herinnering: uitnodiging</message>
+	<message id="invitation.subject">Invitation</message>
 	<message id="invitation.body">
-Hallo {1},
+Hello {1},
 
-Het lijkt er op dat je onze uitnodiging nog niet hebt beantwoord. Zou je dit kunnen doen op
-https://raf-en-vero.pauwels-cordier.be/?uuid={2} vóór 13 januari?
+You are invited to our wedding party! Please respond through
+https://raf-en-vero.pauwels-cordier.be/?uuid={2}
 
-Bedankt en hopelijk tot dan!
+Thank you!
 
-Met feestelijke groeten,
+Kind regards,
 
-Véronique 👰 en Raf 🤵
+Véronique 👰 and Raf 🤵
 	</message>
 	<message id="invitation.html">
-<p>Hallo {1},</p>
-<p>Het lijkt erop dat je onze uitnodiging nog niet hebt beantwoord. Zou je dit kunnen doen op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">onze website</a> vóór <strong>13 januari</strong>?</p>
-<p>Bedankt en hopelijk tot dan!</p>
-<p>Met feestelijke groeten,</p>
-<p>Véronique 👰 en Raf 🤵</p>
+<p>Hello {1},</p>
+<p>You are invited to our wedding party! Please respond through <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">our website</a>.</p>
+<p>Thank you!</p>
+<p>Kind regards,</p>
+<p>Véronique 👰 and Raf 🤵</p>
 	</message>
-	<message id="confirmation.subject">Bevestiging uitnodiging</message>
+	<message id="confirmation.subject">Response confirmation</message>
 	<message id="confirmation.body">
-Hallo {1},
+Hello {1},
 
-Je hebt de uitnodiging bevestigd. Je kan deze nakijken op
+You just confirmed the invitation. You can review this at
 https://raf-en-vero.pauwels-cordier.be/?uuid={2} .
 
-Bedankt!
+Thank you!
 
-Met feestelijke groeten,
+Kind regards,
 
 Véronique 👰 en Raf 🤵
 	</message>
 	<message id="confirmation.html">
-<p>Hallo {1},</p>
-<p>Je hebt de uitnodiging bevestigd. Je kan deze nakijken op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">onze website</a>.</p>
-<p>Bedankt!</p>
-<p>Met feestelijke groeten,</p>
+<p>Hello {1},</p>
+<p>You just confirmed the invitation. You can review this at <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">our website</a>.</p>
+<p>Thank you!</p>
+<p>Kind regards,</p>
 <p>Véronique 👰 en Raf 🤵</p>
 	</message>
 	<message id="header">
@@ -86,8 +86,8 @@ Véronique 👰 en Raf 🤵
 	<message id="rsvp">
 		${names}
 		<p>
-			Muziek die niet mag ontbreken?<br/>
-			<small>optioneel, we kunnen natuurlijk niks beloven 😇</small>
+			Any music we should consider?<br/>
+			<small>optional and we cannot make any promises 😇</small>
 		</p>
 		${songs}
 		${remarks}
@@ -95,43 +95,43 @@ Véronique 👰 en Raf 🤵
 		${status}
 		<p class="gift">Cadeautip ✉ BE76 9730 9611 3795</p>
 	</message>
-	<message id="sendUpdates">Update sturen</message>
-	<message id="update.subject">Laatste infomatie voor huwelijksfeest</message>
+	<message id="sendUpdates">Send update</message>
+	<message id="update.subject">Latest information for our wedding</message>
 	<message id="update.body">
-Hallo {1},
+Hello {1},
 
-We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we nog wat praktische dingen meegeven.
+We are just a few days away from our wedding! So we would like to give you some practical information.
 
-Wens je de ceremonie 's ochtends bij te wonen aan het gemeentehuis van Temse, dan kan je parkeren op het marktplein. Voor het avondfeest in Eventroom te Sint-Amands is er parking vlakbij of in de Buisstraat.
+If you want to join the ceremony in the morning, you can park ... For the evening party, you can park ...
 
-Na de receptie kan je plaatsnemen aan {2}.
+After the evening reception, you can find a seat at {2}.
 
-Je vindt deze informatie en het tijdschema nog steeds terug op https://raf-en-vero.pauwels-cordier.be/?uuid={3}
+You can find this information and the time scheme at https://raf-en-vero.pauwels-cordier.be/?uuid={3}
 
-Bedankt om op onze uitnodiging in te gaan, en tot heel binnenkort!
+Thank you for joining us, and see you soon!
 
-Met feestelijke groeten,
+Kind regards,
 
-Véronique en Raf
+Véronique and Raf
 	</message>
 	<message id="update.html">
-<p>Hallo {1},</p>
+<p>Hello {1},</p>
 
-<p>We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we nog wat praktische dingen meegeven.</p>
+<p>We are just a few days away from our wedding! So we would like to give you some practical information.</p>
 
-<p>Wens je de ceremonie 's ochtends bij te wonen aan het gemeentehuis van Temse, dan kan je parkeren op het marktplein. Voor het avondfeest in Eventroom te Sint-Amands is er parking vlakbij of in de Buisstraat.</p>
+<p>If you want to join the ceremony in the morning, you can park ... For the evening party, you can park ...</p>
 
-<p>Na de receptie kan je plaatsnemen aan <strong>{2}</strong>.</p>
+<p>After the evening reception, you can find a seat at <strong>{2}</strong>.</p>
 
-<p>Je vindt deze informatie en het tijdschema nog steeds terug op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={3}">onze website</a>.</p>
+<p>You can find this information and the time scheme at <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={3}">our website</a>.</p>
 
-<p>Bedankt om op onze uitnodiging in te gaan, en tot heel binnenkort!</p>
+<p>Thank you for joining us, and see you soon!</p>
 
-<p>Met feestelijke groeten,</p>
+<p>Kind regards,</p>
 
 <p>Véronique en Raf</p>
 	</message>
 	<message id="footer">
-		Gemaakt met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
+		ido is free software: get the <a href="ido-src.tar.gz">source</a>. Made with <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
 	</message>
 </messages>

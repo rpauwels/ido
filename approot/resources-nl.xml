@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages>
+	<message id="domain">raf-en-vero.pauwels-cordier.be</message>
+	<message id="pageTitle">veronique + raf</message>
+	<message id="submit">bevestigen</message>
+	<message id="change">aanpassen</message>
+	<message id="status.notSubmitted">Je hebt de uitnodiging nog niet bevestigd.</message>
+	<message id="status.submitted">Je bevestigde op {1} en ontving hierover een e-mail.</message>
+	<message id="status.places">Je hebt bevestigd en kan plaatsnemen aan <strong>{1}</strong>.</message>
+	<message id="calendarImg">calendar.svg</message>
+	<message id="calendar">Toevoegen aan agenda</message>
+	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
+	<message id="absent">kan er niet bij zijn</message>
+	<message id="present">zal er zijn</message>
+	<message id="herbivore">eet vegetarisch</message>
+	<message id="carnivore">eet vis en vlees</message>
+	<message id="pollotarian">eet vlees (geen vis)</message>
+	<message id="artist">artiest</message>
+	<message id="title">titel</message>
+	<message id="remarks">opmerkingen</message>
+	<message id="create">Tabellen maken</message>
+	<message id="dessert">Dessert</message>
+	<message id="meal">Maaltijd</message>
+	<message id="full">Alles</message>
+	<message id="invite">Uitnodigen</message>
+	<message id="fromAddress">raf@localhost</message>
+	<message id="fromName">Raf Pauwels en Véronique Cordier</message>
+	<message id="invitation.subject">Herinnering: uitnodiging</message>
+	<message id="invitation.body">
+Hallo {1},
+
+Het lijkt er op dat je onze uitnodiging nog niet hebt beantwoord. Zou je dit kunnen doen op
+https://raf-en-vero.pauwels-cordier.be/?uuid={2} vóór 13 januari?
+
+Bedankt en hopelijk tot dan!
+
+Met feestelijke groeten,
+
+Véronique 👰 en Raf 🤵
+	</message>
+	<message id="invitation.html">
+<p>Hallo {1},</p>
+<p>Het lijkt erop dat je onze uitnodiging nog niet hebt beantwoord. Zou je dit kunnen doen op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">onze website</a> vóór <strong>13 januari</strong>?</p>
+<p>Bedankt en hopelijk tot dan!</p>
+<p>Met feestelijke groeten,</p>
+<p>Véronique 👰 en Raf 🤵</p>
+	</message>
+	<message id="confirmation.subject">Bevestiging uitnodiging</message>
+	<message id="confirmation.body">
+Hallo {1},
+
+Je hebt de uitnodiging bevestigd. Je kan deze nakijken op
+https://raf-en-vero.pauwels-cordier.be/?uuid={2} .
+
+Bedankt!
+
+Met feestelijke groeten,
+
+Véronique 👰 en Raf 🤵
+	</message>
+	<message id="confirmation.html">
+<p>Hallo {1},</p>
+<p>Je hebt de uitnodiging bevestigd. Je kan deze nakijken op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">onze website</a>.</p>
+<p>Bedankt!</p>
+<p>Met feestelijke groeten,</p>
+<p>Véronique 👰 en Raf 🤵</p>
+	</message>
+	<message id="header">
+		<h1 class="animated fadeIn" id="name">
+			<span class="animated fadeInDown">véronique</span>
+			+
+			<span class="animated fadeInUp">raf</span>
+			<small><time datetime="2018-02-03">3 februari 2018</time></small>
+		</h1>
+	</message>
+	<message id="event">
+		<div class="event-circle">
+			<img class="event-img" src="${header}.svg" alt="${summary}" />
+		</div>
+		<time class="event-time">${start}</time>
+		<p class="event-location">
+			${<if-geo>}<a href="https://www.openstreetmap.org/?mlat=${lat}&amp;mlon=${lon}#map=17/${lat}/${lon}">${location}</a>${</if-geo>}
+			${<if-no-geo>}${location}${</if-no-geo>}
+		</p>
+	</message>
+	<message id="rsvp">
+		${names}
+		<p>
+			Muziek die niet mag ontbreken?<br/>
+			<small>optioneel, we kunnen natuurlijk niks beloven 😇</small>
+		</p>
+		${songs}
+		${remarks}
+		${submit}
+		${status}
+		<p class="gift">Cadeautip ✉ BE76 9730 9611 3795</p>
+	</message>
+	<message id="sendUpdates">Update sturen</message>
+	<message id="update.subject">Laatste infomatie voor huwelijksfeest</message>
+	<message id="update.body">
+Hallo {1},
+
+We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we nog wat praktische dingen meegeven.
+
+Wens je de ceremonie 's ochtends bij te wonen aan het gemeentehuis van Temse, dan kan je parkeren op het marktplein. Voor het avondfeest in Eventroom te Sint-Amands is er parking vlakbij of in de Buisstraat.
+
+Na de receptie kan je plaatsnemen aan {2}.
+
+Je vindt deze informatie en het tijdschema nog steeds terug op https://raf-en-vero.pauwels-cordier.be/?uuid={3}
+
+Bedankt om op onze uitnodiging in te gaan, en tot heel binnenkort!
+
+Met feestelijke groeten,
+
+Véronique en Raf
+	</message>
+	<message id="update.html">
+<p>Hallo {1},</p>
+
+<p>We zijn nog maar een paar dagen verwijderd van ons huwelijksfeest! Daarom willen we nog wat praktische dingen meegeven.</p>
+
+<p>Wens je de ceremonie 's ochtends bij te wonen aan het gemeentehuis van Temse, dan kan je parkeren op het marktplein. Voor het avondfeest in Eventroom te Sint-Amands is er parking vlakbij of in de Buisstraat.</p>
+
+<p>Na de receptie kan je plaatsnemen aan <strong>{2}</strong>.</p>
+
+<p>Je vindt deze informatie en het tijdschema nog steeds terug op <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={3}">onze website</a>.</p>
+
+<p>Bedankt om op onze uitnodiging in te gaan, en tot heel binnenkort!</p>
+
+<p>Met feestelijke groeten,</p>
+
+<p>Véronique en Raf</p>
+	</message>
+	<message id="footer">
+		ido is GPLv2 vrije software: verkrijg de <a href="ido-src.tar.gz">broncode</a>. Gemaakt met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
+	</message>
+</messages>

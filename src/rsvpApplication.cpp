@@ -1,3 +1,20 @@
+/*
+	ido: an RSVP web application for weddings
+	Copyright (C) 2017  Raf Pauwels
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; version 2 of the License.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along
+	with this program; if not, see <https://www.gnu.org/licenses/>.
+*/
+
 #include "rsvpApplication.hpp"
 #include "adminApplication.hpp"
 #include "calendarResource.hpp"
@@ -38,7 +55,7 @@
 
 RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
   : Wt::WApplication(env) {
-	useStyleSheet("animate.css/animate.min.css");
+	useStyleSheet("animate.min.css");
 	messageResourceBundle().use("resources");
 	std::unique_ptr<Wt::Dbo::backend::Sqlite3> sqlite3(new Wt::Dbo::backend::Sqlite3("rsvp.db"));
 	sqlite3->setProperty("show-queries", "true");
@@ -231,8 +248,18 @@ std::unique_ptr<Wt::WApplication> createAdminApplication(const Wt::WEnvironment&
 }
 
 int main(int argc, char **argv) {
-	Wt::WServer server(argc, argv, WTHTTP_CONFIGURATION);
-	server.addEntryPoint(Wt::EntryPointType::Application, createApplication);
-	server.addEntryPoint(Wt::EntryPointType::Application, createAdminApplication, "/admin");
-	server.run();
+	enum Error {none, exception, serverException};
+	try {
+		Wt::WServer server(argc, argv, WTHTTP_CONFIGURATION);
+		server.addEntryPoint(Wt::EntryPointType::Application, createApplication);
+		server.addEntryPoint(Wt::EntryPointType::Application, createAdminApplication, "/admin");
+		server.run();
+	} catch (const Wt::WServer::Exception& e) {
+		std::cerr << e.what() << std::endl;
+		return Error::serverException;
+	} catch (const std::exception &e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+		return Error::exception;
+	}
+	return Error::none;
 }
