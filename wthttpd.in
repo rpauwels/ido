@@ -1,2 +1,3 @@
-docroot=${CMAKE_INSTALL_PREFIX}/var/www/${PROJECT_NAME}
+docroot=${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}
+approot=${CMAKE_INSTALL_PREFIX}/etc/${PROJECT_NAME}
 http-listen=0.0.0.0:8080
