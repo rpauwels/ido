@@ -15,10 +15,11 @@ ido ships with the Wt HTTP daemon, meaning it runs as a standalone web server. O
 
 ## Build and Install ##
 
-### Requirements ###
+You will need:
 
 - Wt and Wt::Dbo 4.0.1 development packages
-- CMake 3.6.3
+- CMake 3.6.3 or higher (probably works with far older versions if you change CMAKE\_MIN\_RELEASE)
+- Doxygen (optional)
 
 ### Instructions ###
 
