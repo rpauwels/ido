@@ -55,8 +55,8 @@
 
 RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
   : Wt::WApplication(env) {
-	useStyleSheet("animate.min.css");
-	messageResourceBundle().use("resources");
+	useStyleSheet("/animate.min.css");
+	messageResourceBundle().use(appRoot() + "resources");
 	std::unique_ptr<Wt::Dbo::backend::Sqlite3> sqlite3(new Wt::Dbo::backend::Sqlite3("rsvp.db"));
 	sqlite3->setProperty("show-queries", "true");
 	session_.setConnection(std::move(sqlite3));
@@ -81,13 +81,13 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 	
 	const std::string *uuid = env.getParameter("uuid");
 	if (!uuid) {
-		log("error") << "Uuid parameter absent";
+		Wt::log("error") << "Uuid parameter absent";
 		return;
 	}
 	Wt::Dbo::Transaction transaction(session_);
 	party_ = session_.find<Party>().where("uuid = ?").bind(*uuid);
 	if (!party_) {
-		log("error") << "Uuid value " << *uuid << " not found";
+		Wt::log("error") << "Uuid value " << *uuid << " not found";
 		return;
 	}
 	
@@ -144,7 +144,7 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 	auto footer = root()->addNew<Wt::WText>(Wt::WString::tr("footer"));
 	footer->addStyleClass("footer");
 	party_.modify()->opened = Wt::WDateTime::currentDateTime();
-	log("info") << "Party " << party_.id() << " (" << party_->name << ") loaded the page";
+	Wt::log("info") << "Party " << party_.id() << " (" << party_->name << ") loaded the page";
 }
 
 void RsvpApplication::addSong(const std::string& artist, const std::string& title) {
@@ -232,9 +232,9 @@ void RsvpApplication::submit() {
 	message.addHtmlBody(Wt::WString::tr("confirmation.html").arg(party_->name).arg(party_->uuid));
 	Wt::Mail::Client client;
 	if (!client.connect())
-		log("error") << "Could not connect to SMTP server";
+		Wt::log("error") << "Could not connect to SMTP server";
 	if (!client.send(message))
-		log("error") << "Could not send confirmation to " << party_->name;
+		Wt::log("error") << "Could not send confirmation to " << party_->name;
 	client.disconnect();
 	setStatus();
 }

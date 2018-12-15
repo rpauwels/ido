@@ -24,7 +24,7 @@
 	<message id="full">Full</message>
 	<message id="invite">Invite</message>
 	<message id="fromAddress">raf@localhost</message>
-	<message id="fromName">Raf Pauwels en Véronique Cordier</message>
+	<message id="fromName">Raf Pauwels and Véronique Cordier</message>
 	<message id="invitation.subject">Invitation</message>
 	<message id="invitation.body">
 Hello {1},
@@ -56,21 +56,21 @@ Thank you!
 
 Kind regards,
 
-Véronique 👰 en Raf 🤵
+Véronique 👰 and Raf 🤵
 	</message>
 	<message id="confirmation.html">
 <p>Hello {1},</p>
 <p>You just confirmed the invitation. You can review this at <a href="https://raf-en-vero.pauwels-cordier.be/?uuid={2}">our website</a>.</p>
 <p>Thank you!</p>
 <p>Kind regards,</p>
-<p>Véronique 👰 en Raf 🤵</p>
+<p>Véronique 👰 and Raf 🤵</p>
 	</message>
 	<message id="header">
 		<h1 class="animated fadeIn" id="name">
 			<span class="animated fadeInDown">véronique</span>
 			+
 			<span class="animated fadeInUp">raf</span>
-			<small><time datetime="2018-02-03">3 februari 2018</time></small>
+			<small><time datetime="2018-02-03">February 3, 2018</time></small>
 		</h1>
 	</message>
 	<message id="event">

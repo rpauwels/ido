@@ -7,7 +7,6 @@
 	<message id="status.notSubmitted">Je hebt de uitnodiging nog niet bevestigd.</message>
 	<message id="status.submitted">Je bevestigde op {1} en ontving hierover een e-mail.</message>
 	<message id="status.places">Je hebt bevestigd en kan plaatsnemen aan <strong>{1}</strong>.</message>
-	<message id="calendarImg">calendar.svg</message>
 	<message id="calendar">Toevoegen aan agenda</message>
 	<message id="icsFilename">huwelijk_raf_en_vero.ics</message>
 	<message id="absent">kan er niet bij zijn</message>
@@ -23,7 +22,6 @@
 	<message id="meal">Maaltijd</message>
 	<message id="full">Alles</message>
 	<message id="invite">Uitnodigen</message>
-	<message id="fromAddress">raf@localhost</message>
 	<message id="fromName">Raf Pauwels en Véronique Cordier</message>
 	<message id="invitation.subject">Herinnering: uitnodiging</message>
 	<message id="invitation.body">
@@ -72,16 +70,6 @@ Véronique 👰 en Raf 🤵
 			<span class="animated fadeInUp">raf</span>
 			<small><time datetime="2018-02-03">3 februari 2018</time></small>
 		</h1>
-	</message>
-	<message id="event">
-		<div class="event-circle">
-			<img class="event-img" src="${header}.svg" alt="${summary}" />
-		</div>
-		<time class="event-time">${start}</time>
-		<p class="event-location">
-			${<if-geo>}<a href="https://www.openstreetmap.org/?mlat=${lat}&amp;mlon=${lon}#map=17/${lat}/${lon}">${location}</a>${</if-geo>}
-			${<if-no-geo>}${location}${</if-no-geo>}
-		</p>
 	</message>
 	<message id="rsvp">
 		${names}
@@ -132,6 +120,6 @@ Véronique en Raf
 <p>Véronique en Raf</p>
 	</message>
 	<message id="footer">
-		ido is GPLv2 vrije software: verkrijg de <a href="ido-src.tar.gz">broncode</a>. Gemaakt met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
+		ido is GPLv2 vrije software: verkrijg de <a href="ido-src.tar.xz">broncode</a>. Gemaakt met <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
 	</message>
 </messages>

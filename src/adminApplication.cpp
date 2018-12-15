@@ -38,7 +38,7 @@
 
 AdminApplication::AdminApplication(const Wt::WEnvironment& env)
   : Wt::WApplication(env) {
-	messageResourceBundle().use("resources");
+	messageResourceBundle().use(appRoot() + "resources");
 	std::unique_ptr<Wt::Dbo::backend::Sqlite3> sqlite3(new Wt::Dbo::backend::Sqlite3("rsvp.db"));
 	sqlite3->setProperty("show-queries", "true");
 	session_.setConnection(move(sqlite3));

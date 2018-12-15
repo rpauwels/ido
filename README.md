@@ -25,11 +25,11 @@ You will need:
 
 1. In the project directory, create and enter a build directory: `mkdir build && cd build`
 2. Locate the folder containing `wt-config.cmake` (and other CMake Wt files). You can usually find them in `/usr/lib/cmake/wt`.
-3. Configure using CMake and use the previous value for `Wt_DIR`: `cmake -DWt_DIR=/usr/lib/cmake/wt ..`
+3. Configure using CMake and use the previous value for `Wt_DIR`. Optionally, use `CMAKE_INSTALL_PREFIX` if you want to install somewhere else than the default `/usr/local`: `cmake -DWt_DIR=/usr/lib/cmake/wt -DCMAKE_INSTALL_PREFIX=/ ..`
 4. Make the project: `make -j5`
 5. Install the project: `make install`
 
-## Run ##
+## Running ##
 
 ### Requirements ###
 
@@ -37,9 +37,23 @@ You will need:
 - Sqlite3
 - systemd (service)
 
-### Instructions ###
+### Getting Started ###
 
-Running the web server manually in the foreground: `ido.wt --docroot /var/www/ido --http-listen 0.0.0.0:8080`. When installing, a file containing the default parameters is installed in /etc/wt/wthttpd so they might not even be necessary.
+The project ships with a `${CMAKE_INSTALL_PREFIX}/etc/wt/wthttpd` file that contains sensible default startup parameters. If this is your only Wt application, you can copy it into `/etc/wt/wthttpd` and simply run `ido.wt`. Otherwise, use these values as the startup parameters to run the web server manually in the foreground:
+
+	ido.wt --docroot /usr/local/share/ido --approot /usr/local/etc/ido --http-listen 0.0.0.0:8080
+
+### Application Paths ###
+
+In a default Wt installation, the Wt resources dir is installed to `${CMAKE_INSTALL_PREFIX}/share/Wt/resources`. These files are served from `/resources/`. Ido builds its styling upon the default style and Bootstrap theme. It can be configured with `--resources-dir`.
+
+Additionally, the webserver serves files from the docroot. These are installed to `${CMAKE_INSTALL_PREFIX}/share/ido`. They are application-specific files the user agent needs (CSS stylesheets, fonts, images). This can be configured with `--docroot`. In addition to the path, this parameter can also have a list of files to serve them into the internal path. This is the case by default.
+
+The approot contains files that only the webserver needs. You can find them in `${CMAKE_INSTALL_PREFIX}/etc/ido`. This is mainly the application configuration and translation resource files. The folder can be read-only. You can configure it with `--approot`.
+
+Finally, the working directory is used for read-write webserver resources. That is only the `ido.db` SQLite3-database, which is created (but not initialized) automatically if not present.
+
+### Service ###
 
 Enabling the web server daemon: `sudo systemctl enable ido.wt`
 
