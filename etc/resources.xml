@@ -7,7 +7,7 @@
 	<message id="status.notSubmitted">You have not yet confirmed.</message>
 	<message id="status.submitted">You confirmed at {1} and received an e-mail about this.</message>
 	<message id="status.places">You confirmed and can join <strong>{1}</strong>.</message>
-	<message id="calendarImg">calendar.svg</message>
+	<message id="calendarImg">img/calendar.svg</message>
 	<message id="calendar">Add to calendar</message>
 	<message id="icsFilename">ido_wedding.ics</message>
 	<message id="absent">cannot make it</message>
@@ -75,7 +75,7 @@ Véronique 👰 and Raf 🤵
 	</message>
 	<message id="event">
 		<div class="event-circle">
-			<img class="event-img" src="${header}.svg" alt="${summary}" />
+			<img class="event-img" src="img/${header}.svg" alt="${summary}" />
 		</div>
 		<time class="event-time">${start}</time>
 		<p class="event-location">
@@ -93,10 +93,10 @@ Véronique 👰 and Raf 🤵
 		${remarks}
 		${submit}
 		${status}
-		<p class="gift">Cadeautip ✉ BE76 9730 9611 3795</p>
+		<p class="gift">Gift hint: ✉</p>
 	</message>
 	<message id="sendUpdates">Send update</message>
-	<message id="update.subject">Latest information for our wedding</message>
+	<message id="update.subject">Latest information in preparation for the wedding</message>
 	<message id="update.body">
 Hello {1},
 
@@ -132,6 +132,6 @@ Véronique and Raf
 <p>Véronique en Raf</p>
 	</message>
 	<message id="footer">
-		ido is free software: get the <a href="ido-src.tar.gz">source</a>. Made with <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
+		ido is GPLv2 <a href="ido-src.tar.gz">free software</a>. Made with <a href="https://webtoolkit.eu/">Wt</a>. Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>. <a href="https://icons8.com">Icon pack by Icons8</a>
 	</message>
 </messages>

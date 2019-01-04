@@ -5,7 +5,7 @@ find_package(Wt NO_DEFAULT_PATH REQUIRED)
 find_package(Doxygen)
 set(CMAKE_CXX_STANDARD 14)
 set(SRC
-	${PROJECT_SOURCE_DIR}/src/rsvpApplication.cpp
+	${PROJECT_SOURCE_DIR}/src/mainApplication.cpp
 	${PROJECT_SOURCE_DIR}/src/adminApplication.cpp
 	${PROJECT_SOURCE_DIR}/src/calendarResource.cpp
 	${PROJECT_SOURCE_DIR}/src/event.cpp
@@ -17,16 +17,11 @@ set(ETC
 )
 set(ARCHIVE ${PROJECT_NAME}-src.tar.xz)
 set(SHARE
-	share/style.css
-	share/robbe.jpg
-	share/robbe-blur.jpg
-	share/animate.min.css
-	share/economica-v5-latin-regular.woff2
-	share/economica-v5-latin-regular.woff
-	share/lato-v14-latin-regular.woff2
-	share/lato-v14-latin-regular.woff
+	share/style
+	share/font
+	share/img
 )
-set(DOCROOT_FILES /style.css,/robbe.jpg,/robbe-blur.jpg,/animate.min.css,/economica-v5-latin-regular.woff2,/economica-v5-latin-regular.woff,/lato-v14-latin-regular.woff2,/lato-v14-latin-regular.woff)
+set(DOCROOT_FILES /style,/font,/img,/${ARCHIVE})
 set(SHARE_INSTALL ${SHARE} ${ARCHIVE})
 #list(TRANSFORM SHARE_INSTALL PREPEND /)
 #list(JOIN SHARE "," DOCROOT_FILES)
@@ -48,10 +43,8 @@ configure_file(wthttpd.in ${PROJECT_BINARY_DIR}/wthttpd)
 
 install(TARGETS ${PROJECT_NAME}.wt DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(FILES ${ETC} DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/${PROJECT_NAME})
-install(FILES ${PROJECT_BINARY_DIR}/wthttpd DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/wt)
+install(FILES ${PROJECT_BINARY_DIR}/wthttpd DESTINATION /etc/wt)
 install(FILES ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.wt.service DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/systemd/system COMPONENT service)
-install(FILES 
-	${SHARE}
-	${PROJECT_BINARY_DIR}/${ARCHIVE}
-	DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}
-)
+install(DIRECTORY DESTINATION /var/local/ido COMPONENT service)
+install(FILES ${PROJECT_BINARY_DIR}/${ARCHIVE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
+install(DIRECTORY ${SHARE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})

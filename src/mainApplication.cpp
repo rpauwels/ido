@@ -15,7 +15,7 @@
 	with this program; if not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "rsvpApplication.hpp"
+#include "mainApplication.hpp"
 #include "adminApplication.hpp"
 #include "calendarResource.hpp"
 #include "guest.hpp"
@@ -53,11 +53,11 @@
 #include <utility>
 #include <string>
 
-RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
+MainApplication::MainApplication(const Wt::WEnvironment& env)
   : Wt::WApplication(env) {
-	useStyleSheet("/animate.min.css");
+	useStyleSheet("style/animate.min.css");
 	messageResourceBundle().use(appRoot() + "resources");
-	std::unique_ptr<Wt::Dbo::backend::Sqlite3> sqlite3(new Wt::Dbo::backend::Sqlite3("rsvp.db"));
+	std::unique_ptr<Wt::Dbo::backend::Sqlite3> sqlite3(new Wt::Dbo::backend::Sqlite3("ido.db"));
 	sqlite3->setProperty("show-queries", "true");
 	session_.setConnection(std::move(sqlite3));
 	session_.mapClass<Event>("event");
@@ -74,7 +74,7 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 	bootstrapTheme->setVersion(Wt::BootstrapVersion::v3);
 	bootstrapTheme->setResponsive(true);
 	setTheme(bootstrapTheme);
-	useStyleSheet("style.css");
+	useStyleSheet("style/style.css");
 	
 	auto header = root()->addNew<Wt::WTemplate>(Wt::WString::tr("header"));
 	header->addStyleClass("header");
@@ -147,24 +147,24 @@ RsvpApplication::RsvpApplication(const Wt::WEnvironment& env)
 	Wt::log("info") << "Party " << party_.id() << " (" << party_->name << ") loaded the page";
 }
 
-void RsvpApplication::addSong(const std::string& artist, const std::string& title) {
+void MainApplication::addSong(const std::string& artist, const std::string& title) {
 	if (songContainer_->count() > 6)
 		return;
 	auto songRow = songContainer_->addNew<Wt::WContainerWidget>();
 	auto artistEdit = songRow->addNew<Wt::WLineEdit>(artist);
 	artistEdit->setTextSize(15);
 	artistEdit->setPlaceholderText(Wt::WString::tr("artist"));
-	artistEdit->changed().connect(this, &RsvpApplication::songChanged);
+	artistEdit->changed().connect(this, &MainApplication::songChanged);
 	auto titleEdit = songRow->addNew<Wt::WLineEdit>(title);
 	titleEdit->setTextSize(15);
 	titleEdit->setPlaceholderText(Wt::WString::tr("title"));
-	titleEdit->changed().connect(this, &RsvpApplication::songChanged);
+	titleEdit->changed().connect(this, &MainApplication::songChanged);
 	songRow->animateShow(Wt::WAnimation(Wt::AnimationEffect::SlideInFromTop | Wt::AnimationEffect::Fade, 
 	                                    Wt::TimingFunction::EaseOut, 250));
 	songs_.push_back(std::make_pair(artistEdit, titleEdit));
 }
 
-void RsvpApplication::setStatus() {
+void MainApplication::setStatus() {
 	Wt::WString submitText;
 	Wt::WString statusText;
 	submit_ = rsvp_->bindNew<Wt::WPushButton>("submit", Wt::WString::tr("submit"));
@@ -181,11 +181,11 @@ void RsvpApplication::setStatus() {
 	}
 	auto status = rsvp_->bindNew<Wt::WText>("status", statusText);
 	status->addStyleClass("alert");
-	submit_->clicked().connect(this, &RsvpApplication::submit);
+	submit_->clicked().connect(this, &MainApplication::submit);
 	rsvp_->setDisabled(!party_->confirmed.isNull());
 }
 
-void RsvpApplication::songChanged() {
+void MainApplication::songChanged() {
 	auto it = songs_.begin();
 	for (int i = 0; it < songs_.end() - 1; ++i) {
 		if (it->first->text().empty() && it->second->text().empty()) {
@@ -199,7 +199,7 @@ void RsvpApplication::songChanged() {
 		addSong();
 }
 
-void RsvpApplication::submit() {
+void MainApplication::submit() {
 	submit_->setEnabled(false);
 	Wt::Dbo::Transaction transaction(session_);
 	party_.reread();
@@ -239,8 +239,8 @@ void RsvpApplication::submit() {
 	setStatus();
 }
 
-std::unique_ptr<Wt::WApplication> createApplication(const Wt::WEnvironment& env) {
-	return std::make_unique<RsvpApplication>(env);
+std::unique_ptr<Wt::WApplication> createMainApplication(const Wt::WEnvironment& env) {
+	return std::make_unique<MainApplication>(env);
 }
 
 std::unique_ptr<Wt::WApplication> createAdminApplication(const Wt::WEnvironment& env) {
@@ -251,7 +251,7 @@ int main(int argc, char **argv) {
 	enum Error {none, exception, serverException};
 	try {
 		Wt::WServer server(argc, argv, WTHTTP_CONFIGURATION);
-		server.addEntryPoint(Wt::EntryPointType::Application, createApplication);
+		server.addEntryPoint(Wt::EntryPointType::Application, createMainApplication);
 		server.addEntryPoint(Wt::EntryPointType::Application, createAdminApplication, "/admin");
 		server.run();
 	} catch (const Wt::WServer::Exception& e) {

@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=${CMAKE_INSTALL_PREFIX}/var/www/${PROJECT_NAME}
-ExecStart=${CMAKE_INSTALL_PREFIX}/usr/bin/${PROJECT_NAME}.wt
+WorkingDirectory=/var/local/ido
+ExecStart=${CMAKE_INSTALL_PREFIX}/bin/${PROJECT_NAME}.wt
 Restart=on-failure
 RestartSec=1
 

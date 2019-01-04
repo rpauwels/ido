@@ -1,3 +1,4 @@
-docroot=${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME};${DOCROOT_FILES}
+docroot=${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME};/resources,${DOCROOT_FILES}
 approot=${CMAKE_INSTALL_PREFIX}/etc/${PROJECT_NAME}
+resources-dir=/usr/local/share/Wt/resources
 http-listen=0.0.0.0:8080

@@ -3,25 +3,25 @@
 	font-style: normal;
 	font-weight: 400;
 	src: local('Economica'), local('Economica-Regular'),
-		url('fonts/economica-v5-latin-regular.woff2') format('woff2'),
-		url('fonts/economica-v5-latin-regular.woff') format('woff');
+		url('font/economica-v5-latin-regular.woff2') format('woff2'),
+		url('font/economica-v5-latin-regular.woff') format('woff');
 }
 @font-face {
 	font-family: 'Lato';
 	font-style: normal;
 	font-weight: 400;
 	src: local('Lato Regular'), local('Lato-Regular'),
-		url('fonts/lato-v14-latin-regular.woff2') format('woff2'), 
-		url('fonts/lato-v14-latin-regular.woff') format('woff');
+		url('font/lato-v14-latin-regular.woff2') format('woff2'), 
+		url('font/lato-v14-latin-regular.woff') format('woff');
 }
 body,
 html,
-.robbeWrapper {
+.bgWrapper {
 	height: 100%;
 }
 body,
-.robbe {
-	background-image: url("robbe.jpg");
+.bg {
+	background-image: url("bg.jpg");
 	background-size: cover;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -90,7 +90,7 @@ a:active {
 	margin-right: 15px;
 }
 .rsvp {
-	background-image: url("robbe-blur.jpg");
+	background-image: url("bg-blur.jpg");
 	background-size: cover;
 	background-attachment: fixed;
 	background-repeat: no-repeat;

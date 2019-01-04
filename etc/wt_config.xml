@@ -10,7 +10,7 @@
 		<progressive-bootstrap>false</progressive-bootstrap>
 		<properties>
 			<property name="smtp-self-host">localhost</property>
-			<property name="favicon">ja.svg</property>
+			<property name="favicon">img/ja.svg</property>
 		</properties>
 	</application-settings>
 </server>

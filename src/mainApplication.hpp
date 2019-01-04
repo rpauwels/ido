@@ -25,8 +25,8 @@
 	I didn't bother). All other strings are externalized and thus translatable.
 */
 
-#ifndef RSVPAPPLICATION_HPP_
-#define RSVPAPPLICATION_HPP_
+#ifndef MAINAPPLICATION_HPP_
+#define MAINAPPLICATION_HPP_
 
 #include "party.hpp"
 
@@ -44,12 +44,11 @@
 #include <utility>
 
 //! Main application that takes a UUID and builds an interface.
-class RsvpApplication : public Wt::WApplication
+class MainApplication : public Wt::WApplication
 {
 public:
 	//! Sets up the database mapping and builds the interface.
-	RsvpApplication(const Wt::WEnvironment& env);
-
+	MainApplication(const Wt::WEnvironment& env);
 private:
 	Wt::Dbo::Session session_;
 	Wt::Dbo::ptr<Party> party_;
@@ -66,4 +65,4 @@ private:
 	void setStatus();
 };
 
-#endif // RSVPAPPLICATION_HPP_
+#endif // MAINAPPLICATION_HPP_
