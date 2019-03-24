@@ -1,8 +1,6 @@
 # ido Wedding RSVP Application #
 
-ido is a simple web application for managing wedding RSVPs. It was quickly hacked together in a limited time, but can still serve as a Wt4 example application, since there are not too many to be found in the wild.
-
-ido ships with the Wt HTTP daemon, meaning it runs as a standalone web server. Of course you can use a reverse proxy before it.
+ido is a simple web application for managing wedding RSVPs. ido ships with the Wt HTTP daemon, meaning it runs as a standalone web server. Of course you can use it in combination with a reverse proxy.
 
 ## Features ##
 
@@ -11,14 +9,14 @@ ido ships with the Wt HTTP daemon, meaning it runs as a standalone web server. O
 - Song suggestions
 - iCalendar file generation
 - Sending of reminders with table numbers
-- Responsive design and animation (OMG!)
+- Responsive design and animation, ZOMG
 
 ## Build and Install ##
 
 You will need:
 
-- Wt and Wt::Dbo 4.0.1 development packages
-- CMake 3.6.3 or higher (probably works with far older versions if you change CMAKE\_MIN\_RELEASE)
+- Wt and Wt::Dbo 4
+- CMake 3.6.3 or higher
 - Doxygen (optional)
 
 ### Instructions ###
@@ -33,7 +31,7 @@ You will need:
 
 ### Requirements ###
 
-- Wt and Wt::Dbo 4.0.1
+- Wt and Wt::Dbo 4
 - Sqlite3
 - systemd (service)
 
@@ -63,7 +61,7 @@ An empty `ido.db` database file will have been created in your working directory
 		INSERT INTO guest (version, first_name, last_name, email, order, diet)
 		VALUES (0, 'Mr.', 'Incredible', 'mr.incredible@example.org', 0)
 
-Providing a `uuid` query parameter is required. If it is absent when opening the root page, page construction simply returns early and only the title and image is shown. You can simply generate the necessary UUIDs for the party table in SQLite: `lower(hex(randomblob(16)))`
+Providing a `uuid` query parameter is required. It really should not have been called uuid, because it can be any simple unique identifier and I just used `lower(hex(randomblob(16)))`. If it is absent when opening the root page, page construction simply returns early and only the title and image is shown.
 
 You will invite most parties to a limited number of different 'event sets'. They can be entered through the a party's inviteLevel. This field is only directly used as groups for e-mailing in the administrative application, and diet selection (so parties not invited to dinner get only a present/absent choice). This way, for special cases you can still change the events to which they are invited. You need to only use inviteLevel, then you can link events with statements like this (to associate all parties with inviteLevel 1 or higher to event with id 3): 
 
@@ -88,18 +86,3 @@ Enabling the web server daemon: `sudo systemctl enable ido.wt`
 
 Starting the web server daemon: `sudo systemctl start ido.wt`
 
-## License ##
-
-Copyright (C) 2017  Raf Pauwels
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; version 2 of the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along
-with this program; if not, see <https://www.gnu.org/licenses/>.
